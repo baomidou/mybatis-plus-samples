@@ -1,0 +1,18 @@
+# DataSource Config
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    schema: classpath:db/schema-h2.sql
+    data: classpath:db/data-h2.sql
+    url: jdbc:h2:mem:test
+    username: root
+    password: test
+
+# MyBatis-Plus Config
+mybatis-plus:
+  global-config:
+    db-config:
+      column-underline: true
+      id-type: id_worker
+      field-strategy: not_empty
+
