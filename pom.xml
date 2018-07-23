@@ -46,7 +46,7 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.0-gamma</version>
+            <version>3.0-RC</version>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
