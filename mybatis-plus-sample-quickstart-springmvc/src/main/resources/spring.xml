@@ -3,9 +3,10 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- 引入属性文件 -->
+    <!-- Import Properties -->
     <context:property-placeholder location="classpath:config.properties"/>
 
+    <!-- H2 Data Source Config -->
     <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
         <property name="driverClassName" value="org.h2.Driver"/>
         <property name="jdbcUrl" value="${h2.url}"/>
@@ -13,11 +14,13 @@
         <property name="password" value="${h2.password}"/>
     </bean>
 
+    <!-- SqlSessionFactory Config -->
     <bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="globalConfig" ref="globalConfig"/>
     </bean>
 
+    <!-- MyBatis-Plus Global Config -->
     <bean id="globalConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig">
         <property name="dbConfig">
             <bean class="com.baomidou.mybatisplus.core.config.GlobalConfig.DbConfig">
@@ -28,7 +31,7 @@
         </property>
     </bean>
 
-    <!-- MyBatis 动态扫描  -->
+    <!-- MyBatis Mapper Scan Config  -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.baomidou.mybatisplus.samples.quickstart.springmvc.mapper"/>
     </bean>
