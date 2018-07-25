@@ -17,18 +17,6 @@
     <!-- SqlSessionFactory Config -->
     <bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="globalConfig" ref="globalConfig"/>
-    </bean>
-
-    <!-- MyBatis-Plus Global Config -->
-    <bean id="globalConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig">
-        <property name="dbConfig">
-            <bean class="com.baomidou.mybatisplus.core.config.GlobalConfig.DbConfig">
-                <property name="columnUnderline" value="true"/>
-                <property name="idType" value="ID_WORKER"/>
-                <property name="fieldStrategy" value="NOT_EMPTY"/>
-            </bean>
-        </property>
     </bean>
 
     <!-- MyBatis Mapper Scan Config  -->

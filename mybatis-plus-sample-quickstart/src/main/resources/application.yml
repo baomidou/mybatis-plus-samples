@@ -13,5 +13,3 @@ mybatis-plus:
   global-config:
     db-config:
       column-underline: true
-      id-type: id_worker
-      field-strategy: not_empty

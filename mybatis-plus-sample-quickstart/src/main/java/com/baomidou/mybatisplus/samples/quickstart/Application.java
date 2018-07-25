@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan("com.baomidou.mybatisplus.samples.quickstart.mapper")
-public class QuickStartApplication {
+public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(QuickStartApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
 }
