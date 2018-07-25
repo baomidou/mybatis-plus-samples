@@ -15,4 +15,3 @@ mybatis-plus:
       column-underline: true
       id-type: id_worker
       field-strategy: not_empty
-
