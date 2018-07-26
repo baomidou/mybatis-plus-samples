@@ -2,6 +2,7 @@ package com.baomidou.mybatisplus.samples.quickstart.springmvc;
 
 import com.baomidou.mybatisplus.samples.quickstart.springmvc.entity.User;
 import com.baomidou.mybatisplus.samples.quickstart.springmvc.mapper.UserMapper;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,10 @@ public class SampleTest {
     private UserMapper userMapper;
 
     @Test
-    public void testSelectAll() {
+    public void testSelect() {
+        System.out.println(("----- selectAll method test ------"));
         List<User> userList = userMapper.selectList(null);
+        Assert.assertEquals(5, userList.size());
         userList.forEach(System.out::println);
     }
 
