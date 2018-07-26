@@ -1,13 +1,15 @@
 language: java
-sudo: false # faster builds
+
+sudo: false
 
 jdk:
   - oraclejdk8
 
-install: mvn install -DskipTests=true -Dmaven.javadoc.skip=true
+before_install:
+    - export TZ='Asia/Shanghai'
+    - chmod +x mvnw
 
-script:
-  - mvn cobertura:cobertura
+script: "mvn clean cobertura:cobertura"
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
