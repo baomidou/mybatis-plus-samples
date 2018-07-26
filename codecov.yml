@@ -1,0 +1,14 @@
+coverage:
+  precision: 2
+  round: down
+  status:
+    patch:
+      default:
+        target: 80%
+    project:
+      default:
+        target: 80%
+
+comment:
+  layout: "header, diff, uncovered"
+  behavior: default
