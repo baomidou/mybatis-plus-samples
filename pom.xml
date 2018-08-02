@@ -65,8 +65,20 @@
                         <format>html</format>
                         <format>xml</format>
                     </formats>
-                    <check />
+                    <instrumentation>
+                        <ignoreMethodAnnotations>
+                            <ignoreMethodAnnotation>lombok.Generated</ignoreMethodAnnotation>
+                        </ignoreMethodAnnotations>
+                    </instrumentation>
+                    <check/>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
