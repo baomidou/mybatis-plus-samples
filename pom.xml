@@ -14,6 +14,7 @@
     <modules>
         <module>mybatis-plus-sample-quickstart</module>
         <module>mybatis-plus-sample-quickstart-springmvc</module>
+        <module>mybatis-plus-sample-generator</module>
     </modules>
 
     <parent>
@@ -40,6 +41,11 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus</artifactId>
+                <version>${mybatisplus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
                 <version>${mybatisplus.version}</version>
             </dependency>
         </dependencies>
