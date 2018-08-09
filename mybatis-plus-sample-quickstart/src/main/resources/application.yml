@@ -8,8 +8,12 @@ spring:
     username: root
     password: test
 
-# MyBatis-Plus Config
-mybatis-plus:
-  global-config:
-    db-config:
-      column-underline: true
+# MyBatis-Plus Config (可无)
+#mybatis-plus:
+#  global-config:
+#    db-config:
+#      column-underline: true
+
+logging:
+  level:
+    com.baomidou.mybatisplus.samples.quickstart: debug
