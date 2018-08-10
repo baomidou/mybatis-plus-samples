@@ -15,6 +15,7 @@
         <module>mybatis-plus-sample-quickstart</module>
         <module>mybatis-plus-sample-quickstart-springmvc</module>
         <module>mybatis-plus-sample-generator</module>
+        <module>mybatis-plus-sample-wrapper</module>
     </modules>
 
     <parent>
