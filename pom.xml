@@ -15,6 +15,7 @@
         <module>mybatis-plus-sample-quickstart</module>
         <module>mybatis-plus-sample-quickstart-springmvc</module>
         <module>mybatis-plus-sample-generator</module>
+        <module>mybatis-plus-sample-crud</module>
         <module>mybatis-plus-sample-wrapper</module>
         <module>mybatis-plus-sample-pagination</module>
         <module>mybatis-plus-sample-auto-fill-metainfo</module>
@@ -31,7 +32,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <mybatisplus.version>3.0-RC2-SNAPSHOT</mybatisplus.version>
+        <mybatisplus.version>3.0-RC3-SNAPSHOT</mybatisplus.version>
     </properties>
 
     <dependencyManagement>
