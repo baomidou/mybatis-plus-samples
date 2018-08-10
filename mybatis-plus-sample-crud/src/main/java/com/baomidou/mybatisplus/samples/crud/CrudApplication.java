@@ -1,10 +1,10 @@
-package com.baomidou.mybatisplus.generator;
+package com.baomidou.mybatisplus.samples.crud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class GeneratorApplication {
+public class CrudApplication {
 
     /**
      * <p>
@@ -18,7 +18,7 @@ public class GeneratorApplication {
      * </p>
      */
     public static void main(String[] args) {
-        SpringApplication.run(GeneratorApplication.class, args);
+        SpringApplication.run(CrudApplication.class, args);
     }
 
 }

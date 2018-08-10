@@ -1,4 +1,4 @@
-package com.baomidou.mybatisplus.samples.generator;
+package com.baomidou.mybatisplus.sample.generator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
