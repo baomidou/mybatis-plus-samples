@@ -17,6 +17,7 @@
         <module>mybatis-plus-sample-generator</module>
         <module>mybatis-plus-sample-wrapper</module>
         <module>mybatis-plus-sample-pagination</module>
+        <module>mybatis-plus-sample-auto-fill-metainfo</module>
     </modules>
 
     <parent>
