@@ -12,3 +12,10 @@ spring:
 logging:
   level:
     com.baomidou.mybatisplus.samples.wrapper: debug
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  type-aliases-super-type: java.lang.Object
+  global-config:
+    db-config:
+      db-type: h2

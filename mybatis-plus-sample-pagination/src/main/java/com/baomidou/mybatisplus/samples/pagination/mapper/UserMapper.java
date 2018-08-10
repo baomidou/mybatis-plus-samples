@@ -4,8 +4,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.samples.pagination.entity.User;
 import com.baomidou.mybatisplus.samples.pagination.model.MyPage;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultType;
-import org.apache.ibatis.annotations.Select;
 
 /**
  * @author miemie
@@ -19,7 +17,5 @@ public interface UserMapper extends BaseMapper<User> {
      * @param myPage 自定义 page
      * @return 分页数据
      */
-    @Select("select * from user where age = #{pg.selectInt} and name = #{pg.selectStr}")
-    @ResultType(User.class)
     MyPage<User> mySelectPage(@Param("pg") MyPage<User> myPage);
 }
