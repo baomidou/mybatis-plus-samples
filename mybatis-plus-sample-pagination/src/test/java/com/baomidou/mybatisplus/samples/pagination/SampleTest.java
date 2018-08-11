@@ -29,15 +29,15 @@ public class SampleTest {
 
     @Test
     public void tests() {
-//        System.out.println("----- baseMapper 自带分页 ------");
-//        Page<User> page = new Page<>(1, 5);
-//        IPage<User> userIPage = mapper.selectPage(page, new QueryWrapper<User>()
-//                .eq("age", 20).eq("name", "Jack"));
-//        Assert.assertSame(page, userIPage);
-//        System.out.println("总条数 ------> " + userIPage.getTotal());
-//        System.out.println("当前页数 ------> " + userIPage.getCurrent());
-//        System.out.println("当前每页显示数 ------> " + userIPage.getSize());
-//        print(userIPage.getRecords());
+        System.out.println("----- baseMapper 自带分页 ------");
+        Page<User> page = new Page<>(1, 5);
+        IPage<User> userIPage = mapper.selectPage(page, new QueryWrapper<User>()
+                .eq("age", 20).eq("name", "Jack"));
+        Assert.assertSame(page, userIPage);
+        System.out.println("总条数 ------> " + userIPage.getTotal());
+        System.out.println("当前页数 ------> " + userIPage.getCurrent());
+        System.out.println("当前每页显示数 ------> " + userIPage.getSize());
+        print(userIPage.getRecords());
 
 
         System.out.println("----- 自定义分页 ------");
