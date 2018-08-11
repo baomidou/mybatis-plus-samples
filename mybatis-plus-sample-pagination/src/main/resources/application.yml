@@ -15,9 +15,3 @@ logging:
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml
-  type-aliases-super-type: java.lang.Object
-  global-config:
-    db-config:
-      db-type: h2
-  configuration:
-    map-underscore-to-camel-case: false
