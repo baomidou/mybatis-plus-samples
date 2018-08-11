@@ -16,6 +16,7 @@ public interface UserMapper extends BaseMapper<User> {
 
     /**
      * 3.x 的 page 可以进行取值,多入参记得加上注解
+     * todo 目前使用注解会报错,写在 xml 里就没事
      *
      * @param myPage 自定义 page
      * @return 分页数据
