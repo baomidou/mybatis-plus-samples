@@ -16,6 +16,9 @@
         <module>mybatis-plus-sample-quickstart-springmvc</module>
         <module>mybatis-plus-sample-generator</module>
         <module>mybatis-plus-sample-crud</module>
+        <module>mybatis-plus-sample-active-record</module>
+        <module>mybatis-plus-sample-tenant</module>
+        <module>mybatis-plus-sample-enum</module>
         <module>mybatis-plus-sample-wrapper</module>
         <module>mybatis-plus-sample-pagination</module>
         <module>mybatis-plus-sample-auto-fill-metainfo</module>

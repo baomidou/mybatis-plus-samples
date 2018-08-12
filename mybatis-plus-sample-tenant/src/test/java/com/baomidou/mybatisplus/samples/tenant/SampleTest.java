@@ -1,4 +1,4 @@
-package com.baomidou.mybatisplus.samples.crud;
+package com.baomidou.mybatisplus.samples.tenant;
 
 import javax.annotation.Resource;
 
@@ -10,8 +10,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.baomidou.mybatisplus.samples.enums.entity.User;
-import com.baomidou.mybatisplus.samples.enums.mapper.UserMapper;
+import com.baomidou.mybatisplus.samples.tenant.entity.User;
+import com.baomidou.mybatisplus.samples.tenant.mapper.UserMapper;
 
 /**
  * <p>
