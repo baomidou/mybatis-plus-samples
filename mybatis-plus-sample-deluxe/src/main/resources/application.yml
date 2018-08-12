@@ -14,4 +14,5 @@ logging:
     com.baomidou.mybatisplus.samples.deluxe: debug
 
 mybatis-plus:
+  # 扫描 mapper.xml
   mapper-locations: classpath:/mapper/*Mapper.xml

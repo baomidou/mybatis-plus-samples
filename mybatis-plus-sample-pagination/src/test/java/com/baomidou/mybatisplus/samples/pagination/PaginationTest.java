@@ -1,9 +1,11 @@
 package com.baomidou.mybatisplus.samples.pagination;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.samples.pagination.entity.User;
+import com.baomidou.mybatisplus.samples.pagination.mapper.UserMapper;
+import com.baomidou.mybatisplus.samples.pagination.model.MyPage;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,12 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.CollectionUtils;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.samples.pagination.entity.User;
-import com.baomidou.mybatisplus.samples.pagination.mapper.UserMapper;
-import com.baomidou.mybatisplus.samples.pagination.model.MyPage;
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author miemie
@@ -24,7 +22,7 @@ import com.baomidou.mybatisplus.samples.pagination.model.MyPage;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SampleTest {
+public class PaginationTest {
 
     @Resource
     private UserMapper mapper;
