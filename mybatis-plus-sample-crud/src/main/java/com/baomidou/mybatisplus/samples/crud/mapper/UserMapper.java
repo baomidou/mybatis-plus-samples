@@ -1,7 +1,8 @@
 package com.baomidou.mybatisplus.samples.crud.mapper;
 
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.samples.enums.entity.User;
+import com.baomidou.mybatisplus.samples.crud.entity.User;
 
 /**
  * <p>
