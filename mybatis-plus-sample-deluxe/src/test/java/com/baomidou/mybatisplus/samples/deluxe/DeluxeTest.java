@@ -34,6 +34,11 @@ public class DeluxeTest {
         print(userPage.getRecords());
     }
 
+    @Test
+    public void testDelAll() {
+        mapper.deleteAll();
+    }
+
     private <T> void print(List<T> list) {
         if (!CollectionUtils.isEmpty(list)) {
             list.forEach(System.out::println);
