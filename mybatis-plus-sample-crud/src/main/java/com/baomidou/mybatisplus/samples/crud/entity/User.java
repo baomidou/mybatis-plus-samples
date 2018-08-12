@@ -1,6 +1,7 @@
 package com.baomidou.mybatisplus.samples.crud.entity;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -11,6 +12,7 @@ import lombok.Data;
  * @since 2018-08-11
  */
 @Data
+@Accessors(chain = true)
 public class User {
     private Long id;
     private String name;
