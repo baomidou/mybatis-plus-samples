@@ -40,7 +40,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <mybatisplus.version>3.0-RC3-SNAPSHOT</mybatisplus.version>
+        <mybatisplus.version>3.0-RC3.1-SNAPSHOT</mybatisplus.version>
     </properties>
 
     <dependencyManagement>

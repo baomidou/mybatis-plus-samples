@@ -10,8 +10,9 @@
                 age = #{selectInt}
             </if>
             <if test="selectStr != null">
-                name = #{selectStr}
+                AND name = #{selectStr}
             </if>
+            AND deleted = 0
         </trim>
     </select>
 
