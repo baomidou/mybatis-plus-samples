@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2018-08-10
  */
 @Configuration
-@MapperScan("com.baomidou.mybatisplus.samples.crud.mapper")
+@MapperScan("com.baomidou.mybatisplus.samples.enums.mapper")
 public class MybatisPlusConfig {
 
 }
