@@ -1,17 +1,16 @@
 package com.baomidou.mybatisplus.samples.crud;
 
-import javax.annotation.Resource;
-
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.samples.crud.entity.User;
+import com.baomidou.mybatisplus.samples.crud.mapper.UserMapper;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.baomidou.mybatisplus.samples.enums.entity.User;
-import com.baomidou.mybatisplus.samples.enums.mapper.UserMapper;
+import javax.annotation.Resource;
 
 /**
  * <p>
