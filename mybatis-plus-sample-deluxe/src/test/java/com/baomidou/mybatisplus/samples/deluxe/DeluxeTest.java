@@ -54,6 +54,16 @@ public class DeluxeTest {
         mapper.deleteAll();
     }
 
+    @Test
+    public void testInsert() {
+        mapper.insert(new User().setEmail("122@qq.com"));
+    }
+
+    @Test
+    public void testSelect() {
+        System.out.println(mapper.selectById(1L));
+    }
+
     private <T> void print(List<T> list) {
         if (!CollectionUtils.isEmpty(list)) {
             list.forEach(System.out::println);
