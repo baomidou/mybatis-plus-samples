@@ -20,7 +20,7 @@ import java.util.List;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SampleTest {
+public class WrapperTest {
 
     @Resource
     private UserMapper userMapper;
