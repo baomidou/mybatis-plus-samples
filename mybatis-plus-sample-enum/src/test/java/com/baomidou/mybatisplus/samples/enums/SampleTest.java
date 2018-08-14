@@ -16,7 +16,7 @@ import com.baomidou.mybatisplus.samples.enums.mapper.UserMapper;
 
 /**
  * <p>
- * 内置 CRUD 演示
+ * 内置 Enums 演示
  * </p>
  *
  * @author hubin
@@ -40,11 +40,16 @@ public class SampleTest {
         System.err.println("\n插入成功 ID 为：" + user.getId());
     }
 
-
     @Test
     public void delete() {
         Assert.assertTrue(mapper.delete(new QueryWrapper<User>()
                 .lambda().eq(User::getAge, AgeEnum.TWO)) > 0);
+    }
+
+    @Test
+    public void update() {
+        Assert.assertTrue(mapper.update(new User().setAge(AgeEnum.TWO),
+                new QueryWrapper<User>().eq("age", AgeEnum.THREE)) > 0);
     }
 
     @Test
