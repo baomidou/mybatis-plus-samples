@@ -15,7 +15,10 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class User {
     private Long id;
+    /**
+     * 租户 ID
+     */
+    private Long tenantId;
     private String name;
-    private Integer age;
-    private String email;
+
 }
