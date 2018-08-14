@@ -1,13 +1,12 @@
 package com.baomidou.mybatisplus.samples.enums.entity;
 
-import com.baomidou.mybatisplus.samples.enums.enums.AgeEnum;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 用户实体对应表 user
+ * 基础父类测试
  * </p>
  *
  * @author hubin
@@ -15,9 +14,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class User extends BaseEntity {
-    private String name;
-    private AgeEnum age;
-    private String email;
+public class BaseEntity {
+  private Long id;
 
 }

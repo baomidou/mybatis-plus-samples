@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.samples.enums.entity.User;
+import com.baomidou.mybatisplus.samples.enums.enums.AgeEnum;
 import com.baomidou.mybatisplus.samples.enums.mapper.UserMapper;
 
 /**
@@ -29,10 +30,10 @@ public class SampleTest {
     private UserMapper mapper;
 
     @Test
-    public void aInsert() {
+    public void insert() {
         User user = new User();
-        user.setName("小羊");
-        user.setAge(3);
+        user.setName("K神");
+        user.setAge(AgeEnum.ONE);
         user.setEmail("abc@mp.com");
         Assert.assertTrue(mapper.insert(user) > 0);
         // 成功直接拿会写的 ID
@@ -41,28 +42,15 @@ public class SampleTest {
 
 
     @Test
-    public void bDelete() {
-        Assert.assertTrue(mapper.deleteById(3L) > 0);
+    public void delete() {
         Assert.assertTrue(mapper.delete(new QueryWrapper<User>()
-                .lambda().eq(User::getName, "Sandy")) > 0);
+                .lambda().eq(User::getAge, AgeEnum.TWO)) > 0);
     }
 
-
     @Test
-    public void cUpdate() {
-        Assert.assertTrue(mapper.updateById(new User().setId(1L).setEmail("ab@c.c")) > 0);
-        Assert.assertTrue(mapper.update(new User().setName("mp"),
-                new UpdateWrapper<User>().lambda()
-                        .set(User::getAge, 3)
-                        .eq(User::getId, 2)) > 0);
-    }
-
-
-    @Test
-    public void dSelect() {
-        Assert.assertEquals("ab@c.c", mapper.selectById(1L).getEmail());
+    public void select() {
         User user = mapper.selectOne(new QueryWrapper<User>().lambda().eq(User::getId, 2));
-        Assert.assertEquals("mp", user.getName());
-        Assert.assertTrue(3 == user.getAge());
+        Assert.assertEquals("Jack", user.getName());
+        Assert.assertTrue(AgeEnum.THREE == user.getAge());
     }
 }
