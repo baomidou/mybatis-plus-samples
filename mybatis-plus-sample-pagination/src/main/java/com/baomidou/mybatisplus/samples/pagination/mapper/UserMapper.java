@@ -1,11 +1,9 @@
 package com.baomidou.mybatisplus.samples.pagination.mapper;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.samples.pagination.entity.User;
 import com.baomidou.mybatisplus.samples.pagination.model.MyPage;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @author miemie
@@ -22,9 +20,5 @@ public interface UserMapper extends BaseMapper<User> {
      * @param myPage 自定义 page
      * @return 分页数据
      */
-    IPage<User> mySelectPage(@Param("pg") MyPage<User> myPage);
-
-//    @Select("select * from user where age = #{pg.selectInt} and name = #{pg.selectStr}")
-//    @ResultType(User.class)
-//    MyPage<User> atSelectPage(@Param("pg") MyPage<User> myPage);
+    MyPage<User> mySelectPage(@Param("pg") MyPage<User> myPage);
 }

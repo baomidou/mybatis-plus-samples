@@ -42,22 +42,12 @@ public class PaginationTest {
 
         System.err.println("----- 自定义 XML 分页 ------");
         MyPage<User> myPage = new MyPage<User>(1, 5).setSelectInt(20).setSelectStr("Jack");
-        IPage<User> userMyPage = mapper.mySelectPage(myPage);
+        MyPage<User> userMyPage = mapper.mySelectPage(myPage);
         Assert.assertSame(myPage, userMyPage);
         System.out.println("总条数 ------> " + userMyPage.getTotal());
         System.out.println("当前页数 ------> " + userMyPage.getCurrent());
         System.out.println("当前每页显示数 ------> " + userMyPage.getSize());
         print(userMyPage.getRecords());
-
-
-//        System.err.println("----- 自定注解义分页 ------");
-//        MyPage<User> atPage = new MyPage<User>(1, 5).setSelectInt(20).setSelectStr("Jack");
-//        IPage<User> userAtPage = mapper.atSelectPage(atPage);
-//        Assert.assertSame(atPage, userAtPage);
-//        System.out.println("总条数 ------> " + userAtPage.getTotal());
-//        System.out.println("当前页数 ------> " + userAtPage.getCurrent());
-//        System.out.println("当前每页显示数 ------> " + userAtPage.getSize());
-//        print(userAtPage.getRecords());
     }
 
     private <T> void print(List<T> list) {
