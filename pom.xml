@@ -24,7 +24,7 @@
         <module>mybatis-plus-sample-auto-fill-metainfo</module>
         <module>mybatis-plus-sample-sql-injector</module>
         <module>mybatis-plus-sample-performance-analysis</module>
-        <module>mybatis-plus-sample-execution-analysis</module>
+        <!--<module>mybatis-plus-sample-execution-analysis</module>-->
         <module>mybatis-plus-sample-logic-delete</module>
         <module>mybatis-plus-sample-deluxe</module>
     </modules>
