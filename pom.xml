@@ -27,6 +27,7 @@
         <module>mybatis-plus-sample-logic-delete</module>
         <module>mybatis-plus-sample-deluxe</module>
         <module>mybatis-plus-sample-sequence</module>
+        <module>mybatis-plus-sample-optimistic-locker</module>
   </modules>
 
     <parent>
