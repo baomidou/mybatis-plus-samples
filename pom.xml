@@ -23,7 +23,7 @@
         <module>mybatis-plus-sample-auto-fill-metainfo</module>
         <module>mybatis-plus-sample-sql-injector</module>
         <module>mybatis-plus-sample-performance-analysis</module>
-        <!--<module>mybatis-plus-sample-execution-analysis</module>-->
+        <module>mybatis-plus-sample-execution-analysis</module>
         <module>mybatis-plus-sample-logic-delete</module>
         <module>mybatis-plus-sample-deluxe</module>
         <module>mybatis-plus-sample-sequence</module>
@@ -41,7 +41,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <mybatisplus.version>3.0-RC3.1-SNAPSHOT</mybatisplus.version>
+        <mybatisplus.version>3.0-RC3</mybatisplus.version>
     </properties>
 
     <dependencyManagement>
