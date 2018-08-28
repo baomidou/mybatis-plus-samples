@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.samples.optlocker.entity.User;
 import com.baomidou.mybatisplus.samples.optlocker.mapper.UserMapper;
 
@@ -82,19 +81,23 @@ public class OptLockerTest {
 
     /**
      * 批量更新带乐观锁
+     * <p>
+     * update(et,ew) et:必须带上version的值才会触发乐观锁
      */
     @Test
     public void testUpdateByEntitySucc() {
-        User ewEntity = new User();
-        ewEntity.setVersion(1);
-        QueryWrapper<User> ew = new QueryWrapper<>(ewEntity);
-        int count = userMapper.selectCount(ew);
+        QueryWrapper<User> ew = new QueryWrapper<>();
+        ew.eq("version", 1);
+        Integer count = userMapper.selectCount(ew);
 
         User entity = new User();
         entity.setAge(28);
+        entity.setVersion(1);
 
-        Assert.assertEquals("updated records should be same", count, userMapper.update(entity, ew));
-        Assert.assertEquals("No records found with version=1", 0, userMapper.selectCount(ew));
+        Assert.assertEquals("updated records should be same", count, userMapper.update(entity, null));
+        ew = new QueryWrapper<>();
+        ew.eq("version", 1);
+        Assert.assertEquals("No records found with version=1", 0, userMapper.selectCount(ew).intValue());
         ew = new QueryWrapper<>();
         ew.eq("version", 2);
         Assert.assertEquals("All records with version=1 should be updated to version=2", count, userMapper.selectCount(ew));
