@@ -39,7 +39,7 @@ public class OptLockerTest {
         userUpdate.setId(id);
         userUpdate.setAge(19);
         userUpdate.setVersion(1);
-        Assert.assertEquals("Should update success", 1, userMapper.updateById(userUpdate).intValue());
+        Assert.assertEquals("Should update success", 1, userMapper.updateById(userUpdate));
         Assert.assertEquals("Should version = version+1", 2, userUpdate.getVersion().intValue());
     }
 
@@ -57,7 +57,7 @@ public class OptLockerTest {
         userUpdate.setId(id);
         userUpdate.setAge(19);
         userUpdate.setVersion(0);
-        Assert.assertEquals("Should update failed due to incorrect version(actually 1, but 0 passed in)", 0, userMapper.updateById(userUpdate).intValue());
+        Assert.assertEquals("Should update failed due to incorrect version(actually 1, but 0 passed in)", 0, userMapper.updateById(userUpdate));
     }
 
     @Test
@@ -74,7 +74,7 @@ public class OptLockerTest {
         userUpdate.setId(id);
         userUpdate.setAge(19);
         userUpdate.setVersion(null);
-        Assert.assertEquals("Should update success as no version passed in", 1, userMapper.updateById(userUpdate).intValue());
+        Assert.assertEquals("Should update success as no version passed in", 1, userMapper.updateById(userUpdate));
         User updated = userMapper.selectById(id);
         Assert.assertEquals("Version not changed", 1, updated.getVersion().intValue());
         Assert.assertEquals("Age updated", 19, updated.getAge().intValue());
@@ -88,13 +88,13 @@ public class OptLockerTest {
         User ewEntity = new User();
         ewEntity.setVersion(1);
         QueryWrapper<User> ew = new QueryWrapper<>(ewEntity);
-        Integer count = userMapper.selectCount(ew);
+        int count = userMapper.selectCount(ew);
 
         User entity = new User();
         entity.setAge(28);
 
         Assert.assertEquals("updated records should be same", count, userMapper.update(entity, ew));
-        Assert.assertEquals("No records found with version=1", 0, userMapper.selectCount(ew).intValue());
+        Assert.assertEquals("No records found with version=1", 0, userMapper.selectCount(ew));
         ew = new QueryWrapper<>();
         ew.eq("version", 2);
         Assert.assertEquals("All records with version=1 should be updated to version=2", count, userMapper.selectCount(ew));
