@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.samples.optlocker.entity.User;
 import com.baomidou.mybatisplus.samples.optlocker.mapper.UserMapper;
 
@@ -88,7 +89,7 @@ public class OptLockerTest {
     public void testUpdateByEntitySucc() {
         QueryWrapper<User> ew = new QueryWrapper<>();
         ew.eq("version", 1);
-        Integer count = userMapper.selectCount(ew);
+        int count = userMapper.selectCount(ew);
 
         User entity = new User();
         entity.setAge(28);
@@ -97,7 +98,7 @@ public class OptLockerTest {
         Assert.assertEquals("updated records should be same", count, userMapper.update(entity, null));
         ew = new QueryWrapper<>();
         ew.eq("version", 1);
-        Assert.assertEquals("No records found with version=1", 0, userMapper.selectCount(ew).intValue());
+        Assert.assertEquals("No records found with version=1", 0, userMapper.selectCount(ew));
         ew = new QueryWrapper<>();
         ew.eq("version", 2);
         Assert.assertEquals("All records with version=1 should be updated to version=2", count, userMapper.selectCount(ew));
