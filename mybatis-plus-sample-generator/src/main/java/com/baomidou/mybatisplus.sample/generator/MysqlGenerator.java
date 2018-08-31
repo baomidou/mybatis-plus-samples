@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.baomidou.mybatisplus.generator;
+package com.baomidou.mybatisplus.sample.generator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,6 +23,9 @@ import java.util.Map;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.generator.AutoGenerator;
+import com.baomidou.mybatisplus.generator.GeneratorTest;
+import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.FileOutConfig;
 import com.baomidou.mybatisplus.generator.config.GlobalConfig;
@@ -88,7 +91,7 @@ public class MysqlGenerator extends GeneratorTest {
                         // if ( fieldType.toLowerCase().contains( "tinyint" ) ) {
                         //    return DbColumnType.BOOLEAN;
                         // }
-                        return super.processTypeConvert(globalConfig, fieldType);
+                        return (DbColumnType) super.processTypeConvert(globalConfig, fieldType);
                     }
                 })
                 .setDriverName("com.mysql.jdbc.Driver")

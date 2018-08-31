@@ -98,10 +98,10 @@ public class OptLockerTest {
         Assert.assertEquals("updated records should be same", count, userMapper.update(entity, null));
         ew = new QueryWrapper<>();
         ew.eq("version", 1);
-        Assert.assertEquals("No records found with version=1", 0, userMapper.selectCount(ew));
+        Assert.assertEquals("No records found with version=1", 0, userMapper.selectCount(ew).intValue());
         ew = new QueryWrapper<>();
         ew.eq("version", 2);
-        Assert.assertEquals("All records with version=1 should be updated to version=2", count, userMapper.selectCount(ew));
+        Assert.assertEquals("All records with version=1 should be updated to version=2", count, userMapper.selectCount(ew).intValue());
     }
 
 }
