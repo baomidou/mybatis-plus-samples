@@ -1,4 +1,4 @@
-package com.baomidou.mybatisplus.generator;
+package com.baomidou.mybatisplus.sample.generator;
 
 import java.util.Scanner;
 
