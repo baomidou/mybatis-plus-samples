@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import com.baomidou.mybatisplus.annotation.KeySequence;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.incrementer.H2KeyGenerator;
+import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
 
 /**
  * <p>
@@ -25,5 +26,10 @@ public class MybatisPlusConfig {
     @Bean
     public H2KeyGenerator h2KeyGenerator(){
         return new H2KeyGenerator();
+    }
+
+    @Bean
+    public PerformanceInterceptor performanceInterceptor(){
+        return new PerformanceInterceptor();
     }
 }
