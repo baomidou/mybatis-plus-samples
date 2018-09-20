@@ -3,6 +3,7 @@ package com.baomidou.mybatisplus.samples.pagination.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.samples.pagination.entity.User;
 import com.baomidou.mybatisplus.samples.pagination.model.MyPage;
+import com.baomidou.mybatisplus.samples.pagination.model.ParamSome;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -20,5 +21,5 @@ public interface UserMapper extends BaseMapper<User> {
      * @param myPage 自定义 page
      * @return 分页数据
      */
-    MyPage<User> mySelectPage(@Param("pg") MyPage<User> myPage);
+    MyPage<User> mySelectPage(@Param("pg") MyPage<User> myPage, @Param("ps") ParamSome paramSome);
 }

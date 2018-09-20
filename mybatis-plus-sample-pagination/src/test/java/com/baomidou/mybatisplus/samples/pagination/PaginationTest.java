@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.samples.pagination.entity.User;
 import com.baomidou.mybatisplus.samples.pagination.mapper.UserMapper;
 import com.baomidou.mybatisplus.samples.pagination.model.MyPage;
+import com.baomidou.mybatisplus.samples.pagination.model.ParamSome;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,7 +43,8 @@ public class PaginationTest {
 
         System.err.println("----- 自定义 XML 分页 ------");
         MyPage<User> myPage = new MyPage<User>(1, 5).setSelectInt(20).setSelectStr("Jack");
-        MyPage<User> userMyPage = mapper.mySelectPage(myPage);
+        ParamSome paramSome = new ParamSome(20, "Jack");
+        MyPage<User> userMyPage = mapper.mySelectPage(myPage, paramSome);
         Assert.assertSame(myPage, userMyPage);
         System.out.println("总条数 ------> " + userMyPage.getTotal());
         System.out.println("当前页数 ------> " + userMyPage.getCurrent());

@@ -3,6 +3,8 @@
 <mapper namespace="com.baomidou.mybatisplus.samples.pagination.mapper.UserMapper">
 
     <select id="mySelectPage" resultType="com.baomidou.mybatisplus.samples.pagination.entity.User">
-        select * from user where age = #{pg.selectInt} and name = #{pg.selectStr}
+        select *
+        from user where (age = #{pg.selectInt} and name = #{pg.selectStr})
+                or (age = #{ps.yihao} and name = #{ps.erhao})
     </select>
 </mapper>
