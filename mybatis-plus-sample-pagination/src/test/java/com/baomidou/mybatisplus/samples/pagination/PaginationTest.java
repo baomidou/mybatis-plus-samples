@@ -1,5 +1,6 @@
 package com.baomidou.mybatisplus.samples.pagination;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -7,7 +8,6 @@ import com.baomidou.mybatisplus.samples.pagination.entity.User;
 import com.baomidou.mybatisplus.samples.pagination.mapper.UserMapper;
 import com.baomidou.mybatisplus.samples.pagination.model.MyPage;
 import com.baomidou.mybatisplus.samples.pagination.model.ParamSome;
-import com.google.gson.Gson;
 import ikidou.reflect.TypeBuilder;
 import org.junit.Assert;
 import org.junit.Test;
@@ -30,8 +30,6 @@ public class PaginationTest {
     @Resource
     private UserMapper mapper;
 
-    private Gson gson = new Gson();
-
     @Test
     public void tests() {
         System.out.println("----- baseMapper 自带分页 ------");
@@ -46,8 +44,8 @@ public class PaginationTest {
         System.out.println("----- baseMapper 自带分页 ------");
 
         System.out.println("json 正反序列化 begin");
-        String json = gson.toJson(page);
-        Page<User> page1 = gson.fromJson(json, TypeBuilder.newInstance(Page.class).addTypeParam(User.class).build());
+        String json = JSON.toJSONString(page);
+        Page<User> page1 = JSON.parseObject(json, TypeBuilder.newInstance(Page.class).addTypeParam(User.class).build());
         print(page1.getRecords());
         System.out.println("json 正反序列化 end");
 
