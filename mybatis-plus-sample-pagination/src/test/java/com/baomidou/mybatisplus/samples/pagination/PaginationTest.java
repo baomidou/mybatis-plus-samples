@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.samples.pagination.entity.User;
 import com.baomidou.mybatisplus.samples.pagination.mapper.UserMapper;
 import com.baomidou.mybatisplus.samples.pagination.model.MyPage;
 import com.baomidou.mybatisplus.samples.pagination.model.ParamSome;
+import com.google.gson.Gson;
+import ikidou.reflect.TypeBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,9 +30,11 @@ public class PaginationTest {
     @Resource
     private UserMapper mapper;
 
+    private Gson gson = new Gson();
+
     @Test
     public void tests() {
-        System.err.println("----- baseMapper 自带分页 ------");
+        System.out.println("----- baseMapper 自带分页 ------");
         Page<User> page = new Page<>(1, 5);
         IPage<User> userIPage = mapper.selectPage(page, new QueryWrapper<User>()
                 .eq("age", 20).eq("name", "Jack"));
@@ -39,9 +43,15 @@ public class PaginationTest {
         System.out.println("当前页数 ------> " + userIPage.getCurrent());
         System.out.println("当前每页显示数 ------> " + userIPage.getSize());
         print(userIPage.getRecords());
+        System.out.println("----- baseMapper 自带分页 ------");
 
+        System.out.println("json 正反序列化 begin");
+        String json = gson.toJson(page);
+        Page<User> page1 = gson.fromJson(json, TypeBuilder.newInstance(Page.class).addTypeParam(User.class).build());
+        print(page1.getRecords());
+        System.out.println("json 正反序列化 end");
 
-        System.err.println("----- 自定义 XML 分页 ------");
+        System.out.println("----- 自定义 XML 分页 ------");
         MyPage<User> myPage = new MyPage<User>(1, 5).setSelectInt(20).setSelectStr("Jack");
         ParamSome paramSome = new ParamSome(20, "Jack");
         MyPage<User> userMyPage = mapper.mySelectPage(myPage, paramSome);
@@ -50,6 +60,7 @@ public class PaginationTest {
         System.out.println("当前页数 ------> " + userMyPage.getCurrent());
         System.out.println("当前每页显示数 ------> " + userMyPage.getSize());
         print(userMyPage.getRecords());
+        System.out.println("----- 自定义 XML 分页 ------");
     }
 
     private <T> void print(List<T> list) {
