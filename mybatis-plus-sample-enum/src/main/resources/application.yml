@@ -10,8 +10,7 @@ spring:
 
 # MP 配置
 mybatis-plus:
-  typeEnumsPackage: com.baomidou.mybatisplus.samples.enums.enums
-
+  type-enums-package: com.baomidou.mybatisplus.samples.enums.enums
 
 # Logger Config
 logging:
