@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.devloper.joker.mybatisplus.cascade.mapper.UserMapper">
+
+    <!-- 联合查询加映射字段 -->
+    <resultMap id="userCascadeResult" type="user">
+        <id column="id" property="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="createTime" column="create_time"/>
+        <association property="role" columnPrefix="role_" resultMap="roleResult"/>
+
+    </resultMap>
+
+    <resultMap id="roleResult" type="role">
+        <id column="id" property="id"/>
+        <result property="name" column="name"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+     <select id="selectPageByCustomWithXml" resultMap="userCascadeResult">
+      SELECT user.*,
+      role.name as role_name,
+      role.create_time as role_create_time
+      FROM user as user
+      LEFT JOIN role as role
+      ON user.role_id = role.id
+    </select>
+
+</mapper>

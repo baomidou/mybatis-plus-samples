@@ -28,6 +28,7 @@
         <module>mybatis-plus-sample-deluxe</module>
         <module>mybatis-plus-sample-sequence</module>
         <module>mybatis-plus-sample-optimistic-locker</module>
+        <module>mybatis-plus-sample-cascade</module>
   </modules>
 
     <parent>
