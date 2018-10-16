@@ -23,4 +23,4 @@
 - mybatis-plus-sample-enum：MyBatis-Plus 枚举注入示例
 - mybatis-plus-sample-tenant：MyBatis-Plus 多租户示例
 - mybatis-plus-sample-deluxe：MyBatis-Plus 完整示例（包含 分页、逻辑删除、自定义全局操作 等绝大部分常用功能的使用示例，相当于大整合的完整示例）
-
+- mybatis-plus-sample-cascade：MyBatis-Plus 多表级联示例
