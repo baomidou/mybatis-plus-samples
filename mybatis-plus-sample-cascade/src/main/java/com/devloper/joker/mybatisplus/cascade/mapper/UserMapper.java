@@ -42,4 +42,4 @@ public interface UserMapper extends BaseMapper<User> {
     @QuerySupport
     Page<User> selectPageByCustomWithXml(Page<User> page, @Param(Constants.WRAPPER) Wrapper<User> wrapper);
 
-}
+  }
