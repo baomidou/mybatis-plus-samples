@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    schema: classpath:db/schema-h2.sql
+    data: classpath:db/data-h2.sql
+    url: jdbc:h2:mem:test
+    username: root
+    password: test
+  output:
+    ansi: #设置支持颜色显示
+      enabled: always
+mybatis-plus:
+  type-aliases-package: com.devloper.joker.mybatisplus.cascade.entity
+
+
+logging:
+  level:
+    com.devloper.joker: debug
