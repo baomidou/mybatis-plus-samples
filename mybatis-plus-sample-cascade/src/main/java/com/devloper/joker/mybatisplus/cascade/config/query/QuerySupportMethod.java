@@ -1,5 +1,6 @@
 package com.devloper.joker.mybatisplus.cascade.config.query;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.injector.AbstractMethod;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
@@ -7,10 +8,16 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.ResultType;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.builder.StaticSqlSource;
 import org.apache.ibatis.executor.keygen.NoKeyGenerator;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlCommandType;
 import org.apache.ibatis.mapping.SqlSource;
+import org.apache.ibatis.scripting.defaults.RawSqlSource;
+import org.apache.ibatis.scripting.xmltags.DynamicSqlSource;
+import org.apache.ibatis.scripting.xmltags.MixedSqlNode;
+import org.apache.ibatis.scripting.xmltags.SqlNode;
+import org.apache.ibatis.scripting.xmltags.TextSqlNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -18,6 +25,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.util.ReflectionUtils;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -87,6 +95,7 @@ public class QuerySupportMethod extends AbstractMethod {
 
     /**
      * 获取当前mapper所支持的查询方法并进行缓存
+     *
      * @param mapperClass
      * @param modelClass
      * @param tableInfo
@@ -125,6 +134,7 @@ public class QuerySupportMethod extends AbstractMethod {
 
     /**
      * 缓存支持的方法
+     *
      * @param mapperClass
      * @param method
      */
@@ -152,31 +162,69 @@ public class QuerySupportMethod extends AbstractMethod {
     }
 
     public String getMethodSqlByAnnotation(Class<?> mapperClass, String name) {
+        return getMethodSqlByAnnotation(mapperClass, name, getSupportMethod(mapperClass, name));
+    }
+
+    public String getMethodSqlByAnnotation(Class<?> mapperClass, String name, Method selectMethod) {
         String result = null;
         if (getSqlWithAnnotation) {
             String text = "Query Support find " + mapperClass.getName() + "." + name + " sql ";
             logger.debug(text + "by @Select");
             String error = text + "by @Select has error, cause by : ";
-            Method selectMethod = getSupportMethod(mapperClass, name);
             Assert.notNull(selectMethod, error + "can't find method");
             Select select = AnnotationUtils.findAnnotation(selectMethod, Select.class);
             Assert.notNull(select, error + "not use @Select");
             try {
                 StringBuilder sb = new StringBuilder();
                 for (String value : select.value()) {
-                    sb.append(value);
+                    sb.append(value + "\t");
                 }
                 result = sb.toString();
             } catch (Exception e) {
-                logger.warn(error + " {}",  e.getMessage());
+                logger.warn(error + " {}", e.getMessage());
             }
         }
 
         return result;
     }
 
+    public <T> T getField(Class<T> fieldClass, String fieldName, Object target) {
+        Field field = ReflectionUtils.findField(target.getClass(), fieldName);
+        field.setAccessible(true);
+        return (T) ReflectionUtils.getField(field, target);
+
+    }
+
+    public String getSqlText(SqlNode sqlNode) {
+        if (sqlNode != null) {
+            if (sqlNode instanceof TextSqlNode) {
+                return getField(String.class, "text", sqlNode);
+            } else if (sqlNode instanceof MixedSqlNode) {
+                List<SqlNode> sqlNodeList = getField(List.class, "contents", sqlNode);
+                Assert.isTrue(sqlNodeList.size() == 1, "MixedSqlNode SqlNode contents should only one");
+                return getSqlText(sqlNodeList.get(0));
+            }
+        }
+        return null;
+    }
+
+    public String getSqlText(SqlSource sqlSource) {
+        if (sqlSource != null) {
+            if (sqlSource instanceof RawSqlSource) {
+                return getSqlText(getField(RawSqlSource.class, "sqlSource", sqlSource));
+            } else if (sqlSource instanceof StaticSqlSource) {
+                return getField(String.class, "sql", sqlSource);
+            } else if (sqlSource instanceof DynamicSqlSource) {
+                SqlNode sqlNode = getField(SqlNode.class, "rootSqlNode", sqlSource);
+                return getSqlText(sqlNode);
+            }
+        }
+        return null;
+    }
+
     /**
      * 重新注入@QuerySupport相关的方法
+     *
      * @param mapperClass
      * @param modelClass
      * @param tableInfo
@@ -186,35 +234,61 @@ public class QuerySupportMethod extends AbstractMethod {
         String mapperClassName = mapperClass.getName();
         for (String method : methodList) {
             String statementName = mapperClassName + StringPool.DOT + method;
-            String beforeSql;
+            Method selectMethod = getSupportMethod(mapperClass, method);
+            Assert.notNull(selectMethod, "Query Support can't find method about " + statementName);
+            boolean hasWrapper = false;
+            for (Class parameterType : selectMethod.getParameterTypes()) {
+                if (Wrapper.class.isAssignableFrom(parameterType)) {
+                    hasWrapper = true;
+                    break;
+                }
+            }
+
+            MappedStatement mappedStatement = null;
+            SqlSource sqlSource = null;
             try {
-                MappedStatement mappedStatement = configuration.getMappedStatement(statementName);
-                beforeSql = mappedStatement.getBoundSql(null).getSql();
+                mappedStatement = configuration.getMappedStatement(statementName);
+                sqlSource = mappedStatement.getSqlSource();
             } catch (Exception e) {
-                logger.warn("Query Support get statement before sql error, cause by : {}", e.getMessage());
-                beforeSql = getMethodSqlByAnnotation(mapperClass, method);
+                logger.warn("Query Support get statement error, cause by : {}", e.getMessage());
+            }
+
+            boolean buildSqlSource = false;
+
+            String currentSql = null;
+            if (sqlSource == null) {
+                buildSqlSource = true;
+                currentSql = getMethodSqlByAnnotation(mapperClass, method, selectMethod);
+            } else {
+                //when wrapper exist, should find sql text
+                if (hasWrapper) {
+                    buildSqlSource = true;
+                    currentSql = getSqlText(sqlSource);
+                }
+            }
+
+            if (buildSqlSource) {
+                Assert.isTrue(StringUtils.isNotEmpty(currentSql), "Query Support can't correct find sql text about " + statementName);
+                //logger.debug("Query Support find {} sql text: \r\n\t {}", statementName, currentSql);
+                if (hasWrapper) {
+                    String scriptSql;
+                    if (currentSql.contains("<script>")) {
+                        int index = currentSql.indexOf("</script>");
+                        scriptSql = currentSql.substring(0, index) + " %s " + currentSql.substring(index);
+                    } else {
+                        scriptSql = "<script>\n" + currentSql + "\n %s </script>";
+                    }
+                    //生成支持查询条件的sql, mapper方法中需提供参数 @Param(Constants.WRAPPER) Wrapper<User> wrapper
+                    currentSql = String.format(scriptSql, this.sqlWhereEntityWrapper(tableInfo));
+                }
+                sqlSource = languageDriver.createSqlSource(configuration, currentSql, modelClass);
             }
 
             try {
-                if (StringUtils.isNotEmpty(beforeSql)) {
-                    String scriptSql;
-                    if (beforeSql.contains("<script>")) {
-                        int index = beforeSql.indexOf("</script>");
-                        scriptSql = beforeSql.substring(0, index) + " %s " + beforeSql.substring(index);
-                    } else {
-                        scriptSql = "<script>\n" + beforeSql + "\n %s </script>";
-                    }
-
-                    //生成支持查询条件的sql, mapper方法中需提供参数 @Param(Constants.WRAPPER) Wrapper<User> wrapper
-                    String currentSql = String.format(scriptSql, this.sqlWhereEntityWrapper(tableInfo));
-                    //移除之前所应用的方法
-                    this.removeBeforeMappedStatement(statementName);
-                    SqlSource sqlSource = languageDriver.createSqlSource(configuration, currentSql, modelClass);
-                    this.addSelectMappedStatement(mapperClass, method, sqlSource, modelClass, tableInfo);
-
-                    logger.debug("Query Support afresh inject {} statement success", statementName);
-
-                }
+                //移除之前所应用的方法
+                this.removeBeforeMappedStatement(statementName);
+                this.addSelectMappedStatement(mapperClass, method, sqlSource, modelClass, tableInfo);
+                logger.debug("Query Support afresh inject {} statement success", statementName);
             } catch (Exception e) {
                 logger.warn("Query Support afresh inject statement error, cause by : {}", e.getMessage());
             }
@@ -244,7 +318,8 @@ public class QuerySupportMethod extends AbstractMethod {
 
 
     /**
-     *  修改所应用的resultMap/resultType  类型优先级 (若未存在注解,当类型与mapper泛型不一致时使用其本身) @ResultType > @ResultMap > @Table(在类型一致时应用存在的resultMap)
+     * 修改所应用的resultMap/resultType  类型优先级 (若未存在注解,当类型与mapper泛型不一致时使用其本身) @ResultType > @ResultMap > @Table(在类型一致时应用存在的resultMap)
+     *
      * @param mapperClass
      * @param id
      * @param sqlSource
@@ -293,13 +368,14 @@ public class QuerySupportMethod extends AbstractMethod {
         }
 
         if (StringUtils.isNotEmpty(resultMap)) {
-            return this.addMappedStatement(mapperClass, id, sqlSource, SqlCommandType.SELECT, (Class)null, resultMap, (Class)null, new NoKeyGenerator(), (String)null, (String)null);
+            return this.addMappedStatement(mapperClass, id, sqlSource, SqlCommandType.SELECT, (Class) null, resultMap, (Class) null, new NoKeyGenerator(), (String) null, (String) null);
         }
-        return this.addMappedStatement(mapperClass, id, sqlSource, SqlCommandType.SELECT, (Class)null, (String)null, resultType, new NoKeyGenerator(), (String)null, (String)null);
+        return this.addMappedStatement(mapperClass, id, sqlSource, SqlCommandType.SELECT, (Class) null, (String) null, resultType, new NoKeyGenerator(), (String) null, (String) null);
     }
 
     /**
      * 移除之前所注册的mappedStatement
+     *
      * @param statementName mapper方法所对应的id
      */
     protected void removeBeforeMappedStatement(String statementName) {
