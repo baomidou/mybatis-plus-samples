@@ -2,6 +2,7 @@ package com.devloper.joker.mybatisplus.cascade.mapper;
 
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -10,6 +11,7 @@ import com.devloper.joker.mybatisplus.cascade.entity.User;
 import com.devloper.joker.mybatisplus.cascade.entity.UserRoleVO;
 import org.apache.ibatis.annotations.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 //可直接在这里定义方法列表,默认只有在类上加注解才会支持方法
@@ -20,7 +22,7 @@ public interface UserMapper extends BaseMapper<User> {
 
     @QuerySupport
     @Select("SELECT user.*, role.name as role_name, role.create_time as role_create_time FROM user as user LEFT JOIN role as role ON user.role_id = role.id")
-    List<UserRoleVO> findUserWithRoleByVoWithQueryList(@Param(Constants.WRAPPER) Wrapper<UserRoleVO> wrapper);
+    List<UserRoleVO> findUserWithRoleByVoWithQueryList(@Param(Constants.WRAPPER) QueryWrapper<UserRoleVO> wrapper);
 
     @QuerySupport
     @Select(JOIN_SQL)
@@ -42,4 +44,17 @@ public interface UserMapper extends BaseMapper<User> {
     @QuerySupport
     Page<User> selectPageByCustomWithXml(Page<User> page, @Param(Constants.WRAPPER) Wrapper<User> wrapper);
 
-  }
+    @QuerySupport
+    @Select({JOIN_SQL, "WHERE user.id = #{id}"})
+    User selectCascadeById(Serializable id);
+
+
+    @ResultMap("userCascadeResult")
+    @Select({JOIN_SQL, "WHERE user.id = #{id}"})
+    User selectCascadeById2(Serializable id);
+
+    @QuerySupport
+    @Select({"${text}"})
+    List<User> selectByText(String text, @Param(Constants.WRAPPER) Wrapper<User> wrapper);
+
+}

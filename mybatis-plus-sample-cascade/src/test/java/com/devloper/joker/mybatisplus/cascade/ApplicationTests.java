@@ -68,6 +68,31 @@ public class ApplicationTests {
     }
 
     @Test
+    public void selectCascadeById() {
+        //最终返回结果包含关联对象属性值依赖于@TableName(resultMap = "")
+        User user = userMapper.selectCascadeById(1L);
+        logger.info("result class: {}", user.getClass());
+        logger.info("result: {}", toJson(user));
+    }
+
+    @Test
+    public void selectCascadeById2() {
+        //需要设置@ResultMap
+        User user = userMapper.selectCascadeById2( 1L);
+        logger.info("result class: {}", user.getClass());
+        logger.info("result: {}", toJson(user));
+    }
+
+    @Test
+    public void selectByText() {
+        List<User> result = userMapper.selectByText(UserMapper.JOIN_SQL, new QueryWrapper<User>().eq("role_id", 2).or().eq("user.id", 1L));
+        logger.info("result: {}", toJson(result));
+
+        result = userMapper.selectByText("SELECT * FROM user", new QueryWrapper<User>().eq("role_id", 2).or().eq("id", 1L));
+        logger.info("result: {}", toJson(result));
+    }
+
+    @Test
     public void customSelectPageWithXml() {
         Page<User> userPage = new Page<>(1, 5);
         IPage<User> result = userMapper.selectPageByCustomWithXml(userPage, new QueryWrapper<User>().eq("role_id", 2).eq("username", "joker"));
