@@ -46,6 +46,7 @@ public class ApplicationTests {
         user.setCreateTime(new Date());
         Role role = new Role();
         role.setId(2L);
+        //依赖于User实体类中role字段注解上的el
         user.setRole(role);
         userMapper.insert(user);
         logger.info("insert user: {}", toJson(user));
@@ -58,6 +59,13 @@ public class ApplicationTests {
                         .set("role_id", null).eq("id",2L));
     }
 
+    @Test
+    public void selectById() {
+        //最终返回结果包含关联对象属性值依赖于@TableName(resultMap = "")
+        User user = userMapper.selectById(1L);
+        logger.info("result class: {}", user.getClass());
+        logger.info("result: {}", toJson(user));
+    }
 
     @Test
     public void customSelectPageWithXml() {
