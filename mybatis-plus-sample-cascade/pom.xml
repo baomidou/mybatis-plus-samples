@@ -44,6 +44,15 @@
             <version>2.9.6</version>
             <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.joker-pper</groupId>
+            <artifactId>mybatis-plus-query-core</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/lib/mybatis-plus-query-core-1.0.jar</systemPath>
+        </dependency>
+
     </dependencies>
 
     <build>
