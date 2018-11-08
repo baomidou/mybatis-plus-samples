@@ -1,9 +1,9 @@
 package com.baomidou.mybatisplus.samples.wrapper;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.samples.wrapper.entity.User;
-import com.baomidou.mybatisplus.samples.wrapper.mapper.RoleMapper;
-import com.baomidou.mybatisplus.samples.wrapper.mapper.UserMapper;
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,8 +11,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.Resource;
-import java.util.List;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.samples.wrapper.entity.User;
+import com.baomidou.mybatisplus.samples.wrapper.mapper.RoleMapper;
+import com.baomidou.mybatisplus.samples.wrapper.mapper.UserMapper;
 
 /**
  * @author miemie
@@ -57,6 +60,15 @@ public class WrapperTest {
         List<User> plainUsers4 = userMapper.selectList(new QueryWrapper<User>()
                 .apply("role_id = 2"));
         print(plainUsers4);
+
+        UpdateWrapper<User> uw = new UpdateWrapper<>();
+        uw.set("email", null);
+        uw.eq("id",4);
+        userMapper.update(new User(), uw);
+        User u4 = userMapper.selectById(4);
+        Assert.assertNull(u4.getEmail());
+
+
     }
 
     private <T> void print(List<T> list) {
