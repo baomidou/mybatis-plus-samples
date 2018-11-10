@@ -114,7 +114,7 @@ public class ApplicationTests {
     public void selectPageByCustom() {
         Page<User> userPage = new Page<>(1, 2);
         IPage<User> result = userMapper.selectPageByCustom(userPage, new QueryWrapper<User>().lambda().nested(it -> it.eq(User::getRole, 1).or().eq(User::getUsername, "joker")).
-                or().eq(User::getUsername, "ss").select(User::getUsername, User::getPassword));
+                or().eq(User::getUsername, "ss").select(User::getUsername, User::getPassword)); //select未生效
         logger.info("查询的列表数据为: {}", toJson(result));
     }
 
@@ -122,6 +122,27 @@ public class ApplicationTests {
     @Test
     public void findUserWithRoleByVoWithQuery() {
         Object results = userMapper.findUserWithRoleByVoWithQueryList(new QueryWrapper<UserRoleVO>().eq("role.id", 1L).eq("role.name", "admin"));
+        logger.info("查询的列表数据为: {}", toJson(results));
+    }
+
+
+  @Test
+    public void findUserWithRoleByVoWithQueryListAndColumns() {
+        Object results = userMapper.findUserWithRoleByVoWithQueryListAndColumns(new QueryWrapper<UserRoleVO>().select("user.*", "role.name as role_name", "role.create_time").eq("role.id", 1L).eq("role.name", "admin"));
+        logger.info("查询的列表数据为: {}", toJson(results));
+    }
+
+    @Test
+    public void selectPageByCustomWithAssociationAndColumns() {
+        Page<User> userPage = new Page<>(1, 2);
+
+        Object results = userMapper.selectPageByCustomWithAssociationAndColumns(userPage, new QueryWrapper<User>().lambda().select().eq(User::getRole, 1L));
+        logger.info("查询的列表数据为: {}", toJson(results));
+
+        results = userMapper.selectPageByCustomWithAssociationAndColumns(userPage, new QueryWrapper<User>().lambda().select(User::getId, User::getUsername, User::getRole).eq(User::getRole, 1L));
+        logger.info("查询的列表数据为: {}", toJson(results));
+
+        results = userMapper.selectPageByCustomWithAssociationAndColumns(userPage, new QueryWrapper<User>().select("id", "username", "create_time", "role_id").eq("role_id", 1L));
         logger.info("查询的列表数据为: {}", toJson(results));
     }
 }

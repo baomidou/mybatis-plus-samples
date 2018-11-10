@@ -14,6 +14,11 @@
 
     </resultMap>
 
+    <resultMap id="userNotCascadeResult" type="user">
+        <association property="role" column="role_id" javaType="Role"
+                     select="com.devloper.joker.mybatisplus.cascade.mapper.RoleMapper.selectById"/>
+    </resultMap>
+
     <resultMap id="roleResult" type="role">
         <id column="id" property="id"/>
         <result property="name" column="name"/>

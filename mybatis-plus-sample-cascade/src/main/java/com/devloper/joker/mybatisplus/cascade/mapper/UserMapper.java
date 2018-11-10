@@ -57,4 +57,20 @@ public interface UserMapper extends BaseMapper<User> {
     @Select({"${text}"})
     List<User> selectByText(String text, @Param(Constants.WRAPPER) Wrapper<User> wrapper);
 
+
+       /**
+     * Wrapper支持select指定列的方式
+     * @param wrapper
+     * @return
+     */
+    @QuerySupport
+    @Select("SELECT %s FROM user as user LEFT JOIN role as role ON user.role_id = role.id")
+    List<UserRoleVO> findUserWithRoleByVoWithQueryListAndColumns(@Param(Constants.WRAPPER) Wrapper<UserRoleVO> wrapper);
+
+    @ResultMap("userNotCascadeResult")
+    @QuerySupport
+    @Select("SELECT %s FROM user")
+    Page<User> selectPageByCustomWithAssociationAndColumns(Page<User> page, @Param(Constants.WRAPPER) Wrapper<User> wrapper);
+
+
 }
