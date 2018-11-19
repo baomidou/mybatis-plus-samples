@@ -1,16 +1,18 @@
 package com.baomidou.mybatisplus.samples.crud;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.baomidou.mybatisplus.samples.crud.entity.User;
-import com.baomidou.mybatisplus.samples.crud.mapper.UserMapper;
+import javax.annotation.Resource;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.annotation.Resource;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.samples.crud.entity.User;
+import com.baomidou.mybatisplus.samples.crud.mapper.UserMapper;
 
 /**
  * <p>
@@ -63,5 +65,19 @@ public class SampleTest {
         User user = mapper.selectOne(new QueryWrapper<User>().lambda().eq(User::getId, 2));
         Assert.assertEquals("mp", user.getName());
         Assert.assertTrue(3 == user.getAge());
+    }
+
+    @Test
+    public void orderBy() {
+        QueryWrapper<User> ew = new QueryWrapper<>();
+        ew.orderByAsc("age");
+        Assert.assertTrue(!mapper.selectList(ew).isEmpty());
+    }
+
+    @Test
+    public void orderByLambda() {
+        LambdaQueryWrapper<User> lw = new LambdaQueryWrapper<>();
+        lw.orderByAsc(User::getAge);
+        Assert.assertTrue(!mapper.selectList(lw).isEmpty());
     }
 }
