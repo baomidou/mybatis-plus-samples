@@ -57,7 +57,7 @@
             <artifactId>mybatis-plus-query-core</artifactId>
             <version>1.0</version>
             <scope>system</scope>
-            <systemPath>${pom.basedir}/lib/mybatis-plus-query-core-1.0.jar</systemPath>
+            <systemPath>${pom.basedir}/lib/mybatis-plus-query-core-1.1.jar</systemPath>
         </dependency>
 
     </dependencies>
