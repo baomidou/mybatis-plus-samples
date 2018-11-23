@@ -2,6 +2,8 @@ package com.baomidou.mybatisplus.samples.deluxe.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.Version;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -20,7 +22,11 @@ public class User {
     private Integer age;
     @TableField(el = "email, typeHandler=com.baomidou.mybatisplus.samples.deluxe.config.TestTypeHandler")
     private String email;
-    @TableLogic
+
+    @Version
+    private Integer version;
+
+    @TableLogic(value = "0", delval = "1")
     @TableField(select = false)
     private Integer deleted;
 }
