@@ -8,7 +8,7 @@
 
     <!-- H2 Data Source Config -->
     <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
-        <property name="driverClassName" value="org.h2.Driver"/>
+        <property name="driverClassName" value="${h2.driver}"/>
         <property name="jdbcUrl" value="${h2.url}"/>
         <property name="username" value="${h2.username}"/>
         <property name="password" value="${h2.password}"/>
@@ -17,7 +17,23 @@
     <!-- SqlSessionFactory Config -->
     <bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
+        <property name="globalConfig" ref="globalConfig"/>
+        <property name="plugins">
+            <array>
+                <bean class="com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor"></bean>
+            </array>
+        </property>
     </bean>
+
+    <bean id="globalConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig">
+        <property name="dbConfig" ref="dbConfig"/>
+    </bean>
+
+    <bean id="dbConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig.DbConfig">
+        <property name="keyGenerator" ref="keyGenerator"/>
+    </bean>
+
+    <bean id="keyGenerator" class="com.baomidou.mybatisplus.extension.incrementer.H2KeyGenerator"/>
 
     <!-- MyBatis Mapper Scan Config  -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
