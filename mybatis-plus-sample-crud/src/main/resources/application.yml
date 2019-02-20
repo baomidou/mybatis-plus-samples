@@ -1,10 +1,10 @@
 # DataSource Config
 spring:
   datasource:
-    driver-class-name: org.h2.Driver
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
     schema: classpath:db/schema-h2.sql
     data: classpath:db/data-h2.sql
-    url: jdbc:h2:mem:test
+    url: jdbc:p6spy:h2:mem:test
     username: root
     password: test
 
