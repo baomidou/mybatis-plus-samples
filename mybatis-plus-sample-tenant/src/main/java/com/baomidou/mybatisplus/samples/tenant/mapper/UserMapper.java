@@ -13,4 +13,11 @@ import com.baomidou.mybatisplus.samples.tenant.entity.User;
  */
 public interface UserMapper extends BaseMapper<User> {
 
+    /**
+     * 自定义SQL：默认也会增加多租户条件
+     * 参考打印的SQL
+     * @return
+     */
+    public Integer myCount();
+
 }

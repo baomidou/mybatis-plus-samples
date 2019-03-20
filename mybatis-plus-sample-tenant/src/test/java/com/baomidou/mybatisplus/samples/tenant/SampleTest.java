@@ -54,4 +54,13 @@ public class SampleTest {
         List<User> userList = mapper.selectList(null);
         userList.forEach(u -> Assert.assertTrue(1 == u.getTenantId()));
     }
+
+    /**
+     * 自定义SQL：默认也会增加多租户条件
+     * 参考打印的SQL
+     */
+    @Test
+    public void manualSqlTenantFilterTest() {
+        System.out.println(mapper.myCount());
+    }
 }
