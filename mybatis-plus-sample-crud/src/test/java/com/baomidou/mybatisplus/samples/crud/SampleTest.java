@@ -1,16 +1,18 @@
 package com.baomidou.mybatisplus.samples.crud;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+
 import javax.annotation.Resource;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.samples.crud.entity.User;
 import com.baomidou.mybatisplus.samples.crud.mapper.UserMapper;
 
@@ -35,49 +37,47 @@ public class SampleTest {
         user.setName("小羊");
         user.setAge(3);
         user.setEmail("abc@mp.com");
-        Assert.assertTrue(mapper.insert(user) > 0);
+        assertThat(mapper.insert(user)).isGreaterThan(0);
         // 成功直接拿会写的 ID
-        System.err.println("\n插入成功 ID 为：" + user.getId());
+        assertThat(user.getId()).isNotNull();
     }
 
 
     @Test
     public void bDelete() {
-        Assert.assertTrue(mapper.deleteById(3L) > 0);
-        Assert.assertTrue(mapper.delete(new QueryWrapper<User>()
-                .lambda().eq(User::getName, "Sandy")) > 0);
+        assertThat(mapper.deleteById(3L)).isGreaterThan(0);
+        assertThat(mapper.delete(new QueryWrapper<User>()
+                .lambda().eq(User::getName, "Sandy"))).isGreaterThan(0);
     }
 
 
     @Test
     public void cUpdate() {
-        Assert.assertTrue(mapper.updateById(new User().setId(1L).setEmail("ab@c.c")) > 0);
-        Assert.assertTrue(mapper.update(new User().setName("mp"),
-                new UpdateWrapper<User>().lambda()
+        assertThat(mapper.updateById(new User().setId(1L).setEmail("ab@c.c"))).isGreaterThan(0);
+        assertThat(mapper.update(new User().setName("mp"),
+                Wrappers.<User>lambdaUpdate()
                         .set(User::getAge, 3)
-                        .eq(User::getId, 2)) > 0);
+                        .eq(User::getId, 2))).isGreaterThan(0);
     }
 
 
     @Test
     public void dSelect() {
-        Assert.assertEquals("ab@c.c", mapper.selectById(1L).getEmail());
+        assertThat(mapper.selectById(1L).getEmail()).isEqualTo("ab@c.c");
         User user = mapper.selectOne(new QueryWrapper<User>().lambda().eq(User::getId, 2));
-        Assert.assertEquals("mp", user.getName());
-        Assert.assertTrue(3 == user.getAge());
+        assertThat(user.getName()).isEqualTo("mp");
+        assertThat(user.getAge()).isEqualTo(3);
     }
 
     @Test
     public void orderBy() {
-        QueryWrapper<User> ew = new QueryWrapper<>();
-        ew.orderByAsc("age");
-        Assert.assertTrue(!mapper.selectList(ew).isEmpty());
+        List<User> users = mapper.selectList(Wrappers.<User>query().orderByAsc("age"));
+        assertThat(users).isNotEmpty();
     }
 
     @Test
     public void orderByLambda() {
-        LambdaQueryWrapper<User> lw = new LambdaQueryWrapper<>();
-        lw.orderByAsc(User::getAge);
-        Assert.assertTrue(!mapper.selectList(lw).isEmpty());
+        List<User> users = mapper.selectList(Wrappers.<User>lambdaQuery().orderByAsc(User::getAge));
+        assertThat(users).isNotEmpty();
     }
 }
