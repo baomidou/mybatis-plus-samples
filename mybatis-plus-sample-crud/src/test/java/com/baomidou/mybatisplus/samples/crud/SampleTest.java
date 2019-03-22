@@ -3,6 +3,7 @@ package com.baomidou.mybatisplus.samples.crud;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -12,7 +13,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.samples.crud.entity.User;
 import com.baomidou.mybatisplus.samples.crud.mapper.UserMapper;
 
@@ -73,6 +76,23 @@ public class SampleTest {
     public void orderBy() {
         List<User> users = mapper.selectList(Wrappers.<User>query().orderByAsc("age"));
         assertThat(users).isNotEmpty();
+    }
+
+    @Test
+    public void selectMaps() {
+        List<Map<String, Object>> mapList = mapper.selectMaps(Wrappers.<User>query().orderByAsc("age"));
+        assertThat(mapList).isNotEmpty();
+        assertThat(mapList.get(0)).isNotEmpty();
+        System.out.println(mapList.get(0));
+    }
+
+    @Test
+    public void selectMapsPage() {
+        IPage<Map<String, Object>> page = mapper.selectMapsPage(new Page<>(1, 5), Wrappers.<User>query().orderByAsc("age"));
+        assertThat(page).isNotNull();
+        assertThat(page.getRecords()).isNotEmpty();
+        assertThat(page.getRecords().get(0)).isNotEmpty();
+        System.out.println(page.getRecords().get(0));
     }
 
     @Test
