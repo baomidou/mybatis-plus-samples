@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -99,5 +100,15 @@ public class SampleTest {
     public void orderByLambda() {
         List<User> users = mapper.selectList(Wrappers.<User>lambdaQuery().orderByAsc(User::getAge));
         assertThat(users).isNotEmpty();
+    }
+
+    @Test
+    public void testSelectMaxId() {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.select("max(id) as id");
+        User user = mapper.selectOne(wrapper);
+        System.out.println("maxId=" + user.getId());
+        List<User> users = mapper.selectList(Wrappers.<User>lambdaQuery().orderByDesc(User::getId));
+        Assert.assertEquals(user.getId().longValue(), users.get(0).getId().longValue());
     }
 }
