@@ -1,0 +1,21 @@
+spring:
+  rabbitmq:
+    host: 你的 IP
+    port: 5672
+    username: 用户
+    password: 密码
+    listener:
+      simple:
+        retry:
+          enabled: true
+          initial-interval: 1000
+          max-attempts: 3
+          max-interval: 10000
+          multiplier: 2.0
+          stateless: true
+  #redis config
+  redis:
+    host: 你的 IP
+    port: 6379
+    password: 密码
+    timeout: 10000
