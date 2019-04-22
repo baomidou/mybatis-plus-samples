@@ -9,6 +9,7 @@ spring:
         retry:
           enabled: true
           initial-interval: 1000
+          # 最大尝试次数
           max-attempts: 3
           max-interval: 10000
           multiplier: 2.0

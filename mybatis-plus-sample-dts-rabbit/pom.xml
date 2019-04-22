@@ -26,13 +26,7 @@
     </dependency>
     <dependency>
       <groupId>com.baomidou</groupId>
-      <artifactId>mybatis-plus-core</artifactId>
-      <version>3.1.1.1-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>com.baomidou</groupId>
       <artifactId>mybatis-plus-dts</artifactId>
-      <version>3.1.1.1-SNAPSHOT</version>
     </dependency>
   </dependencies>
 
