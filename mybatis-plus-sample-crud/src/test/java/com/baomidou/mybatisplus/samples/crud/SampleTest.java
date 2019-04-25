@@ -58,19 +58,73 @@ public class SampleTest {
     @Test
     public void cUpdate() {
         assertThat(mapper.updateById(new User().setId(1L).setEmail("ab@c.c"))).isGreaterThan(0);
-        assertThat(mapper.update(new User().setName("mp"),
+        assertThat(
+                mapper.update(
+                        new User().setName("mp"),
+                        Wrappers.<User>lambdaUpdate()
+                                .set(User::getAge, 3)
+                                .eq(User::getId, 2)
+                )
+        ).isGreaterThan(0);
+        User user = mapper.selectById(2);
+        assertThat(user.getAge()).isEqualTo(3);
+        assertThat(user.getName()).isEqualTo("mp");
+
+        mapper.update(
+                null,
+                Wrappers.<User>lambdaUpdate().set(User::getEmail, null).eq(User::getId, 2)
+        );
+        assertThat(mapper.selectById(1).getEmail()).isEqualTo("ab@c.c");
+        user = mapper.selectById(2);
+        assertThat(user.getEmail()).isNull();
+        assertThat(user.getName()).isEqualTo("mp");
+
+        mapper.update(
+                new User().setEmail("miemie@baomidou.com"),
+                new QueryWrapper<User>()
+                        .lambda().eq(User::getId, 2)
+        );
+        user = mapper.selectById(2);
+        assertThat(user.getEmail()).isEqualTo("miemie@baomidou.com");
+
+        mapper.update(
+                new User().setEmail("miemie2@baomidou.com"),
                 Wrappers.<User>lambdaUpdate()
-                        .set(User::getAge, 3)
-                        .eq(User::getId, 2))).isGreaterThan(0);
+                        .set(User::getAge, null)
+                        .eq(User::getId, 2)
+        );
+        user = mapper.selectById(2);
+        assertThat(user.getEmail()).isEqualTo("miemie2@baomidou.com");
+        assertThat(user.getAge()).isNull();
     }
 
 
     @Test
     public void dSelect() {
-        assertThat(mapper.selectById(1L).getEmail()).isEqualTo("ab@c.c");
-        User user = mapper.selectOne(new QueryWrapper<User>().lambda().eq(User::getId, 2));
-        assertThat(user.getName()).isEqualTo("mp");
+        mapper.insert(
+                new User().setId(10086L)
+                        .setName("miemie")
+                        .setEmail("miemie@baomidou.com")
+                        .setAge(3));
+        assertThat(mapper.selectById(10086L).getEmail()).isEqualTo("miemie@baomidou.com");
+        User user = mapper.selectOne(new QueryWrapper<User>().lambda().eq(User::getId, 10086));
+        assertThat(user.getName()).isEqualTo("miemie");
         assertThat(user.getAge()).isEqualTo(3);
+
+        mapper.selectList(Wrappers.<User>lambdaQuery().select(User::getId))
+                .forEach(x -> {
+                    assertThat(x.getId()).isNotNull();
+                    assertThat(x.getEmail()).isNull();
+                    assertThat(x.getName()).isNull();
+                    assertThat(x.getAge()).isNull();
+                });
+        mapper.selectList(new QueryWrapper<User>().select("id","name"))
+                .forEach(x -> {
+                    assertThat(x.getId()).isNotNull();
+                    assertThat(x.getEmail()).isNull();
+                    assertThat(x.getName()).isNotNull();
+                    assertThat(x.getAge()).isNull();
+                });
     }
 
     @Test
