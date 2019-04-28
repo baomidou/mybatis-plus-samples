@@ -14,9 +14,3 @@ spring:
           max-interval: 10000
           multiplier: 2.0
           stateless: true
-  #redis config
-  redis:
-    host: 你的 IP
-    port: 6379
-    password: 密码
-    timeout: 10000
