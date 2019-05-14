@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,6 +34,19 @@ public class PaginationTest {
 
     @Resource
     private UserMapper mapper;
+
+    @Test
+    public void lambdaPagination() {
+        Page<User> page = new Page<>(1, 3);
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.lambda()
+                .ge(User::getAge, 1);
+        IPage<User> result = mapper.selectPage(page, wrapper);
+        System.out.println(result.getTotal());
+        Assert.assertTrue(result.getTotal() > 3);
+        Assert.assertEquals(3, result.getRecords().size());
+
+    }
 
     @Test
     public void tests() {
