@@ -118,7 +118,7 @@ public class SampleTest {
                     assertThat(x.getName()).isNull();
                     assertThat(x.getAge()).isNull();
                 });
-        mapper.selectList(new QueryWrapper<User>().select("id","name"))
+        mapper.selectList(new QueryWrapper<User>().select("id", "name"))
                 .forEach(x -> {
                     assertThat(x.getId()).isNotNull();
                     assertThat(x.getEmail()).isNull();
@@ -164,5 +164,16 @@ public class SampleTest {
         System.out.println("maxId=" + user.getId());
         List<User> users = mapper.selectList(Wrappers.<User>lambdaQuery().orderByDesc(User::getId));
         Assert.assertEquals(user.getId().longValue(), users.get(0).getId().longValue());
+    }
+
+    @Test
+    public void testGroup() {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.select("age, count(*)")
+                .groupBy("age");
+        List<Map<String, Object>> maplist = mapper.selectMaps(wrapper);
+        for (Map<String, Object> mp : maplist) {
+            System.out.println(mp);
+        }
     }
 }
