@@ -176,4 +176,27 @@ public class SampleTest {
             System.out.println(mp);
         }
     }
+
+    @Test
+    public void testTableFieldExistFalse(){
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.select("age, count(age) as count")
+                .groupBy("age");
+        List<User> list = mapper.selectList(wrapper);
+        list.forEach(System.out::println);
+        list.forEach(x->{
+            Assert.assertNull(x.getId());
+            Assert.assertNotNull(x.getAge());
+            Assert.assertNotNull(x.getCount());
+        });
+        mapper.insert(
+                new User().setId(10088L)
+                        .setName("miemie")
+                        .setEmail("miemie@baomidou.com")
+                        .setAge(3));
+        User miemie = mapper.selectById(10088L);
+        Assert.assertNotNull(miemie);
+
+    }
+
 }
