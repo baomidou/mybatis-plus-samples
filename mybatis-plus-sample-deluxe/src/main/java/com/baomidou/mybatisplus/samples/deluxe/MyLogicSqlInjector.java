@@ -1,7 +1,7 @@
 package com.baomidou.mybatisplus.samples.deluxe;
 
 import com.baomidou.mybatisplus.core.injector.AbstractMethod;
-import com.baomidou.mybatisplus.extension.injector.LogicSqlInjector;
+import com.baomidou.mybatisplus.core.injector.DefaultSqlInjector;
 import com.baomidou.mybatisplus.samples.deluxe.methods.DeleteAll;
 
 import java.util.List;
@@ -12,11 +12,11 @@ import java.util.List;
  * @author miemie
  * @since 2018-08-13
  */
-public class MyLogicSqlInjector extends LogicSqlInjector {
+public class MyLogicSqlInjector extends DefaultSqlInjector {
 
     @Override
-    public List<AbstractMethod> getMethodList() {
-        List<AbstractMethod> methodList = super.getMethodList();
+    public List<AbstractMethod> getMethodList(Class<?> mapperClass) {
+        List<AbstractMethod> methodList = super.getMethodList(mapperClass);
         methodList.add(new DeleteAll());
         return methodList;
     }
