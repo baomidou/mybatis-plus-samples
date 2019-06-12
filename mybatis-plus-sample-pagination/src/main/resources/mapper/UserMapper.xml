@@ -2,9 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.baomidou.mybatisplus.samples.pagination.mapper.UserMapper">
 
+    <resultMap id="userChildrenMap" type="com.baomidou.mybatisplus.samples.pagination.model.UserChildren">
+        <id column="id" property="id"/>
+        <result column="age" property="age"/>
+        <result column="email" property="email"/>
+        <result column="name" property="name"/>
+        <collection property="c" ofType="com.baomidou.mybatisplus.samples.pagination.entity.Children" columnPrefix="c_">
+            <id column="id" property="id"/>
+            <result column="name" property="name"/>
+            <result column="user_id" property="userId"/>
+        </collection>
+    </resultMap>
+
     <select id="mySelectPage" resultType="com.baomidou.mybatisplus.samples.pagination.entity.User">
         select *
-        from user where (age = #{pg.selectInt} and name = #{pg.selectStr})
-                or (age = #{ps.yihao} and name = #{ps.erhao})
+        from user
+        where (age = #{pg.selectInt} and name = #{pg.selectStr})
+           or (age = #{ps.yihao} and name = #{ps.erhao})
     </select>
 </mapper>

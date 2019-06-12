@@ -1,18 +1,5 @@
 package com.baomidou.mybatisplus.samples.pagination;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.util.CollectionUtils;
-
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -21,8 +8,19 @@ import com.baomidou.mybatisplus.samples.pagination.entity.User;
 import com.baomidou.mybatisplus.samples.pagination.mapper.UserMapper;
 import com.baomidou.mybatisplus.samples.pagination.model.MyPage;
 import com.baomidou.mybatisplus.samples.pagination.model.ParamSome;
-
+import com.baomidou.mybatisplus.samples.pagination.model.UserChildren;
 import ikidou.reflect.TypeBuilder;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.util.CollectionUtils;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author miemie
@@ -39,17 +37,15 @@ public class PaginationTest {
     public void lambdaPagination() {
         Page<User> page = new Page<>(1, 3);
         QueryWrapper<User> wrapper = new QueryWrapper<>();
-        wrapper.lambda()
-                .ge(User::getAge, 1);
+        wrapper.lambda().ge(User::getAge, 1);
         IPage<User> result = mapper.selectPage(page, wrapper);
         System.out.println(result.getTotal());
         Assert.assertTrue(result.getTotal() > 3);
         Assert.assertEquals(3, result.getRecords().size());
-
     }
 
     @Test
-    public void tests() {
+    public void tests1() {
         System.out.println("----- baseMapper 自带分页 ------");
         Page<User> page = new Page<>(1, 5);
         IPage<User> userIPage = mapper.selectPage(page, new QueryWrapper<User>()
@@ -77,6 +73,15 @@ public class PaginationTest {
         System.out.println("当前每页显示数 ------> " + userMyPage.getSize());
         print(userMyPage.getRecords());
         System.out.println("----- 自定义 XML 分页 ------");
+    }
+
+    @Test
+    public void tests2() {
+        MyPage<UserChildren> myPage = new MyPage<>(1, 5);
+        myPage.setSelectInt(18);
+        MyPage<UserChildren> userChildrenMyPage = mapper.userChildrenPage(myPage);
+        List<UserChildren> records = userChildrenMyPage.getRecords();
+        records.forEach(System.out::println);
     }
 
     private <T> void print(List<T> list) {

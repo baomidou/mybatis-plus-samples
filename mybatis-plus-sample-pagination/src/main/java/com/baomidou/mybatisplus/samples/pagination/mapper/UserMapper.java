@@ -1,11 +1,13 @@
 package com.baomidou.mybatisplus.samples.pagination.mapper;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.samples.pagination.entity.User;
 import com.baomidou.mybatisplus.samples.pagination.model.MyPage;
 import com.baomidou.mybatisplus.samples.pagination.model.ParamSome;
+import com.baomidou.mybatisplus.samples.pagination.model.UserChildren;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * @author miemie
@@ -25,4 +27,20 @@ public interface UserMapper extends BaseMapper<User> {
      */
 //    @Select("select * from user where (age = #{pg.selectInt} and name = #{pg.selectStr}) or (age = #{ps.yihao} and name = #{ps.erhao})")
     MyPage<User> mySelectPage(@Param("pg") MyPage<User> myPage, @Param("ps") ParamSome paramSome);
+
+
+    @ResultMap("userChildrenMap")
+    @Select("<script>select u.id,u.name,u.email,u.age,c.id as \"c_id\",c.name as \"c_name\",c.user_id as \"c_user_id\" " +
+            "from user u " +
+            "left join children c on c.user_id = u.id " +
+            "<where>" +
+            "<if test=\"selectInt != null\"> " +
+            "and u.age = #{selectInt} " +
+            "</if> " +
+            "<if test=\"selectStr != null and selectStr != ''\"> " +
+            "and u.name = #{selectStr} " +
+            "</if> " +
+            "</where>" +
+            "</script>")
+    MyPage<UserChildren> userChildrenPage(MyPage<UserChildren> myPage);
 }

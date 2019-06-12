@@ -1,5 +1,13 @@
+DELETE
+FROM children;
 DELETE FROM user;
 
+INSERT INTO children (id, name, user_id)
+VALUES (1, 'Jone', 1),
+       (2, 'Jack', 1),
+       (3, 'Jack2', 1),
+       (4, 'Jack', 15),
+       (5, 'Billie', 15);
 
 INSERT INTO user (id, name, age, email)
 VALUES (1, 'Jone', 18, 'test1@baomidou.com'),
