@@ -38,7 +38,7 @@ public interface UserMapper extends BaseMapper<User> {
             "and u.age = #{selectInt} " +
             "</if> " +
             "<if test=\"selectStr != null and selectStr != ''\"> " +
-            "and u.name = #{selectStr} " +
+            "and c.name = #{selectStr} " +
             "</if> " +
             "</where>" +
             "</script>")

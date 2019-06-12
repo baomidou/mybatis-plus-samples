@@ -78,7 +78,7 @@ public class PaginationTest {
     @Test
     public void tests2() {
         MyPage<UserChildren> myPage = new MyPage<>(1, 5);
-        myPage.setSelectInt(18);
+        myPage.setSelectInt(18).setSelectStr("Jack");
         MyPage<UserChildren> userChildrenMyPage = mapper.userChildrenPage(myPage);
         List<UserChildren> records = userChildrenMyPage.getRecords();
         records.forEach(System.out::println);
