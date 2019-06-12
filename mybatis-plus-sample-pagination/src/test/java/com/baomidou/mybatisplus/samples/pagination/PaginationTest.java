@@ -77,10 +77,17 @@ public class PaginationTest {
 
     @Test
     public void tests2() {
+        /* 下面的 left join 不会对 count 进行优化,因为 where 条件里有 join 的表的条件 */
         MyPage<UserChildren> myPage = new MyPage<>(1, 5);
         myPage.setSelectInt(18).setSelectStr("Jack");
         MyPage<UserChildren> userChildrenMyPage = mapper.userChildrenPage(myPage);
         List<UserChildren> records = userChildrenMyPage.getRecords();
+        records.forEach(System.out::println);
+
+        /* 下面的 left join 会对 count 进行优化,因为 where 条件里没有 join 的表的条件 */
+        myPage = new MyPage<UserChildren>(1, 5).setSelectInt(18);
+        userChildrenMyPage = mapper.userChildrenPage(myPage);
+        records = userChildrenMyPage.getRecords();
         records.forEach(System.out::println);
     }
 
