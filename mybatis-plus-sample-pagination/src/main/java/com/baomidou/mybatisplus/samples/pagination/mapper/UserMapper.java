@@ -1,13 +1,19 @@
 package com.baomidou.mybatisplus.samples.pagination.mapper;
 
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.session.RowBounds;
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.samples.pagination.entity.User;
 import com.baomidou.mybatisplus.samples.pagination.model.MyPage;
 import com.baomidou.mybatisplus.samples.pagination.model.ParamSome;
 import com.baomidou.mybatisplus.samples.pagination.model.UserChildren;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
 
 /**
  * @author miemie
@@ -43,4 +49,15 @@ public interface UserMapper extends BaseMapper<User> {
             "</where>" +
             "</script>")
     MyPage<UserChildren> userChildrenPage(MyPage<UserChildren> myPage);
+
+
+    MyPage<User> mySelectPageMap(@Param("pg") MyPage<User> myPage, @Param("map") Map param);
+
+    List<User> mySelectMap(Map param);
+
+    List<User> myPageSelect(MyPage<User> myPage);
+
+    List<User> iPageSelect(IPage<User> myPage);
+
+    List<User> rowBoundList(RowBounds rowBounds, Map map);
 }

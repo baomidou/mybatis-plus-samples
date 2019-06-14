@@ -20,4 +20,49 @@
         where (age = #{pg.selectInt} and name = #{pg.selectStr})
            or (age = #{ps.yihao} and name = #{ps.erhao})
     </select>
+
+    <select id="mySelectPageMap" resultType="com.baomidou.mybatisplus.samples.pagination.entity.User">
+        select * from user
+        <where>
+            <if test="map.name!=null and map.name!=''">
+                name like #{map.name}
+            </if>
+        </where>
+    </select>
+
+    <select id="mySelectMap" resultType="com.baomidou.mybatisplus.samples.pagination.entity.User">
+        select * from user
+        <where>
+            <if test="name!=null and name!=''">
+                name like #{name}
+            </if>
+        </where>
+    </select>
+
+    <select id="myPageSelect" resultType="com.baomidou.mybatisplus.samples.pagination.entity.User">
+        select * from user
+        <where>
+            <if test="name!=null and name!=''">
+                name like '%'||#{name}||'%'
+            </if>
+        </where>
+    </select>
+
+    <select id="iPageSelect" resultType="com.baomidou.mybatisplus.samples.pagination.entity.User">
+        select * from user
+        <where>
+            <if test="name!=null and name!=''">
+                name like #{name}
+            </if>
+        </where>
+    </select>
+
+    <select id="rowBoundList" resultType="com.baomidou.mybatisplus.samples.pagination.entity.User">
+        select * from user
+        <where>
+            <if test="name!=null and name!=''">
+                name like #{name}
+            </if>
+        </where>
+    </select>
 </mapper>

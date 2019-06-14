@@ -1,5 +1,21 @@
 package com.baomidou.mybatisplus.samples.pagination;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.apache.ibatis.session.RowBounds;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.util.CollectionUtils;
+
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -9,18 +25,8 @@ import com.baomidou.mybatisplus.samples.pagination.mapper.UserMapper;
 import com.baomidou.mybatisplus.samples.pagination.model.MyPage;
 import com.baomidou.mybatisplus.samples.pagination.model.ParamSome;
 import com.baomidou.mybatisplus.samples.pagination.model.UserChildren;
+
 import ikidou.reflect.TypeBuilder;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.util.CollectionUtils;
-
-import javax.annotation.Resource;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author miemie
@@ -95,5 +101,57 @@ public class PaginationTest {
         if (!CollectionUtils.isEmpty(list)) {
             list.forEach(System.out::println);
         }
+    }
+
+
+    @Test
+    public void testMyPageMap() {
+        MyPage<User> myPage = new MyPage<User>(1, 5).setSelectInt(20).setSelectStr("Jack");
+        Map map = new HashMap(1);
+        map.put("name", "%a");
+        mapper.mySelectPageMap(myPage, map);
+        myPage.getRecords().forEach(System.out::println);
+    }
+
+    @Test
+    public void testMap() {
+        Map map = new HashMap(1);
+        map.put("name", "%a");
+        mapper.mySelectMap(map).forEach(System.out::println);
+    }
+
+    @Test
+    public void myPage() {
+        MyPage<User> page = new MyPage<>(1, 5);
+        page.setName("a");
+        mapper.myPageSelect(page).forEach(System.out::println);
+    }
+
+    @Test
+    public void iPageTest() {
+        IPage<User> page = new Page<User>(1, 5) {
+            private String name = "%";
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+        };
+
+        List<User> list = mapper.iPageSelect(page);
+        System.out.println("list.size=" + list.size());
+        System.out.println("page.total=" + page.getTotal());
+    }
+
+    @Test
+    public void rowBoundsTest() {
+        RowBounds rowBounds = new RowBounds(0, 5);
+        Map map = new HashMap(1);
+        map.put("name", "%");
+        List<User> list = mapper.rowBoundList(rowBounds, map);
+        System.out.println("list.size=" + list.size());
     }
 }

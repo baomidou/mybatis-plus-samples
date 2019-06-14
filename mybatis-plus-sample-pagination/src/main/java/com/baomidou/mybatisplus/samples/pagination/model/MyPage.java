@@ -17,6 +17,7 @@ public class MyPage<T> extends Page<T> {
 
     private Integer selectInt;
     private String selectStr;
+    private String name;
 
     public MyPage(long current, long size) {
         super(current, size);
