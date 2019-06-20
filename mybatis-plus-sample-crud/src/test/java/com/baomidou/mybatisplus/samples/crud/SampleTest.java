@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -174,6 +175,16 @@ public class SampleTest {
         List<Map<String, Object>> maplist = mapper.selectMaps(wrapper);
         for (Map<String, Object> mp : maplist) {
             System.out.println(mp);
+        }
+        /**
+         * lambdaQueryWrapper groupBy orderBy
+         */
+        LambdaQueryWrapper<User> lambdaQueryWrapper = new QueryWrapper<User>().lambda()
+                .select(User::getAge)
+                .groupBy(User::getAge)
+                .orderByAsc(User::getAge);
+        for (User user : mapper.selectList(lambdaQueryWrapper)) {
+            System.out.println(user);
         }
     }
 
