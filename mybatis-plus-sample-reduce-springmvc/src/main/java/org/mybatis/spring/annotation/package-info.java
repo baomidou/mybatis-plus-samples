@@ -20,4 +20,4 @@
 /**
  * Contains MyBatis annotations
  */
-package spring.annotation;
+package org.mybatis.spring.annotation;

@@ -13,11 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package spring.annotation;
+package org.mybatis.spring.annotation;
 
-import org.mybatis.spring.annotation.MapperScans;
 import org.mybatis.spring.mapper.ClassPathAutoMapperScanner;
-import org.mybatis.spring.mapper.ClassPathMapperScanner;
 import org.mybatis.spring.mapper.MapperFactoryBean;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -46,8 +44,9 @@ import java.util.stream.Collectors;
  * @author Michael Lanyon
  * @author Eduardo Macarron
  * @author Putthiphong Boonphong
+ * @author alan2lin
  * @see MapperFactoryBean
- * @see ClassPathMapperScanner
+ * @see ClassPathAutoMapperScanner
  * @since 1.2.0
  */
 public class AutoMapperScannerRegistrar implements ImportBeanDefinitionRegistrar, ResourceLoaderAware {
@@ -131,6 +130,20 @@ public class AutoMapperScannerRegistrar implements ImportBeanDefinitionRegistrar
         if (basePackages.isEmpty()) {
             return;
         }
+        scanner.setBeanPackages(StringUtils.toStringArray(beanPackages));
+
+
+
+       if( annoAttrs.get("excludedBeans") != null){
+           List<String> excludingBeans = new ArrayList<>();
+           excludingBeans.addAll(
+                   Arrays.stream(annoAttrs.getStringArray("excludedBeans"))
+                           .filter(StringUtils::hasText)
+                           .collect(Collectors.toList()));
+           scanner.setExcludedBeans(StringUtils.toStringArray(excludingBeans));
+       }
+
+        scanner.setSuperMapperName(annoAttrs.getString("superMapperClassName"));
 
         //获取生成目录
         String tmpPackage = annoAttrs.getString("makeMapperPackage");
@@ -140,7 +153,6 @@ public class AutoMapperScannerRegistrar implements ImportBeanDefinitionRegistrar
         scanner.scanBeans(makeMapperPackage, StringUtils.toStringArray(beanPackages));
 
 
-        scanner.setBeanPackages(StringUtils.toStringArray(beanPackages));
         scanner.setMakeMapperPackage(makeMapperPackage);
 
 

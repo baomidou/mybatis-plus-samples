@@ -1,4 +1,4 @@
-package com.zhenai.salary.service.impl;
+package com.baomidou.mybatisplus.samples.reduce.springmvc.utils;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

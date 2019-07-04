@@ -11,6 +11,10 @@
 
     <artifactId>mybatis-plus-sample-reduce-springmvc</artifactId>
 
+    <properties>
+        <javassist.version>3.22.0-GA</javassist.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -52,6 +56,13 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>${javassist.version}</version>
+        </dependency>
+
     </dependencies>
 
 </project>

@@ -7,13 +7,12 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
-@KeySequence("SEQ_district")
-@TableName("district")
-public class District {
+@KeySequence("SEQ_CITY")
+@TableName("city")
+public class City {
 
     @TableId(value = "id", type = IdType.INPUT)
     private Long id;
     private String name;
-    private String city;
-    private String district;
+    private String province;
 }

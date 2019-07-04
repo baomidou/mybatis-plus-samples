@@ -13,12 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package spring.mapper;
+package org.mybatis.spring.mapper;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.mybatis.spring.mapper.ClassPathMapperScanner;
-import org.mybatis.spring.mapper.MapperFactoryBean;
 import org.springframework.beans.PropertyValue;
 import org.springframework.beans.PropertyValues;
 import org.springframework.beans.factory.BeanNameAware;
@@ -78,7 +76,7 @@ import static org.springframework.util.Assert.notNull;
  *
  * <pre class="code">
  * {@code
- *   <bean class="org.mybatis.spring.mapper.AutoMapperScannerConfigurer">
+ *   <bean class="org.mybatis.AutoMapperScannerConfigurer">
  *       <property name="basePackage" value="org.mybatis.spring.sample.mapper" />
  *       <!-- optional unless there are multiple session factories defined -->
  *       <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />

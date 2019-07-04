@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package spring.annotation;
+package org.mybatis.spring.annotation;
 
-import org.mybatis.spring.annotation.MapperScannerRegistrar;
 import org.mybatis.spring.mapper.MapperFactoryBean;
-import org.mybatis.spring.mapper.MapperScannerConfigurer;
+import org.mybatis.spring.mapper.AutoMapperScannerConfigurer;
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.context.annotation.Import;
 
@@ -25,8 +24,8 @@ import java.lang.annotation.*;
 
 /**
  * Use this annotation to register MyBatis mapper interfaces when using Java
- * Config. It performs when same work as {@link MapperScannerConfigurer} via
- * {@link MapperScannerRegistrar}.
+ * Config. It performs when same work as {@link AutoMapperScannerConfigurer} via
+ * {@link AutoMapperScannerRegistrar}.
  *
  * <p>Configuration example:</p>
  * <pre class="code">
@@ -57,7 +56,7 @@ import java.lang.annotation.*;
  *
  * @author Michael Lanyon
  * @author Eduardo Macarron
- * @see MapperScannerRegistrar
+ * @see AutoMapperScannerRegistrar
  * @see MapperFactoryBean
  * @since 1.2.0
  */
@@ -88,18 +87,30 @@ public @interface AutoMapperScan {
 
 
     /**
-     * 新增一个 bean类的目录， 在加载之前 扫描程序会先扫描 该bean下面的类然后动态生mapper类
+     * Bean package to scan MyBatis beans for generating mapper dynamically.
+     * In most cases , a  corresponding default mapper(single table operation) satisfy needs.
+     * Explicit implementation of a corresponding default mapper can be reduce to automatic generating.
+     * This scan process is  post behavior ,a corresponding default mapper will be dynamically generated
+     * if and only if the corresponding mapper is not exists.
      *
-     * @return
+     * @return  bean package names for automatic generating mappers.
      */
     String[] beanPackages() default {};
 
     /**
-     * 生成的mapper类所存放的位置，目前只能存放在一个地方
+     * todo: excluding beans which dont wanna to generate mapper .
+     * @return  regular expression of exclueding beans
+     */
+    String[] excludedBeans() default {};
+
+    /**
+     *   Indicate the package which a default mapper to place.
+     *   The default value is to use the value that has been set for the first element of basePackage attribute
      *
-     * @return
+     * @return package name that place mapper
      */
     String makeMapperPackage() default "";
+    String superMapperClassName() default "com.baomidou.mybatisplus.core.mapper.BaseMapper";
 
 
     /**

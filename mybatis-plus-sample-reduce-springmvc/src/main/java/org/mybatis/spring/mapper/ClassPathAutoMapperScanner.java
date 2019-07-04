@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package spring.mapper;
+package org.mybatis.spring.mapper;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import javassist.CannotCompileException;
 import javassist.ClassPool;
 import javassist.CtClass;
@@ -27,8 +26,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.logging.Logger;
 import org.mybatis.logging.LoggerFactory;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.mybatis.spring.mapper.MapperFactoryBean;
-import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -44,6 +41,7 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.core.type.classreading.MetadataReader;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.springframework.core.type.filter.AssignableTypeFilter;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
@@ -90,6 +88,10 @@ public class ClassPathAutoMapperScanner extends ClassPathBeanDefinitionScanner {
     private String[] beanPackages;
 
     private String makeMapperPackage;
+
+    private String[] excludedBeans;
+
+    private String superMapperName;
 
     public ClassPathAutoMapperScanner(BeanDefinitionRegistry registry) {
         super(registry, false);
@@ -138,6 +140,22 @@ public class ClassPathAutoMapperScanner extends ClassPathBeanDefinitionScanner {
 
     public void setMakeMapperPackage(String makeMapperPackage) {
         this.makeMapperPackage = makeMapperPackage;
+    }
+
+    public String[] getExcludedBeans() {
+        return excludedBeans;
+    }
+
+    public void setExcludedBeans(String[] excludedBeans) {
+        this.excludedBeans = excludedBeans;
+    }
+
+    public String getSuperMapperName() {
+        return superMapperName;
+    }
+
+    public void setSuperMapperName(String superMapperName) {
+        this.superMapperName = superMapperName;
     }
 
     /**
@@ -225,21 +243,7 @@ public class ClassPathAutoMapperScanner extends ClassPathBeanDefinitionScanner {
                                     if (debugEnabled) {
                                         logger.debug("Identified candidate bean class: " + resource);
                                     }
-
                                     beans.add(sbd);
-
-                                    // 根据bean类 生成目标mapper类
-                                    //Class mapperClass =  makeMapperFromBean(sbd,makeMapperPackage);
-                                    //String targetClassPath = getTargetClassName(sbd.getMetadata().getClassName(),
-                                    //        makeMapperPackage).replace('.','/');
-                                    //Resource resource1 =  new ClassPathResource(targetClassPath,mapperClass);
-
-                                    //URL url = resource1.getURL();
-
-                                    int i = 0;
-                                    i++;
-
-
                                 } else {
                                     if (debugEnabled) {
                                         logger.debug("Ignored because not a concrete top-level class: " + resource);
@@ -291,11 +295,21 @@ public class ClassPathAutoMapperScanner extends ClassPathBeanDefinitionScanner {
         return targetClassSimpleName;
     }
 
-    private MapperClass makeMapperFromBean(ScannedGenericBeanDefinition sbd, String makeMapperPackage) {
+    /**
+     *  从bean类构造Mapper类
+     * @param sbd 找到的entity类，被包装为beanDefintion了
+     * @param makeMapperPackage  存放的包
+     * @param superInterfaceClazz 构造时继承的类，默认情况下是集成 BaseMapper
+     * @return
+     */
+    private MapperClass makeMapperFromBean(ScannedGenericBeanDefinition sbd, String makeMapperPackage,Class  superInterfaceClazz ) {
+
+        //Class superInterfaceClazz = BaseMapper.class;
 
         MapperClass retMapperClass = new MapperClass();
         String beanClassName = sbd.getMetadata().getClassName();
         String targetClassName = getTargetClassName(beanClassName, makeMapperPackage);
+
 
         Class mapperClass = null;
         try {
@@ -310,13 +324,18 @@ public class ClassPathAutoMapperScanner extends ClassPathBeanDefinitionScanner {
 
                 ClassPool classPool = ClassPool.getDefault();
 
-                CtClass superInterface = classPool.getCtClass(BaseMapper.class.getName());
+                CtClass superInterface = classPool.getCtClass(superInterfaceClazz.getName());
                 CtClass targetInterFace = classPool.makeInterface(targetClassName, superInterface);
                 ClassFile classFile = targetInterFace.getClassFile();
-                //构造签名 TODO:
-                //String paramterClassSignature ="com/zhenai/salary/model/bean/BusinessUpdate";
-                String paramterClassSignature = beanClassName.replace(".class", "").replace('.', '/');
-                String signature = "Ljava/lang/Object;Lcom/baomidou/mybatisplus/core/mapper/BaseMapper<L" + paramterClassSignature + ";>;";
+
+                // 目标串形式: "Ljava/lang/Object;Lcom/baomidou/mybatisplus/core/mapper/BaseMapper<Lcom/baomidou/mybatisplus/samples/reduce/springmvc/entity/User;>;"
+
+               String superInterfaceClazzSignature = "L"+superInterfaceClazz.getName().replace(".class", "").replace('.', '/');
+                String signatureReturnType = "L"+"java/lang/Object;";
+
+                //String paramterClassSignature ="com/baomidou/mybatisplus/samples/reduce/springmvc/entity/User";
+                String paramterClassSignature = "L"+beanClassName.replace(".class", "").replace('.', '/') +";";
+                String signature = signatureReturnType+ superInterfaceClazzSignature+"<" + paramterClassSignature + ">;";
 
                 SignatureAttribute signatureAttribute = new SignatureAttribute(
                         classFile.getConstPool(),
@@ -334,21 +353,6 @@ public class ClassPathAutoMapperScanner extends ClassPathBeanDefinitionScanner {
                 mapperClass = targetInterFace.toClass();
 
                 retMapperClass.setMapperClass(mapperClass);
-
-
-                //需要填充资源路径
-
-//        URLClassLoader urlLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
-//        Class<URLClassLoader> sysclass = URLClassLoader.class;
-//        try {
-//          Method method = sysclass.getDeclaredMethod("addURL", new Class[] { URL.class });
-//          method.setAccessible(true);
-//          method.invoke(urlLoader, new Object[] { u });
-//        } catch (Throwable t) {
-//          t.printStackTrace();
-//        }
-//
-//        addResourceURLIntoClassPath(new File("/Users/pratik/Documents/Projects/RobotSampleTest/com.automation/src/test/resources").toURI().toURL());
 
                 //手工解除绑定，释放内存
                 targetInterFace.detach();
@@ -384,17 +388,26 @@ public class ClassPathAutoMapperScanner extends ClassPathBeanDefinitionScanner {
         List<ScannedGenericBeanDefinition> missMapperBeans = entityDefinitions.stream().filter(x -> !beanDefinitionSet.contains(StringUtils.uncapitalize(getTargetClassSimpleName(x.getMetadata().getClassName())))).collect(Collectors.toList());
 
 
+       //对于明确不需要生成mapper类的bean，过滤的掉
+        List<ScannedGenericBeanDefinition> finalMissMapperBeans  = null;
+       if(this.excludedBeans ==null) {
+           finalMissMapperBeans = missMapperBeans;
+       }else{
+           // 使用正则的方式会不方便，转换成支持通配符的uri
+           AntPathMatcher pathMatcher = new AntPathMatcher();
+
+           finalMissMapperBeans = missMapperBeans.stream().filter(  x ->
+                        ! Arrays.stream(this.excludedBeans).anyMatch(
+                           excludingBean -> pathMatcher.match(excludingBean.replace(".","/"),x.getBeanClassName().replace(".","/")) )
+                   ) .collect(Collectors.toList());
+       }
+
+        Class superMapperClazz = getSuperMapperByName(this.superMapperName);
+
         //处理这些丢失的mapper，从bean中转换成相应的mapper 的beanDefinition;
+        Set<BeanDefinitionHolder> missingMapper = makeMapperDefinitionsFromBeans(finalMissMapperBeans, this.getMakeMapperPackage(),superMapperClazz );
 
-        Set<BeanDefinitionHolder> missMapper = makeMapperDefinitionsFromBeans(missMapperBeans, this.getMakeMapperPackage());
-
-        beanDefinitions.addAll(missMapper);
-
-
-        boolean c = beanDefinitions.stream().anyMatch(x -> x.getBeanName().equals("businessUpdateMapper"));
-
-
-        int j = 0;
+        beanDefinitions.addAll(missingMapper);
 
         if (beanDefinitions.isEmpty()) {
             LOGGER.warn(() -> "No MyBatis mapper was found in '" + Arrays.toString(basePackages) + "' package. Please check your configuration.");
@@ -410,12 +423,12 @@ public class ClassPathAutoMapperScanner extends ClassPathBeanDefinitionScanner {
      * @param makeMapperPackage
      * @return
      */
-    private Set<BeanDefinitionHolder> makeMapperDefinitionsFromBeans(List<ScannedGenericBeanDefinition> missMapperBeans, String makeMapperPackage) {
+    private Set<BeanDefinitionHolder> makeMapperDefinitionsFromBeans(List<ScannedGenericBeanDefinition> missMapperBeans, String makeMapperPackage,Class superInterfaceClazz ) {
 
         Set<BeanDefinitionHolder> beanDefinitions = new LinkedHashSet<>();
 
         for (ScannedGenericBeanDefinition sbd : missMapperBeans) {
-            MapperClass mapperClass = makeMapperFromBean(sbd, makeMapperPackage);
+            MapperClass mapperClass = makeMapperFromBean(sbd, makeMapperPackage,superInterfaceClazz);
             String targetClassPath = getTargetClassName(sbd.getMetadata().getClassName(),
                     makeMapperPackage).replace('.', '/');
             //Resource resource =  new ClassPathResource(targetClassPath,mapperClass);
@@ -451,8 +464,6 @@ public class ClassPathAutoMapperScanner extends ClassPathBeanDefinitionScanner {
 
                 }
 
-                int i = 0;
-                i++;
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -546,6 +557,23 @@ public class ClassPathAutoMapperScanner extends ClassPathBeanDefinitionScanner {
                     + ". Bean already defined with the same name!");
             return false;
         }
+    }
+
+
+    /**
+     * 从配置的名字获取父类mapper接口的名字
+     * 如果没有特定配置，默认应该是BaseMapper
+     * @param superMapperName  父mapper类名称
+     * @return
+     */
+    private Class getSuperMapperByName(String superMapperName){
+        Class clazz = null;
+        try {
+            clazz = Class.forName(superMapperName);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return clazz;
     }
 
 }

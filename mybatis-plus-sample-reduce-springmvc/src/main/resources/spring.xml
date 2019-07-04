@@ -5,6 +5,8 @@
 
     <!-- Import Properties -->
     <context:property-placeholder location="classpath:config.properties"/>
+    <bean class="com.baomidou.mybatisplus.samples.reduce.springmvc.configurations.DbConfigurations">
+    </bean>
 
     <!-- H2 Data Source Config -->
     <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
@@ -38,8 +40,14 @@
     <bean id="keyGenerator" class="com.baomidou.mybatisplus.extension.incrementer.H2KeyGenerator"/>
 
     <!-- MyBatis Mapper Scan Config  -->
+    <!--
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.baomidou.mybatisplus.samples.reduce.springmvc.mapper"/>
     </bean>
+     -->
+
+
+
+
 
 </beans>
