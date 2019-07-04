@@ -7,6 +7,7 @@
 
 - mybatis-plus-sample-quickstart：MyBatis-Plus 快速开始示例
 - mybatis-plus-sample-quickstart-springmvc：MyBatis-Plus 快速开始示例（Spring MVC版本）
+- mybatis-plus-sample-reduce-springmvc：MyBatis-Plus 简化掉默认mapper类示例（Spring MVC版本）
 - mybatis-plus-sample-generator：MyBatis-Plus 代码生成器示例
 - mybatis-plus-sample-crud：MyBatis-Plus 完整 CRUD 示例
 - mybatis-plus-sample-wrapper：MyBatis-Plus 条件构造器示例
