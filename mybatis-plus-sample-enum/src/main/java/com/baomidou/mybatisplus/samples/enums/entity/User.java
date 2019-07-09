@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.samples.enums.enums.GenderEnum;
 import com.baomidou.mybatisplus.samples.enums.enums.GradeEnum;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
@@ -15,6 +16,7 @@ import lombok.experimental.Accessors;
  * @author hubin
  * @since 2018-08-11
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Accessors(chain = true)
 public class User extends BaseEntity {
