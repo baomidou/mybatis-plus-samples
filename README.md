@@ -23,4 +23,5 @@
 - mybatis-plus-sample-multi-datasource：MyBatis-Plus 多数据源示例
 - mybatis-plus-sample-enum：MyBatis-Plus 枚举注入示例
 - mybatis-plus-sample-tenant：MyBatis-Plus 多租户示例
+- mybatis-plus-sample-customize-basemapper：MyBatis-Plus 自定义BaseMapper示例
 - mybatis-plus-sample-deluxe：MyBatis-Plus 完整示例（包含 分页、逻辑删除、自定义全局操作 等绝大部分常用功能的使用示例，相当于大整合的完整示例）

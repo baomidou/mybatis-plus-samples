@@ -5,6 +5,7 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
@@ -15,6 +16,7 @@ import lombok.experimental.Accessors;
  * @author hubin
  * @since 2018-08-11
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Accessors(chain = true)
 public class User extends Model<User> {
