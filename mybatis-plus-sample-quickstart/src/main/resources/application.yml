@@ -1,14 +1,17 @@
 # DataSource Config
 spring:
   datasource:
-    driver-class-name: org.h2.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     schema: classpath:db/schema-h2.sql
     data: classpath:db/data-h2.sql
-    url: jdbc:h2:mem:test
+    url: jdbc:mysql://192.168.8.60:3306/code_test?autoReconnect=true&useSSL=false&useUnicode=true&&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai&allowMultiQueries=true
     username: root
-    password: test
+    password: 123456
+    initialization-mode: ALWAYS
 
 # Logger Config
 logging:
   level:
     com.baomidou.mybatisplus.samples.quickstart: debug
+    org.springframework: debug
+    com.baomidou.mybatisplus.core.mapper: debug
