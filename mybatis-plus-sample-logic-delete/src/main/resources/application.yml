@@ -13,7 +13,10 @@ logging:
   level:
     com.baomidou.mybatisplus.samples: debug
 mybatis-plus:
+  # 扫描 mapper.xml
+  mapper-locations: classpath:/mapper/*Mapper.xml
   global-config:
+    banner: false
     db-config:
       logic-delete-value: 1 #默认值1
       logic-not-delete-value: 0 #默认值0

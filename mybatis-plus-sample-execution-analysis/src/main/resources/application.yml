@@ -1,5 +1,15 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/mybatis-plus
+    driver-class-name: org.h2.Driver
+    schema: classpath:db/schema-h2.sql
+    url: jdbc:h2:mem:test
     username: root
-    password: 123456
+    password: test
+
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: id_worker
+      capital-mode: true
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

@@ -1,9 +1,13 @@
 package com.baomidou.samples.execution.config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
+import com.baomidou.mybatisplus.core.parser.ISqlParser;
+import com.baomidou.mybatisplus.extension.parsers.BlockAttackSqlParser;
 import com.baomidou.mybatisplus.extension.plugins.SqlExplainInterceptor;
 
 /**
@@ -16,9 +20,10 @@ public class MybatisPlusConfig {
 
     @Bean
     public SqlExplainInterceptor sqlExplainInterceptor(){
-        //启用执行分析插件
         SqlExplainInterceptor sqlExplainInterceptor = new SqlExplainInterceptor();
-        sqlExplainInterceptor.setStopProceed(true);
+        List<ISqlParser> sqlParserList = new ArrayList<>();
+        sqlParserList.add(new BlockAttackSqlParser());
+        sqlExplainInterceptor.setSqlParserList(sqlParserList);
         return sqlExplainInterceptor;
     }
 

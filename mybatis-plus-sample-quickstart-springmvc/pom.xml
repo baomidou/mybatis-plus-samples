@@ -37,6 +37,12 @@
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
+        <!--<dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc</artifactId>
+            <version>11.2.0.3</version>
+            <classifier>jdk16</classifier>
+        </dependency>-->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
