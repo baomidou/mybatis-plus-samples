@@ -87,7 +87,8 @@ public class MybatisPlusConfig {
                 /*if ("user".equals(tableName)) {
                     return true;
                 }*/
-                return false;
+//                return false;
+                return !"user".equalsIgnoreCase(tableName);
             }
 
         });
@@ -97,7 +98,7 @@ public class MybatisPlusConfig {
 //        paginationInterceptor.setSqlParserFilter(new ISqlParserFilter() {
 //            @Override
 //            public boolean doFilter(MetaObject metaObject) {
-//                MappedStatement ms = PluginUtils.getMappedStatement(metaObject);
+//                MappedStatement ms = SqlParserHelper.getMappedStatement(metaObject);
 //                // 过滤自定义查询此时无租户信息约束【 麻花藤 】出现
 //                if ("com.baomidou.springboot.mapper.UserMapper.selectListBySQL".equals(ms.getId())) {
 //                    return true;

@@ -63,4 +63,10 @@ public class SampleTest {
     public void manualSqlTenantFilterTest() {
         System.out.println(mapper.myCount());
     }
+
+    @Test
+    public void testTenantFilter(){
+//        mapper.getUserAndAddr().forEach(System.out::println);
+        mapper.getAddrAndUser().forEach(System.out::println);
+    }
 }

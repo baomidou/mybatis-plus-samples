@@ -7,4 +7,17 @@
         select count(1) from user
     </select>
 
+    <select id="getUserAndAddr" resultType="com.baomidou.mybatisplus.samples.tenant.entity.User">
+        select u.id, a.name
+        from user u
+        left join user_addr a on a.user_id=u.id
+    </select>
+    <select id="getAddrAndUser" resultType="com.baomidou.mybatisplus.samples.tenant.entity.User">
+        select a.name, u.id
+        from user_addr a
+        left join user u on u.id=a.user_id
+
+    </select>
+
+
 </mapper>
