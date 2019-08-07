@@ -64,7 +64,7 @@ public class WrapperTest {
 
         UpdateWrapper<User> uw = new UpdateWrapper<>();
         uw.set("email", null);
-        uw.eq("id",4);
+        uw.eq("id", 4);
         userMapper.update(new User(), uw);
         User u4 = userMapper.selectById(4);
         Assert.assertNull(u4.getEmail());
@@ -73,7 +73,7 @@ public class WrapperTest {
     }
 
     @Test
-    public void lambdaQueryWrapper(){
+    public void lambdaQueryWrapper() {
         System.out.println("----- 普通查询 ------");
         List<User> plainUsers = userMapper.selectList(new LambdaQueryWrapper<User>().eq(User::getRoleId, 2L));
         List<User> lambdaUsers = userMapper.selectList(new QueryWrapper<User>().lambda().eq(User::getRoleId, 2L));
@@ -105,7 +105,7 @@ public class WrapperTest {
 
         UpdateWrapper<User> uw = new UpdateWrapper<>();
         uw.set("email", null);
-        uw.eq("id",4);
+        uw.eq("id", 4);
         userMapper.update(new User(), uw);
         User u4 = userMapper.selectById(4);
         Assert.assertNull(u4.getEmail());
@@ -115,5 +115,19 @@ public class WrapperTest {
         if (!CollectionUtils.isEmpty(list)) {
             list.forEach(System.out::println);
         }
+    }
+
+    /**
+     * SELECT id,name,age,email,role_id FROM user
+     * WHERE ( 1 = 1 ) AND ( ( name = ? AND age = ? ) OR ( name = ? AND age = ? ) )
+     */
+    @Test
+    public void testSql() {
+        QueryWrapper<User> w = new QueryWrapper<>();
+        w.and(i -> i.eq("1", 1))
+                .nested(i ->
+                        i.and(j -> j.eq("name", "a").eq("age", 2))
+                                .or(j -> j.eq("name", "b").eq("age", 2)));
+        userMapper.selectList(w);
     }
 }
