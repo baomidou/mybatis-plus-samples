@@ -1,9 +1,6 @@
 package com.baomidou.samples.performance.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
 
 /**
  * MybatisPlus配置文件
@@ -12,12 +9,10 @@ import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
 @Configuration
 public class MybatisPlusConfig {
 
-
-    @Bean
-    public PerformanceInterceptor performanceInterceptor(){
-        //启用性能分析插件
-        return new PerformanceInterceptor();
-    }
-
-
+//    该插件 3.1.2 后版本废弃，推荐使用
+//    @Bean
+//    public PerformanceInterceptor performanceInterceptor(){
+//        //启用性能分析插件
+//        return new PerformanceInterceptor();
+//    }
 }

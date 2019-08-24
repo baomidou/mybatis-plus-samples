@@ -69,6 +69,11 @@
                 <artifactId>mybatis-plus-dts</artifactId>
                 <version>${mybatisplus.version}</version>
             </dependency>
+            <dependency>
+                <groupId>p6spy</groupId>
+                <artifactId>p6spy</artifactId>
+                <version>3.8.5</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

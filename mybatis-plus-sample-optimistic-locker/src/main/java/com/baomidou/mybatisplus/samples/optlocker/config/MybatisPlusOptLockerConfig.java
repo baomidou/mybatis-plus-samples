@@ -1,10 +1,8 @@
 package com.baomidou.mybatisplus.samples.optlocker.config;
 
+import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
 
 /**
  * <p>
@@ -15,11 +13,6 @@ import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
  */
 @Configuration
 public class MybatisPlusOptLockerConfig {
-
-    @Bean
-    public PerformanceInterceptor performanceInterceptor(){
-        return new PerformanceInterceptor();
-    }
 
     @Bean
     public OptimisticLockerInterceptor optimisticLockerInterceptor() {
