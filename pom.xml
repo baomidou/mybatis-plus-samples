@@ -30,6 +30,7 @@
         <module>mybatis-plus-sample-sequence</module>
         <module>mybatis-plus-sample-optimistic-locker</module>
         <module>mybatis-plus-sample-dts-rabbit</module>
+        <module>mybatis-plus-sample-dynamic-tablename</module>
         <module>mybatis-plus-sample-customize-basemapper</module>
   </modules>
 
