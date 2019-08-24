@@ -52,7 +52,7 @@ public class MyTenantParser extends TenantSqlParser {
      */
     @Override
     protected Expression builderExpression(Expression currentExpression, Table table) {
-        final Expression tenantExpression = this.getTenantHandler().getTenantId();
+        final Expression tenantExpression = this.getTenantHandler().getTenantId(false);
         Expression appendExpression;
         if (!(tenantExpression instanceof SupportsOldOracleJoinSyntax)) {
             appendExpression = new EqualsTo();

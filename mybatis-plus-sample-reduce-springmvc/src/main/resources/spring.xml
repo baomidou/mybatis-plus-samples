@@ -23,7 +23,6 @@
         <property name="globalConfig" ref="globalConfig"/>
         <property name="plugins">
             <array>
-                <bean class="com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor"></bean>
                 <bean class="com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor"></bean>
             </array>
         </property>

@@ -1,23 +1,20 @@
 package com.baomidou.mybatisplus.samples.tenant.config;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
 import com.baomidou.mybatisplus.core.parser.ISqlParser;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.tenant.TenantHandler;
 import com.baomidou.mybatisplus.extension.plugins.tenant.TenantSqlParser;
-
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.LongValue;
 import net.sf.jsqlparser.expression.operators.relational.ExpressionList;
 import net.sf.jsqlparser.expression.operators.relational.InExpression;
 import net.sf.jsqlparser.schema.Column;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author miemie
@@ -51,9 +48,9 @@ public class MybatisPlusConfig {
              * @return
              */
             @Override
-            public Expression getTenantId() {
+            public Expression getTenantId(boolean where) {
                 final boolean multipleTenantIds = true;
-                if (multipleTenantIds) {
+                if (where && multipleTenantIds) {
                     return multipleTenantIdCondition();
                 } else {
                     return singleTenantIdCondition();
@@ -107,15 +104,5 @@ public class MybatisPlusConfig {
 //            }
 //        });
         return paginationInterceptor;
-    }
-
-
-    /**
-     * 性能分析拦截器，不建议生产使用
-     * 用来观察 SQL 执行情况及执行时长
-     */
-    @Bean
-    public PerformanceInterceptor performanceInterceptor() {
-        return new PerformanceInterceptor();
     }
 }
