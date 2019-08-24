@@ -11,13 +11,6 @@
 
     <artifactId>mybatis-plus-sample-pagination</artifactId>
 
-    <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -49,14 +42,6 @@
             <version>1.2.49</version>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>com.github.ikidou</groupId>
-            <artifactId>TypeBuilder</artifactId>
-            <version>1.0</version>
-            <scope>test</scope>
-        </dependency>
-
     </dependencies>
 
     <build>

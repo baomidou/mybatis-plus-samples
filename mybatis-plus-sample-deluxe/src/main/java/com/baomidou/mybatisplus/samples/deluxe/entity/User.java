@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.Version;
 
+import com.baomidou.mybatisplus.samples.deluxe.config.TestTypeHandler;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -23,7 +24,7 @@ public class User {
     private Long id;
     private String name;
     private Integer age;
-    @TableField(el = "email, typeHandler=com.baomidou.mybatisplus.samples.deluxe.config.TestTypeHandler")
+    @TableField(typeHandler = TestTypeHandler.class)
     private String email;
 
     @Version
