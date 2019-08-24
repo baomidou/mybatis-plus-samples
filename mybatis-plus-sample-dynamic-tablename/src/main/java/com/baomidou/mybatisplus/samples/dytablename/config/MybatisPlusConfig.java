@@ -25,9 +25,10 @@ public class MybatisPlusConfig {
         DynamicTableNameParser dynamicTableNameParser = new DynamicTableNameParser();
         dynamicTableNameParser.setTableNameHandlerMap(new HashMap<String, ITableNameHandler>(2) {{
             put("user", (metaObject, sql, tableName) -> {
+                // metaObject 可以获取传入参数，这里实现你自己的动态规则
                 String year = "_2018";
-                int random = new Random().nextInt(1);
-                if (random == 1) {
+                int random = new Random().nextInt(10);
+                if (random % 2 == 1) {
                     year = "_2019";
                 }
                 return tableName + year;
