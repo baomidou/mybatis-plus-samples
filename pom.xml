@@ -32,7 +32,8 @@
         <module>mybatis-plus-sample-dts-rabbit</module>
         <module>mybatis-plus-sample-dynamic-tablename</module>
         <module>mybatis-plus-sample-customize-basemapper</module>
-  </modules>
+        <module>mybatis-plus-sample-typehandler</module>
+    </modules>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -74,6 +75,16 @@
                 <groupId>p6spy</groupId>
                 <artifactId>p6spy</artifactId>
                 <version>3.8.5</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.9.9</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.59</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
