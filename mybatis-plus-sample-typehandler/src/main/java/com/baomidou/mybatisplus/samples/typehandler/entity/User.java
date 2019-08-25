@@ -25,6 +25,10 @@ public class User {
     private String email;
 
     /**
+     * 注意！！ 必须开启映射注解
+     *
+     * @TableName(autoResultMap = true)
+     *
      * 以下两种类型处理器，二选一 也可以同时存在
      *
      * 注意！！选择对应的 JSON 处理器也必须存在对应依赖包
