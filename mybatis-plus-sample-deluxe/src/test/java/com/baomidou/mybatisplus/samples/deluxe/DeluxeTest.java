@@ -103,4 +103,9 @@ public class DeluxeTest {
         Assert.assertNotNull(user);
         Assert.assertNotNull(user.getCreateTime());
     }
+
+    @Test
+    public void verifyGithub1532(){
+        mapper.findList(new User().setName("a")).forEach(System.out::println);
+    }
 }

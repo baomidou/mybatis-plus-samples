@@ -1,5 +1,9 @@
 package com.baomidou.mybatisplus.samples.deluxe.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.baomidou.mybatisplus.samples.deluxe.config.MyBaseMapper;
 import com.baomidou.mybatisplus.samples.deluxe.entity.User;
 import com.baomidou.mybatisplus.samples.deluxe.model.UserPage;
@@ -17,4 +21,7 @@ public interface UserMapper extends MyBaseMapper<User> {
      * @return 分页数据
      */
     UserPage selectUserPage(UserPage userPage);
+
+    List<User> findList(@Param("user") User user);
+
 }

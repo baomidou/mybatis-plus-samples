@@ -15,5 +15,9 @@
             AND deleted = 0
         </trim>
     </select>
+    <!-- verify github #1532-->
+    <select id="findList" parameterType="com.baomidou.mybatisplus.samples.deluxe.entity.User" resultType="com.baomidou.mybatisplus.samples.deluxe.entity.User">
+        select * from user where name like concat(concat('%', #{user.name}), '%')
+    </select>
 
 </mapper>
