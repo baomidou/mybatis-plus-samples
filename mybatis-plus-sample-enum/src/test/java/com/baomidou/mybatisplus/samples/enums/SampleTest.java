@@ -1,6 +1,7 @@
 package com.baomidou.mybatisplus.samples.enums;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.Resource;
 
@@ -15,6 +16,7 @@ import com.baomidou.mybatisplus.samples.enums.entity.User;
 import com.baomidou.mybatisplus.samples.enums.enums.AgeEnum;
 import com.baomidou.mybatisplus.samples.enums.enums.GenderEnum;
 import com.baomidou.mybatisplus.samples.enums.enums.GradeEnum;
+import com.baomidou.mybatisplus.samples.enums.enums.UserState;
 import com.baomidou.mybatisplus.samples.enums.mapper.UserMapper;
 
 /**
@@ -45,12 +47,12 @@ public class SampleTest {
         System.err.println("\n插入成功 ID 为：" + user.getId());
 
         List<User> list = mapper.selectList(null);
-        for(User u:list){
+        for (User u : list) {
             System.out.println(u);
-            Assert.assertNotNull("age should not be null",u.getAge());
-            if(u.getId().equals(user.getId())){
+            Assert.assertNotNull("age should not be null", u.getAge());
+            if (u.getId().equals(user.getId())) {
                 Assert.assertNotNull("gender should not be null", u.getGender());
-                Assert.assertNotNull("grade should not be null",u.getGrade());
+                Assert.assertNotNull("grade should not be null", u.getGrade());
 
             }
         }
@@ -73,5 +75,13 @@ public class SampleTest {
         User user = mapper.selectOne(new QueryWrapper<User>().lambda().eq(User::getId, 2));
         Assert.assertEquals("Jack", user.getName());
         Assert.assertTrue(AgeEnum.THREE == user.getAge());
+
+        //#1500 github: verified ok. Not a bug
+        List<User> userList = mapper.selectList(new QueryWrapper<User>().lambda().eq(User::getUserState, UserState.ACTIVE));
+        Assert.assertEquals(3, userList.size());
+        Optional<User> userOptional = userList.stream()
+                .filter(x -> x.getId() == 1)
+                .findFirst();
+        userOptional.ifPresent(user1 -> Assert.assertTrue(user1.getUserState() == UserState.ACTIVE));
     }
 }
