@@ -20,7 +20,7 @@ public class MysqlInsertAllBatch extends AbstractMethod {
 
 2.注册： 参考MyLogicSqlInjector, 注册自定义方法
 ```java
-public class MyLogicSqlInjector extends LogicSqlInjector {
+public class MyLogicSqlInjector extends DefaultSqlInjector {
 
     /**
      * 如果只需增加方法，保留MP自带方法
