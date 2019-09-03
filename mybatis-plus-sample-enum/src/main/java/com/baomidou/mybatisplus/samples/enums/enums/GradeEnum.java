@@ -2,6 +2,8 @@ package com.baomidou.mybatisplus.samples.enums.enums;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
 
+import lombok.Getter;
+
 /**
  * <p>
  * </p>
@@ -9,6 +11,7 @@ import com.baomidou.mybatisplus.annotation.EnumValue;
  * @author yuxiaobin
  * @date 2018/8/31
  */
+@Getter
 public enum GradeEnum {
 
     PRIMARY(1, "小学"),
@@ -24,11 +27,4 @@ public enum GradeEnum {
     private final int code;
     private final String descp;
 
-    public int getCode() {
-        return code;
-    }
-
-    public String getDescp() {
-        return descp;
-    }
 }
