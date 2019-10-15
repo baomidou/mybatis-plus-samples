@@ -33,6 +33,7 @@
         <module>mybatis-plus-sample-dynamic-tablename</module>
         <module>mybatis-plus-sample-customize-basemapper</module>
         <module>mybatis-plus-sample-typehandler</module>
+        <module>mybatis-plus-sample-assembly</module>
     </modules>
 
     <parent>
