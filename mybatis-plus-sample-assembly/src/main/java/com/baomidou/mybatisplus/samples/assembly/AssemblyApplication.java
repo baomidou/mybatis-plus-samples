@@ -1,12 +1,7 @@
 package com.baomidou.mybatisplus.samples.assembly;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.samples.assembly.entity.User;
-import com.baomidou.mybatisplus.samples.assembly.mapper.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -18,15 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @SpringBootApplication
 public class AssemblyApplication {
-
-    @Autowired
-    private UserMapper userMapper;
-
-    @RequestMapping(value = "/")
-    public Integer test(){
-        User user = new User();
-        return userMapper.selectCount(new LambdaQueryWrapper<>(user).select(User::getId, User::getName));
-    }
 
     public static void main(String[] args) {
         SpringApplication.run(AssemblyApplication.class, args);
