@@ -2,7 +2,6 @@ package com.baomidou.mybatisplus.samples.assembly;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 1. cd target
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
  * 3. curl http://127.0.0.1:8080/test
  * @author nieqiuqiu
  */
-@RestController
 @SpringBootApplication
 public class AssemblyApplication {
 
