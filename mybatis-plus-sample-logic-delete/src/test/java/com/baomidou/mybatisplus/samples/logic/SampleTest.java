@@ -1,36 +1,46 @@
 package com.baomidou.mybatisplus.samples.logic;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.samples.logic.entity.User;
-import com.baomidou.mybatisplus.samples.logic.mapper.UserMapper;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.assertj.core.util.Maps;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.annotation.Resource;
-import java.util.Arrays;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.samples.logic.entity.Common;
+import com.baomidou.mybatisplus.samples.logic.mapper.CommonMapper;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SampleTest {
 
     @Resource
-    private UserMapper userMapper;
+    private CommonMapper commonMapper;
 
     @Test
-    public void testLogicDeleteById() {
-        userMapper.deleteById(1);
+    public void test() {
+        List<Long> ids = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            Common common = new Common().setName("" + i);
+            commonMapper.insert(common);
+            ids.add(common.getId());
+        }
+        log.error("--------------------------------------------------------------------------------------------------------");
+        commonMapper.deleteById(ids.remove(0));
+        log.error("--------------------------------------------------------------------------------------------------------");
+        commonMapper.deleteBatchIds(Arrays.asList(ids.remove(0), ids.remove(0), ids.remove(0)));
+        log.error("--------------------------------------------------------------------------------------------------------");
+        commonMapper.delete(Wrappers.<Common>query().eq("id", ids.remove(0)));
+        log.error("--------------------------------------------------------------------------------------------------------");
+        commonMapper.deleteByMap(Maps.newHashMap("id", ids.remove(0)));
     }
-
-    @Test
-    public void testLogicDeleteBatchIds() {
-        userMapper.deleteBatchIds(Arrays.asList(1, 2, 3));
-    }
-
-    @Test
-    public void testLogicDelete() {
-        userMapper.delete(new QueryWrapper<User>().eq("age", 2));
-    }
-
 }
