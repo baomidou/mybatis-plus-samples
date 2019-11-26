@@ -6,17 +6,17 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
- * @author xiaoguogai
+ * @author miemie
  * @since 2019-11-26
  */
 @Data
 @Accessors(chain = true)
-public class Common {
+public class Null1 {
 
     private Long id;
 
     private String name;
 
-    @TableLogic
+    @TableLogic(delval = "null", value = "1")
     private Integer deleted;
 }
