@@ -1,7 +1,7 @@
-package com.baomidou.mybaitsplus.samples.resultmap.mapper;
+package com.baomidou.mybatisplus.samples.resultmap.mapper;
 
-import com.baomidou.mybaitsplus.samples.resultmap.entity.Man;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.samples.resultmap.entity.Man;
 
 /**
  * @author miemie

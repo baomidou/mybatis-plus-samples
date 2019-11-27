@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.baomidou.mybaitsplus.samples.resultmap.mapper.WomanMapper">
+<mapper namespace="com.baomidou.mybatisplus.samples.resultmap.mapper.WomanMapper">
 
-    <resultMap id="w_r" type="com.baomidou.mybaitsplus.samples.resultmap.entity.Woman">
+    <resultMap id="w_r" type="com.baomidou.mybatisplus.samples.resultmap.entity.Woman">
         <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="laoGongId" column="lao_gong_id"/>
         <association property="laoGong" column="lao_gong_id"
-                     select="com.baomidou.mybaitsplus.samples.resultmap.mapper.ManMapper.selectById"/>
+                     select="com.baomidou.mybatisplus.samples.resultmap.mapper.ManMapper.selectById"/>
         <collection property="waWa" column="id"
-                    select="com.baomidou.mybaitsplus.samples.resultmap.mapper.ChildMapper.selectByLaoMaId"/>
+                    select="com.baomidou.mybatisplus.samples.resultmap.mapper.ChildMapper.selectByLaoMaId"/>
     </resultMap>
 
     <select id="selectLinkById" resultMap="w_r">

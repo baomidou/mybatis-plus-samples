@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.baomidou.mybaitsplus.samples.resultmap.mapper.ChildMapper">
+<mapper namespace="com.baomidou.mybatisplus.samples.resultmap.mapper.ChildMapper">
 
-    <resultMap id="c_r" type="com.baomidou.mybaitsplus.samples.resultmap.entity.Child">
+    <resultMap id="c_r" type="com.baomidou.mybatisplus.samples.resultmap.entity.Child">
         <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="laoHanId" column="lao_han_id"/>
         <result property="laoMaId" column="lao_ma_id"/>
         <association property="laoHan" column="lao_han_id"
-                     select="com.baomidou.mybaitsplus.samples.resultmap.mapper.ManMapper.selectById"/>
+                     select="com.baomidou.mybatisplus.samples.resultmap.mapper.ManMapper.selectById"/>
         <association property="laoMa" column="lao_ma_id"
-                     select="com.baomidou.mybaitsplus.samples.resultmap.mapper.WomanMapper.selectById"/>
+                     select="com.baomidou.mybatisplus.samples.resultmap.mapper.WomanMapper.selectById"/>
     </resultMap>
 
     <select id="selectLinkById" resultMap="c_r">

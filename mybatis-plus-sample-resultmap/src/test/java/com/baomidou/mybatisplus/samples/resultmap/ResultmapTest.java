@@ -1,11 +1,11 @@
-package com.baomidou.mybaitsplus.samples.resultmap;
+package com.baomidou.mybatisplus.samples.resultmap;
 
-import com.baomidou.mybaitsplus.samples.resultmap.entity.Child;
-import com.baomidou.mybaitsplus.samples.resultmap.entity.Man;
-import com.baomidou.mybaitsplus.samples.resultmap.entity.Woman;
-import com.baomidou.mybaitsplus.samples.resultmap.mapper.ChildMapper;
-import com.baomidou.mybaitsplus.samples.resultmap.mapper.ManMapper;
-import com.baomidou.mybaitsplus.samples.resultmap.mapper.WomanMapper;
+import com.baomidou.mybatisplus.samples.resultmap.entity.Child;
+import com.baomidou.mybatisplus.samples.resultmap.entity.Man;
+import com.baomidou.mybatisplus.samples.resultmap.entity.Woman;
+import com.baomidou.mybatisplus.samples.resultmap.mapper.ChildMapper;
+import com.baomidou.mybatisplus.samples.resultmap.mapper.ManMapper;
+import com.baomidou.mybatisplus.samples.resultmap.mapper.WomanMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
