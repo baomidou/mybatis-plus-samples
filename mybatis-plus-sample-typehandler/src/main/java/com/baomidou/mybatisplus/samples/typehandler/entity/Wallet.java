@@ -1,8 +1,8 @@
 package com.baomidou.mybatisplus.samples.typehandler.entity;
 
-import lombok.Data;
-
 import java.util.List;
+
+import lombok.Data;
 
 /**
  * 钱包
@@ -17,5 +17,4 @@ public class Wallet {
      * 各种货币
      */
     private List<Currency> currencyList;
-
 }

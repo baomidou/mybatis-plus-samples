@@ -1,12 +1,14 @@
 package com.baomidou.mybatisplus.samples.typehandler;
 
-import com.baomidou.mybatisplus.samples.typehandler.entity.User;
-import com.baomidou.mybatisplus.samples.typehandler.mapper.UserMapper;
+import javax.annotation.Resource;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import com.baomidou.mybatisplus.samples.typehandler.entity.User;
+import com.baomidou.mybatisplus.samples.typehandler.mapper.UserMapper;
 
 /**
  * <p>
@@ -20,7 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class SampleTest {
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
     /**

@@ -11,4 +11,3 @@ spring:
 logging:
   level:
     com.baomidou.mybatisplus.samples: debug
-# MyBatis-Plus 配置该演示无

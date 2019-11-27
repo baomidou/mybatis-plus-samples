@@ -15,5 +15,4 @@ public class Currency {
      * 金额
      */
     private Double amount;
-
 }

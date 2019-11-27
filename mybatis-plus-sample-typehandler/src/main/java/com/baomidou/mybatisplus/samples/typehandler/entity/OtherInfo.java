@@ -15,5 +15,4 @@ public class OtherInfo {
      * 居住城市
      */
     private String city;
-
 }
