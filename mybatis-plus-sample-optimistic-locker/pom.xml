@@ -4,11 +4,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.baomidou.mybatisplus</groupId>
+        <groupId>com.baomidou</groupId>
         <artifactId>mybatis-plus-samples</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>com.baomidou.mybatisplus</groupId>
+    <groupId>com.baomidou</groupId>
     <artifactId>mybatis-plus-sample-optimistic-locker</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>mybatis-plus-sample-optimistic-locker</name>
