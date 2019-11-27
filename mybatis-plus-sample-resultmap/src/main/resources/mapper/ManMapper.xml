@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baomidou.mybaitsplus.samples.resultmap.mapper.ManMapper">
+
+    <resultMap id="m_r" type="com.baomidou.mybaitsplus.samples.resultmap.entity.Man">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="laoPoId" column="lao_po_id"/>
+        <association property="laoPo" column="lao_po_id"
+                     select="com.baomidou.mybaitsplus.samples.resultmap.mapper.WomanMapper.selectById"/>
+        <collection property="waWa" column="id"
+                    select="com.baomidou.mybaitsplus.samples.resultmap.mapper.ChildMapper.selectByLaoHanId"/>
+    </resultMap>
+
+    <select id="selectLinkById" resultMap="m_r">
+        select *
+        from man
+        where id = #{id}
+    </select>
+</mapper>

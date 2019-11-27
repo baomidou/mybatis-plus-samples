@@ -35,6 +35,7 @@
         <module>mybatis-plus-sample-customize-basemapper</module>
         <module>mybatis-plus-sample-typehandler</module>
         <module>mybatis-plus-sample-assembly</module>
+        <module>mybatis-plus-sample-resultmap</module>
     </modules>
 
     <parent>
@@ -102,6 +103,11 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
