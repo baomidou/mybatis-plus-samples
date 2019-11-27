@@ -1,33 +1,38 @@
 package com.baomidou.mybatisplus.samples.pagination;
 
-import com.alibaba.fastjson.JSON;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.samples.pagination.entity.User;
-import com.baomidou.mybatisplus.samples.pagination.mapper.UserMapper;
-import com.baomidou.mybatisplus.samples.pagination.model.MyPage;
-import com.baomidou.mybatisplus.samples.pagination.model.ParamSome;
-import com.baomidou.mybatisplus.samples.pagination.model.UserChildren;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.apache.ibatis.session.RowBounds;
-import org.junit.Assert;
+import org.assertj.core.util.Maps;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.samples.pagination.entity.User;
+import com.baomidou.mybatisplus.samples.pagination.mapper.UserMapper;
+import com.baomidou.mybatisplus.samples.pagination.model.MyPage;
+import com.baomidou.mybatisplus.samples.pagination.model.ParamSome;
+import com.baomidou.mybatisplus.samples.pagination.model.UserChildren;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import ikidou.reflect.TypeBuilder;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author miemie
  * @since 2018-08-10
  */
+@Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class PaginationTest {
@@ -38,43 +43,40 @@ public class PaginationTest {
     @Test
     public void lambdaPagination() {
         Page<User> page = new Page<>(1, 3);
-        QueryWrapper<User> wrapper = new QueryWrapper<>();
-        wrapper.lambda().ge(User::getAge, 1).orderByAsc(User::getAge);
-        IPage<User> result = mapper.selectPage(page, wrapper);
-        System.out.println(result.getTotal());
-        Assert.assertTrue(result.getTotal() > 3);
-        Assert.assertEquals(3, result.getRecords().size());
+        Page<User> result = mapper.selectPage(page, Wrappers.<User>lambdaQuery().ge(User::getAge, 1).orderByAsc(User::getAge));
+        assertThat(result.getTotal()).isGreaterThan(3);
+        assertThat(result.getRecords().size()).isEqualTo(3);
     }
 
     @Test
     public void tests1() {
-        System.out.println("----- baseMapper 自带分页 ------");
+        log.error("----------------------------------baseMapper 自带分页-------------------------------------------------------");
         Page<User> page = new Page<>(1, 5);
-        IPage<User> userIPage = mapper.selectPage(page, new QueryWrapper<User>()
+        Page<User> userIPage = mapper.selectPage(page, new QueryWrapper<User>()
                 .eq("age", 20).eq("name", "Jack"));
         assertThat(page).isSameAs(userIPage);
-        System.out.println("总条数 ------> " + userIPage.getTotal());
-        System.out.println("当前页数 ------> " + userIPage.getCurrent());
-        System.out.println("当前每页显示数 ------> " + userIPage.getSize());
-        print(userIPage.getRecords());
-        System.out.println("----- baseMapper 自带分页 ------");
+        log.error("总条数 -------------> {}", userIPage.getTotal());
+        log.error("当前页数 -------------> {}", userIPage.getCurrent());
+        log.error("当前每页显示数 -------------> {}", userIPage.getSize());
+        List<User> records = userIPage.getRecords();
+        assertThat(records).isNotEmpty();
 
-        System.out.println("json 正反序列化 begin");
+        log.error("----------------------------------json 正反序列化-------------------------------------------------------");
         String json = JSON.toJSONString(page);
-        Page<User> page1 = JSON.parseObject(json, Page.class);
-        print(page1.getRecords());
-        System.out.println("json 正反序列化 end");
+        log.info("json ----------> {}", json);
+        Page<User> page1 = JSON.parseObject(json, TypeBuilder.newInstance(Page.class).addTypeParam(User.class).build());
+        List<User> records1 = page1.getRecords();
+        assertThat(records1).isNotEmpty();
+        assertThat(records1.get(0).getClass()).isEqualTo(User.class);
 
-        System.out.println("----- 自定义 XML 分页 ------");
+        log.error("----------------------------------自定义 XML 分页-------------------------------------------------------");
         MyPage<User> myPage = new MyPage<User>(1, 5).setSelectInt(20).setSelectStr("Jack");
         ParamSome paramSome = new ParamSome(20, "Jack");
         MyPage<User> userMyPage = mapper.mySelectPage(myPage, paramSome);
         assertThat(myPage).isSameAs(userMyPage);
-        System.out.println("总条数 ------> " + userMyPage.getTotal());
-        System.out.println("当前页数 ------> " + userMyPage.getCurrent());
-        System.out.println("当前每页显示数 ------> " + userMyPage.getSize());
-        print(userMyPage.getRecords());
-        System.out.println("----- 自定义 XML 分页 ------");
+        log.error("总条数 -------------> {}", userMyPage.getTotal());
+        log.error("当前页数 -------------> {}", userMyPage.getCurrent());
+        log.error("当前每页显示数 -------------> {}", userMyPage.getSize());
     }
 
     @Test
@@ -103,17 +105,13 @@ public class PaginationTest {
     @Test
     public void testMyPageMap() {
         MyPage<User> myPage = new MyPage<User>(1, 5).setSelectInt(20).setSelectStr("Jack");
-        Map map = new HashMap(1);
-        map.put("name", "%a");
-        mapper.mySelectPageMap(myPage, map);
+        mapper.mySelectPageMap(myPage, Maps.newHashMap("name", "%a"));
         myPage.getRecords().forEach(System.out::println);
     }
 
     @Test
     public void testMap() {
-        Map map = new HashMap(1);
-        map.put("name", "%a");
-        mapper.mySelectMap(map).forEach(System.out::println);
+        mapper.mySelectMap(Maps.newHashMap("name", "%a")).forEach(System.out::println);
     }
 
     @Test
@@ -145,9 +143,7 @@ public class PaginationTest {
     @Test
     public void rowBoundsTest() {
         RowBounds rowBounds = new RowBounds(0, 5);
-        Map map = new HashMap(1);
-        map.put("name", "%");
-        List<User> list = mapper.rowBoundList(rowBounds, map);
+        List<User> list = mapper.rowBoundList(rowBounds, Maps.newHashMap("name", "%"));
         System.out.println("list.size=" + list.size());
     }
 }
