@@ -1,25 +1,30 @@
 package com.baomidou.mybatisplus.samples.resultmap;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
 import com.baomidou.mybatisplus.samples.resultmap.entity.Child;
 import com.baomidou.mybatisplus.samples.resultmap.entity.Man;
 import com.baomidou.mybatisplus.samples.resultmap.entity.Woman;
 import com.baomidou.mybatisplus.samples.resultmap.mapper.ChildMapper;
 import com.baomidou.mybatisplus.samples.resultmap.mapper.ManMapper;
 import com.baomidou.mybatisplus.samples.resultmap.mapper.WomanMapper;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.annotation.Resource;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author miemie
  * @since 2019-11-27
  */
+@Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ResultmapTest {
@@ -34,6 +39,7 @@ public class ResultmapTest {
     @Test
     public void t_c() {
         final Child child = childMapper.selectLinkById(1L);
+        log.info("child: {}", child);
         assertThat(child).isNotNull();
         final Man laoHan = child.getLaoHan();
         assertThat(laoHan).isNotNull();
@@ -46,6 +52,7 @@ public class ResultmapTest {
     @Test
     public void t_m() {
         final Man man = manMapper.selectLinkById(1L);
+        log.info("man: {}", man);
         assertThat(man).isNotNull();
         assertThat(man.getName()).isNotBlank();
         final Woman laoPo = man.getLaoPo();
@@ -59,6 +66,7 @@ public class ResultmapTest {
     @Test
     public void t_w() {
         final Woman woman = womanMapper.selectLinkById(1L);
+        log.info("woman: {}", woman);
         assertThat(woman).isNotNull();
         assertThat(woman.getName()).isNotBlank();
         final Man laoGong = woman.getLaoGong();
