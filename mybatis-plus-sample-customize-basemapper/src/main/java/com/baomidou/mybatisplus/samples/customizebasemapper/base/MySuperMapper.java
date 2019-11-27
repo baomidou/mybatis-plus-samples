@@ -1,4 +1,4 @@
-package com.baomidou.mybaitsplus.samples.customizebasemapper.base;
+package com.baomidou.mybatisplus.samples.customizebasemapper.base;
 
 import com.baomidou.mybatisplus.core.mapper.Mapper;
 

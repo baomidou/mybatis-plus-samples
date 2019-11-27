@@ -1,4 +1,4 @@
-package com.baomidou.mybaitsplus.samples.customizebasemapper;
+package com.baomidou.mybatisplus.samples.customizebasemapper;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.baomidou.mybaitsplus.samples.customizebasemapper.entity.User;
-import com.baomidou.mybaitsplus.samples.customizebasemapper.mapper.UserMapper;
+import com.baomidou.mybatisplus.samples.customizebasemapper.entity.User;
+import com.baomidou.mybatisplus.samples.customizebasemapper.mapper.UserMapper;
 
 /**
  * <p>

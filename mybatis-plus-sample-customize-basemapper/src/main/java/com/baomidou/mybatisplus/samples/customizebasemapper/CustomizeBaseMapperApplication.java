@@ -1,4 +1,4 @@
-package com.baomidou.mybaitsplus.samples.customizebasemapper;
+package com.baomidou.mybatisplus.samples.customizebasemapper;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

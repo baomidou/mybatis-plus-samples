@@ -1,4 +1,4 @@
-package com.baomidou.mybaitsplus.samples.customizebasemapper.entity;
+package com.baomidou.mybatisplus.samples.customizebasemapper.entity;
 
 import java.sql.Timestamp;
 

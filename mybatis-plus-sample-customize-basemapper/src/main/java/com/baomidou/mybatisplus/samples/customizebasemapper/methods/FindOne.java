@@ -1,4 +1,4 @@
-package com.baomidou.mybaitsplus.samples.customizebasemapper.methods;
+package com.baomidou.mybatisplus.samples.customizebasemapper.methods;
 
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlSource;

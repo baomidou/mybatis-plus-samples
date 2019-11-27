@@ -1,8 +1,8 @@
-package com.baomidou.mybaitsplus.samples.customizebasemapper.base;
+package com.baomidou.mybatisplus.samples.customizebasemapper.base;
 
 import java.util.List;
 
-import com.baomidou.mybaitsplus.samples.customizebasemapper.methods.FindOne;
+import com.baomidou.mybatisplus.samples.customizebasemapper.methods.FindOne;
 import com.baomidou.mybatisplus.core.injector.AbstractMethod;
 import com.baomidou.mybatisplus.core.injector.DefaultSqlInjector;
 

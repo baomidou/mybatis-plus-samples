@@ -1,10 +1,10 @@
-package com.baomidou.mybaitsplus.samples.customizebasemapper.config;
+package com.baomidou.mybatisplus.samples.customizebasemapper.config;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.baomidou.mybaitsplus.samples.customizebasemapper.base.CustomizeSuperMapperSqlInjector;
+import com.baomidou.mybatisplus.samples.customizebasemapper.base.CustomizeSuperMapperSqlInjector;
 
 /**
  * <p>
@@ -14,7 +14,7 @@ import com.baomidou.mybaitsplus.samples.customizebasemapper.base.CustomizeSuperM
  * @date 2019/7/9
  */
 @Configuration
-@MapperScan("com.baomidou.mybaitsplus.samples.customizebasemapper.mapper")
+@MapperScan("com.baomidou.mybatisplus.samples.customizebasemapper.mapper")
 public class MybatisPlusConfig {
 
     @Bean
