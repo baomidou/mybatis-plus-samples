@@ -11,10 +11,6 @@
 
     <artifactId>mybatis-plus-sample-reduce-springmvc</artifactId>
 
-    <properties>
-        <javassist.version>3.22.0-GA</javassist.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -35,11 +31,6 @@
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
         </dependency>
         <!--<dependency>
             <groupId>com.oracle</groupId>
@@ -63,10 +54,7 @@
         <dependency>
             <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>
-            <version>${javassist.version}</version>
+            <version>3.22.0-GA</version>
         </dependency>
-
     </dependencies>
-
-
 </project>

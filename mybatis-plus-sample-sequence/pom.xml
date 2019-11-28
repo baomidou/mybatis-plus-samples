@@ -8,14 +8,8 @@
         <artifactId>mybatis-plus-samples</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>com.baomidou</groupId>
     <artifactId>mybatis-plus-sample-sequence</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>mybatis-plus-sample-sequence</name>
-    <url>http://maven.apache.org</url>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
