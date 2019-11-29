@@ -29,3 +29,4 @@
 - mybatis-plus-sample-typehandler: 类型处理器示例，例如  json 字段对象转换
 - mybatis-plus-sample-deluxe: 完整示例（包含 分页、逻辑删除、自定义全局操作 等绝大部分常用功能的使用示例，相当于大整合的完整示例）
 - mybatis-plus-sample-assembly: 分离打包示例
+- mybatis-plus-sample-resultmap: 使用 resultMap 示例

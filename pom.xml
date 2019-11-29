@@ -49,7 +49,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <mybatisplus.version>3.2.1.4-SNAPSHOT</mybatisplus.version>
+        <mybatisplus.version>3.2.1.5-SNAPSHOT</mybatisplus.version>
         <skipTests>false</skipTests>
     </properties>
 

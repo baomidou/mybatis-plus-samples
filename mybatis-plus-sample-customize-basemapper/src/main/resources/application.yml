@@ -11,9 +11,4 @@ spring:
 # Logger Config
 logging:
   level:
-    com.baomidou.mybatisplus.samples.deluxe: debug
-
-mybatis-plus:
-  # 扫描 mapper.xml
-  configuration:
-    jdbc-type-for-null: 'null'
+    com.baomidou.mybatisplus.samples: debug

@@ -1,33 +1,35 @@
 package com.baomidou.mybatisplus.samples.customizebasemapper;
 
-import org.junit.Assert;
+import com.baomidou.mybatisplus.samples.customizebasemapper.entity.User;
+import com.baomidou.mybatisplus.samples.customizebasemapper.mapper.UserMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.baomidou.mybatisplus.samples.customizebasemapper.entity.User;
-import com.baomidou.mybatisplus.samples.customizebasemapper.mapper.UserMapper;
+import javax.annotation.Resource;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * <p>
- * </p>
- *
  * @author K
- * @date 2019/7/9
+ * @since 2019/7/9
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CustomizeSuperMapperTest {
 
-    @Autowired
-    UserMapper userMapper;
+    @Resource
+    UserMapper mapper;
 
     @Test
     public void test() {
-        User user = userMapper.findOne(1L);
-        Assert.assertNotNull(user);
-        System.out.println(user);
+        final User user = mapper.findOne(1L);
+        assertThat(user).isNotNull();
+
+        List<User> list = mapper.lambdaQueryChain().select(User::getId).list();
+        assertThat(list).isNotEmpty();
+        list.forEach(i -> assertThat(i).isNotNull());
     }
 }
