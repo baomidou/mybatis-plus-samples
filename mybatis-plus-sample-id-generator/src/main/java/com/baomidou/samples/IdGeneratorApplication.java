@@ -1,7 +1,7 @@
 package com.baomidou.samples;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
+import com.baomidou.mybatisplus.autoconfigure.MybatisPlusPropertiesCustomizer;
 import com.baomidou.samples.incrementer.CustomIdGenerator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Bean;
 public class IdGeneratorApplication {
 
     @Bean
-    public ConfigurationCustomizer configurationCustomizer() {
+    public MybatisPlusPropertiesCustomizer configurationCustomizer() {
         return configuration -> configuration.getGlobalConfig().registerIdGenerator(IdType.ASSIGN_ID, new CustomIdGenerator());
     }
 
