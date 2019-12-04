@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.baomidou</groupId>
@@ -14,7 +15,7 @@
         <module>mybatis-plus-sample-quickstart</module>
         <module>mybatis-plus-sample-quickstart-springmvc</module>
         <!-- 多次mvn test 会出现错误 -->
-        <!--        <module>mybatis-plus-sample-reduce-springmvc</module>-->
+        <module>mybatis-plus-sample-reduce-springmvc</module>
         <module>mybatis-plus-sample-generator</module>
         <module>mybatis-plus-sample-crud</module>
         <module>mybatis-plus-sample-active-record</module>
@@ -36,7 +37,7 @@
         <module>mybatis-plus-sample-typehandler</module>
         <module>mybatis-plus-sample-assembly</module>
         <module>mybatis-plus-sample-resultmap</module>
-<!--        <module>mybatis-plus-sample-id-generator</module>-->
+        <module>mybatis-plus-sample-id-generator</module>
     </modules>
 
     <parent>
@@ -50,7 +51,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <mybatisplus.version>3.2.1.5-SNAPSHOT</mybatisplus.version>
+        <mybatisplus.version>3.3.0.1-SNAPSHOT</mybatisplus.version>
         <skipTests>false</skipTests>
     </properties>
 
