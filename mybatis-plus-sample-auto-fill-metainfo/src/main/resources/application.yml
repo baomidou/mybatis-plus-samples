@@ -10,7 +10,9 @@ spring:
 mybatis-plus:
   global-config:
     db-config:
-      id-type: id_worker
+      id-type: assign_id
       capital-mode: true
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+logging:
+  level:
+    com.baomidou.samples.metainfo: debug
