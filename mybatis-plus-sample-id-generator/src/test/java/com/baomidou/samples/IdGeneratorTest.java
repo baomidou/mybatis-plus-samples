@@ -1,13 +1,15 @@
 package com.baomidou.samples;
 
-import com.baomidou.samples.entity.User;
-import com.baomidou.samples.mapper.UserMapper;
+import javax.annotation.Resource;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import com.baomidou.samples.entity.User;
+import com.baomidou.samples.mapper.UserMapper;
 
 /**
  * @author nieqiuqiu 2019/11/30
@@ -16,16 +18,15 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 public class IdGeneratorTest {
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
     @Test
-    public void test(){
+    public void test() {
         User user = new User();
         user.setName("靓仔");
         user.setAge(18);
         userMapper.insert(user);
-        Assert.assertEquals(Long.valueOf(66666L),user.getId());
+        Assert.assertEquals(Long.valueOf(1L), user.getId());
     }
-
 }
