@@ -1,4 +1,4 @@
-package com.baomidou.mybatisplus.samples.customizebasemapper.base;
+package com.baomidou.samples.injector.base;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.core.injector.AbstractMethod;
@@ -6,25 +6,23 @@ import com.baomidou.mybatisplus.core.injector.DefaultSqlInjector;
 import com.baomidou.mybatisplus.extension.injector.methods.additional.AlwaysUpdateSomeColumnById;
 import com.baomidou.mybatisplus.extension.injector.methods.additional.InsertBatchSomeColumn;
 import com.baomidou.mybatisplus.extension.injector.methods.additional.LogicDeleteByIdWithFill;
-import com.baomidou.mybatisplus.samples.customizebasemapper.methods.FindOne;
+import com.baomidou.samples.injector.methods.DeleteAll;
+import com.baomidou.samples.injector.methods.FindOne;
 
 import java.util.List;
 
 /**
- * 自定义 SqlInjector
+ * 自定义Sql注入
  *
- * @author K
- * @since 2019-7-9
+ * @author nieqiurong 2018/8/11 20:23.
  */
-public class CustomizeSuperMapperSqlInjector extends DefaultSqlInjector {
+public class MySqlInjector extends DefaultSqlInjector {
 
-    /**
-     * 如果只需增加方法，保留MP自带方法
-     * 可以super.getMethodList() 再add
-     */
     @Override
     public List<AbstractMethod> getMethodList(Class<?> mapperClass) {
         List<AbstractMethod> methodList = super.getMethodList(mapperClass);
+        //增加自定义方法
+        methodList.add(new DeleteAll());
         methodList.add(new FindOne());
         /**
          * 以下 3 个为内置选装件

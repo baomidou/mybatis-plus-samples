@@ -25,7 +25,6 @@
 - mybatis-plus-sample-dts-rabbit: 基于 rabbitMq 分布式事务示例
 - mybatis-plus-sample-dynamic-tablename: 动态表名示例
 - mybatis-plus-sample-tenant: 多租户示例
-- mybatis-plus-sample-customize-basemapper: 自定义BaseMapper示例
 - mybatis-plus-sample-typehandler: 类型处理器示例，例如  json 字段对象转换
 - mybatis-plus-sample-deluxe: 完整示例（包含 分页、逻辑删除、自定义全局操作 等绝大部分常用功能的使用示例，相当于大整合的完整示例）
 - mybatis-plus-sample-assembly: 分离打包示例

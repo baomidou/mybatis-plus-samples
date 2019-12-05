@@ -1,12 +1,12 @@
 package com.baomidou.samples.injector;
 
+import com.baomidou.samples.injector.mapper.StudentMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.baomidou.samples.injector.mapper.StudentMapper;
+import javax.annotation.Resource;
 
 /**
  * 自定义注入测试
@@ -16,12 +16,11 @@ import com.baomidou.samples.injector.mapper.StudentMapper;
 @SpringBootTest
 public class InjectorTest {
 
-    @Autowired
+    @Resource
     private StudentMapper studentMapper;
 
     @Test
     public void test(){
         studentMapper.deleteAll();
     }
-
 }

@@ -1,4 +1,4 @@
-package com.baomidou.mybatisplus.samples.customizebasemapper.base;
+package com.baomidou.samples.injector.base;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
@@ -15,7 +15,7 @@ import java.util.List;
  * @author K
  * @since 2019/7/9
  */
-public interface MySuperMapper<T> extends BaseMapper<T> {
+public interface MyBaseMapper<T> extends BaseMapper<T> {
 
     /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓  ↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
 
@@ -47,5 +47,10 @@ public interface MySuperMapper<T> extends BaseMapper<T> {
 
     int deleteByIdWithFill(T entity);
 
+    /**
+     * 以下为自己自定义
+     */
     T findOne(Serializable id);
+
+    int deleteAll();
 }
