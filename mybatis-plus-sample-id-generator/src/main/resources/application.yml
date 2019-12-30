@@ -10,4 +10,4 @@ spring:
 # Logger Config
 logging:
   level:
-    com.baomidou.mybatisplus.samples: debug
+    com.baomidou.samples: debug
