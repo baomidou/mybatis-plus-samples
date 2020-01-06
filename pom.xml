@@ -14,7 +14,6 @@
     <modules>
         <module>mybatis-plus-sample-quickstart</module>
         <module>mybatis-plus-sample-quickstart-springmvc</module>
-        <!-- 多次mvn test 会出现错误 -->
         <module>mybatis-plus-sample-reduce-springmvc</module>
         <module>mybatis-plus-sample-generator</module>
         <module>mybatis-plus-sample-crud</module>
@@ -50,7 +49,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <mybatisplus.version>3.3.1.7-SNAPSHOT</mybatisplus.version>
+        <mybatisplus.version>LATEST</mybatisplus.version>
         <skipTests>true</skipTests>
     </properties>
 
