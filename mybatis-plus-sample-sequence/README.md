@@ -49,6 +49,7 @@ public class TestSequser{
 
 * 1.实体定义@KeySequence 注解clazz指定类型String.class
 * 2.实体定义主键的类型String
+* 3.注意：oracle的sequence返回的是Long类型，如果主键类型是Integer，可能会引起ClassCastException
 ```java
 @KeySequence(value = "SEQ_ORACLE_STRING_KEY", clazz = String.class)
 public class YourEntity{
