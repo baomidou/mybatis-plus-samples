@@ -1,16 +1,11 @@
 package com.baomidou.mybatisplus.samples.pagination;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.TypeReference;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.samples.pagination.entity.User;
-import com.baomidou.mybatisplus.samples.pagination.mapper.UserMapper;
-import com.baomidou.mybatisplus.samples.pagination.model.MyPage;
-import com.baomidou.mybatisplus.samples.pagination.model.ParamSome;
-import com.baomidou.mybatisplus.samples.pagination.model.UserChildren;
-import lombok.extern.slf4j.Slf4j;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.apache.ibatis.session.RowBounds;
 import org.assertj.core.util.Maps;
 import org.junit.Test;
@@ -19,10 +14,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.Resource;
-import java.util.List;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.samples.pagination.entity.User;
+import com.baomidou.mybatisplus.samples.pagination.mapper.UserMapper;
+import com.baomidou.mybatisplus.samples.pagination.model.MyPage;
+import com.baomidou.mybatisplus.samples.pagination.model.ParamSome;
+import com.baomidou.mybatisplus.samples.pagination.model.UserChildren;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author miemie
@@ -48,7 +52,8 @@ public class PaginationTest {
     public void tests1() {
         log.error("----------------------------------baseMapper 自带分页-------------------------------------------------------");
         Page<User> page = new Page<>(1, 5);
-        Page<User> userIPage = mapper.selectPage(page, Wrappers.<User>lambdaQuery().eq(User::getAge, 20).eq(User::getName, "Jack"));
+        page.addOrder(OrderItem.asc("age"));
+        Page<User> userIPage = mapper.selectPage(page, Wrappers.<User>lambdaQuery().eq(User::getAge, 20).like(User::getName, "Jack"));
         assertThat(page).isSameAs(userIPage);
         log.error("总条数 -------------> {}", userIPage.getTotal());
         log.error("当前页数 -------------> {}", userIPage.getCurrent());
