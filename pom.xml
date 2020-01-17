@@ -49,7 +49,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <mybatisplus.version>LATEST</mybatisplus.version>
+        <mybatisplus.version>3.3.1</mybatisplus.version>
         <skipTests>true</skipTests>
     </properties>
 
@@ -112,6 +112,14 @@
     </dependencies>
 
     <repositories>
+        <repository>
+            <id>aliyun</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+        </repository>
+        <repository>
+            <id>oss-public</id>
+            <url>https://oss.sonatype.org/content/repositories/public</url>
+        </repository>
         <repository>
             <id>snapshot</id>
             <name>mp-snapshot</name>
