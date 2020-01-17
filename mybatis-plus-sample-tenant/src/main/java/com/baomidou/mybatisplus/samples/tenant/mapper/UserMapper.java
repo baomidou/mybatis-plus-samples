@@ -2,6 +2,8 @@ package com.baomidou.mybatisplus.samples.tenant.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.samples.tenant.entity.User;
 
@@ -22,7 +24,7 @@ public interface UserMapper extends BaseMapper<User> {
      */
     public Integer myCount();
 
-    public List<User> getUserAndAddr();
+    public List<User> getUserAndAddr(@Param("username") String username);
 
-    public List<User> getAddrAndUser();
+    public List<User> getAddrAndUser(@Param("name") String name);
 }

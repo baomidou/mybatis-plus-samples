@@ -1,20 +1,22 @@
 package com.baomidou.mybatisplus.samples.tenant.config;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
 import com.baomidou.mybatisplus.core.parser.ISqlParser;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.tenant.TenantHandler;
 import com.baomidou.mybatisplus.extension.plugins.tenant.TenantSqlParser;
+
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.LongValue;
 import net.sf.jsqlparser.expression.operators.relational.ExpressionList;
 import net.sf.jsqlparser.expression.operators.relational.InExpression;
 import net.sf.jsqlparser.schema.Column;
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author miemie
@@ -44,15 +46,18 @@ public class MybatisPlusConfig {
              * https://gitee.com/baomidou/mybatis-plus/issues/IZZ3M
              *
              * tenant_id in (1,2)
-             *
+             * @param  where 如果是where，可以追加，不是where的情况：比如当insert时，不能insert into user(name, tenant_id) values('test', tenant_id IN (1, 2));
              * @return
              */
             @Override
             public Expression getTenantId(boolean where) {
-                final boolean multipleTenantIds = true;
+                final boolean multipleTenantIds = true;//这里只是演示切换单个tenantId和多个tenantId
+                //具体场景，可以根据情况来拼接
                 if (where && multipleTenantIds) {
+                    //演示如何实现tenant_id in (1,2)
                     return multipleTenantIdCondition();
                 } else {
+                    //演示：tenant_id=1
                     return singleTenantIdCondition();
                 }
             }

@@ -1,5 +1,7 @@
 package com.baomidou.mybatisplus.samples.tenant.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -20,5 +22,8 @@ public class User {
      */
     private Long tenantId;
     private String name;
+
+    @TableField(exist = false)
+    private String addrName;
 
 }

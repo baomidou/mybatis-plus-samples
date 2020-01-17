@@ -9,6 +9,7 @@ import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.Parenthesis;
 import net.sf.jsqlparser.expression.operators.conditional.AndExpression;
 import net.sf.jsqlparser.expression.operators.conditional.OrExpression;
+import net.sf.jsqlparser.expression.operators.relational.Between;
 import net.sf.jsqlparser.expression.operators.relational.EqualsTo;
 import net.sf.jsqlparser.expression.operators.relational.InExpression;
 import net.sf.jsqlparser.expression.operators.relational.ItemsList;
@@ -33,14 +34,42 @@ import net.sf.jsqlparser.statement.select.SubSelect;
 public class MyTenantParser extends TenantSqlParser {
 
     /**
-     * 目前无法处理多租户的字段加上表别名
+     * 目前仅支持：in, between, >, <, =, !=等比较操作，处理多租户的字段加上表别名
      *
      * @param expression
      * @param table
      * @return
      */
     protected Expression processTableAlias(Expression expression, Table table) {
+        String tableAliasName;
+        if (table.getAlias() == null) {
+            tableAliasName = table.getName();
+        } else {
+            tableAliasName = table.getAlias().getName();
+        }
+        if (expression instanceof InExpression) {
+            InExpression in = (InExpression) expression;
+            if (in.getLeftExpression() instanceof Column) {
+                setTableAliasNameForColumn((Column) in.getLeftExpression(), tableAliasName);
+            }
+        } else if (expression instanceof BinaryExpression) {
+            BinaryExpression compare = (BinaryExpression) expression;
+            if (compare.getLeftExpression() instanceof Column) {
+                setTableAliasNameForColumn((Column) compare.getLeftExpression(), tableAliasName);
+            } else if (compare.getRightExpression() instanceof Column) {
+                setTableAliasNameForColumn((Column) compare.getRightExpression(), tableAliasName);
+            }
+        } else if (expression instanceof Between) {
+            Between between = (Between) expression;
+            if (between.getLeftExpression() instanceof Column) {
+                setTableAliasNameForColumn((Column) between.getLeftExpression(), tableAliasName);
+            }
+        }
         return expression;
+    }
+
+    private void setTableAliasNameForColumn(Column column, String tableAliasName) {
+        column.setColumnName(tableAliasName + "." + column.getColumnName());
     }
 
     /**
@@ -52,7 +81,7 @@ public class MyTenantParser extends TenantSqlParser {
      */
     @Override
     protected Expression builderExpression(Expression currentExpression, Table table) {
-        final Expression tenantExpression = this.getTenantHandler().getTenantId(false);
+        final Expression tenantExpression = this.getTenantHandler().getTenantId(true);
         Expression appendExpression;
         if (!(tenantExpression instanceof SupportsOldOracleJoinSyntax)) {
             appendExpression = new EqualsTo();
