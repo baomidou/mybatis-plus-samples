@@ -20,4 +20,10 @@
         select * from user where name like concat(concat('%', #{user.name}), '%')
     </select>
 
+    <select id="customerSqlSegment" resultType="com.baomidou.mybatisplus.samples.deluxe.entity.User">
+        select u.*
+        from USER u
+        ${ew.customSqlSegment}
+    </select>
+
 </mapper>
