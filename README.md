@@ -30,3 +30,4 @@
 - mybatis-plus-sample-assembly: 分离打包示例
 - mybatis-plus-sample-resultmap: 使用 resultMap 示例
 - mybatis-plus-sample-id-generator: 自定义ID生成示例
+- mybatis-plus-sample-no-spring: 不使用spring下的示例
