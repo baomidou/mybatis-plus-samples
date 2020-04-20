@@ -1,18 +1,5 @@
 package com.baomidou.mybatisplus.samples.crud;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -20,6 +7,17 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.samples.crud.entity.User;
 import com.baomidou.mybatisplus.samples.crud.mapper.UserMapper;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * <p>
@@ -126,6 +124,8 @@ public class SampleTest {
                     assertThat(x.getName()).isNotNull();
                     assertThat(x.getAge()).isNull();
                 });
+
+        mapper.selectList(Wrappers.lambdaQuery(new User().setId(10086L)));
     }
 
     @Test
@@ -189,13 +189,13 @@ public class SampleTest {
     }
 
     @Test
-    public void testTableFieldExistFalse(){
+    public void testTableFieldExistFalse() {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.select("age, count(age) as count")
                 .groupBy("age");
         List<User> list = mapper.selectList(wrapper);
         list.forEach(System.out::println);
-        list.forEach(x->{
+        list.forEach(x -> {
             Assert.assertNull(x.getId());
             Assert.assertNotNull(x.getAge());
             Assert.assertNotNull(x.getCount());
