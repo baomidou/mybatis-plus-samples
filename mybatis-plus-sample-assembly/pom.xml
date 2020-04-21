@@ -93,29 +93,30 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- https://gitee.com/baomidou/mybatis-plus/commit/3efe79baf6338cc97f8ef02f18fbd0a9418e4f29 -->
-<!--            <plugin>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--                <configuration>-->
-<!--                    <includes>-->
-<!--                        <include>-->
-<!--                            <groupId>null</groupId>-->
-<!--                            <artifactId>null</artifactId>-->
-<!--                        </include>-->
-<!--                    </includes>-->
-<!--                    <layout>ZIP</layout>-->
-<!--                    <addResources>true</addResources>-->
-<!--                    <outputDirectory>${project.build.directory}</outputDirectory>-->
-<!--                </configuration>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <goals>-->
-<!--                            <goal>repackage</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
+            <!-- 3.3.2版本以下不支持spring-boot-maven-plugin打包，需要注释此插件
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <includes>
+                        <include>
+                            <groupId>null</groupId>
+                            <artifactId>null</artifactId>
+                        </include>
+                    </includes>
+                    <layout>ZIP</layout>
+                    <addResources>true</addResources>
+                    <outputDirectory>${project.build.directory}</outputDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            -->
         </plugins>
     </build>
 </project>
