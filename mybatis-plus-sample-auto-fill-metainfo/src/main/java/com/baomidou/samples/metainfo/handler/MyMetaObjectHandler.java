@@ -5,8 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
-
 /**
  * 填充器
  *
@@ -19,17 +17,12 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
         log.info("start insert fill ....");
-        this.setFieldValByName("operator", "Jerry", metaObject);
-        this.strictInsertFill(metaObject, "operator", String.class, () -> optional().orElse(null));
+        this.strictInsertFill(metaObject, "operator", String.class, "Jetty");
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
         log.info("start update fill ....");
-        this.setFieldValByName("operator", "Tom", metaObject);
-    }
-
-    private Optional<String> optional() {
-        return Optional.of("ssssssssssss");
+        this.strictUpdateFill(metaObject, "operator", String.class, "Tom");
     }
 }
