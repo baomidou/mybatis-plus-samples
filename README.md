@@ -20,9 +20,7 @@
 - mybatis-plus-sample-sql-injector: 自定义全局操作示例
 - mybatis-plus-sample-auto-fill-metainfo: 公共字段填充示例
 - mybatis-plus-sample-logic-delete: 逻辑删除示例
-- mybatis-plus-sample-multi-datasource: 多数据源示例
 - mybatis-plus-sample-enum: 枚举注入示例
-- mybatis-plus-sample-dts-rabbit: 基于 rabbitMq 分布式事务示例
 - mybatis-plus-sample-dynamic-tablename: 动态表名示例
 - mybatis-plus-sample-tenant: 多租户示例
 - mybatis-plus-sample-typehandler: 类型处理器示例，例如  json 字段对象转换
