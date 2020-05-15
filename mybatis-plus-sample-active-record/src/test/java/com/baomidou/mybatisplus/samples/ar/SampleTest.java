@@ -29,7 +29,7 @@ public class SampleTest {
         user.setAge(5);
         user.setEmail("miemie@mp.com");
         Assert.assertTrue(user.insert());
-        // 成功直接拿会写的 ID
+        // 成功可以直接获取 ID
         System.err.println("\n插入成功 ID 为：" + user.getId());
     }
 
