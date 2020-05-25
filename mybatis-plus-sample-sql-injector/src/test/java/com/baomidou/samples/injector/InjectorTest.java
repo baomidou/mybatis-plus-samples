@@ -1,17 +1,20 @@
 package com.baomidou.samples.injector;
 
-import com.baomidou.samples.injector.entity.Student;
-import com.baomidou.samples.injector.mapper.StudentMapper;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.annotation.Resource;
+
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.annotation.Resource;
-import java.util.List;
-import java.util.stream.Collectors;
+import com.baomidou.samples.injector.entity.Student;
+import com.baomidou.samples.injector.mapper.StudentMapper;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 自定义注入测试
@@ -43,6 +46,10 @@ public class InjectorTest {
         }
         studentMapper.insertBatchSomeColumn(ss);
         ids.addAll(ss.stream().map(Student::getId).collect(Collectors.toList()));
+
+        Student select = studentMapper.select("select * from student where id = " + ids.get(0));
+        System.out.println(select);
+
         log.error("--------------------------------------deleteAll-------------------------------------------------------");
         studentMapper.deleteAll();
     }

@@ -1,8 +1,11 @@
 package com.baomidou.samples.injector.mapper;
 
-import com.baomidou.samples.injector.base.MyBaseMapper;
-import com.baomidou.samples.injector.entity.Student;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.SelectProvider;
+
+import com.baomidou.samples.injector.base.MyBaseMapper;
+import com.baomidou.samples.injector.config.MySelectProvider;
+import com.baomidou.samples.injector.entity.Student;
 
 /**
  * 学生Mapper层
@@ -11,4 +14,7 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface StudentMapper extends MyBaseMapper<Student> {
+
+    @SelectProvider(value = MySelectProvider.class, method = "getSql")
+    Student select(String sql);
 }

@@ -21,9 +21,16 @@
         <property name="globalConfig" ref="globalConfig"/>
         <property name="plugins">
             <array>
-                <bean class="com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor"></bean>
+                <bean class="com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor">
+                    <property name="countSqlParser" ref="countSqlParser"/>
+                </bean>
             </array>
         </property>
+    </bean>
+
+    <bean id="countSqlParser"
+          class="com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize">
+        <property name="optimizeJoin" value="true"/>
     </bean>
 
     <bean id="globalConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig">

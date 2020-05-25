@@ -1,5 +1,10 @@
 package com.baomidou.mybatisplus.samples.generator;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,19 +22,28 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
 /**
  * <p>
- * 通过junit test 生成代码
- * 演示：自定义代码模板
- * 默认不会覆盖已有文件，如果需要覆盖，配置GlobalConfig.setFileOverride(true)
+ * H2数据库 代码生成Sample
+ *
+ * 默认H2数据库是大小写敏感的，参考
+ * http://www.h2database.com/javadoc/org/h2/engine/DbSettings.html?highlight=CASE_INSENSITIVE_IDENTIFIERS&search=case#CASE_INSENSITIVE_IDENTIFIERS
+ *
  * </p>
  *
  * @author yuxiaobin
- * @date 2018/11/29
+ * @date 2020/3/27
  */
-public class MpGeneratorTest {
+public class H2CodeGenerationTest {
 
+    /**
+     * 默认H2数据库是大小写敏感的，参考
+     * http://www.h2database.com/javadoc/org/h2/engine/DbSettings.html?highlight=CASE_INSENSITIVE_IDENTIFIERS&search=case#CASE_INSENSITIVE_IDENTIFIERS
+     *
+     * 忽略大小写，可以在jdbcUrl后加参数：CASE_INSENSITIVE_IDENTIFIERS=TRUE
+     * 就可以忽略大小写
+     */
     @Test
     public void generateCode() {
-        generate("mysql", "h2user");
+        generate("h2", "user");
     }
 
     private void generate(String moduleName, String... tableNamesInclude){
@@ -39,7 +53,7 @@ public class MpGeneratorTest {
         GlobalConfig gc = new GlobalConfig();
 //        String projectPath = System.getProperty("user.dir");
         gc.setOutputDir("d:/codeGen");
-        gc.setAuthor("jobob");
+        gc.setAuthor("苗老板");
         gc.setOpen(false);
         //默认不覆盖，如果文件存在，将不会再生成，配置true就是覆盖
         gc.setFileOverride(true);
@@ -47,11 +61,11 @@ public class MpGeneratorTest {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/mybatis-plus?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8");
+        dsc.setUrl("jdbc:p6spy:h2:file:d:/mybatisplus;TRACE_LEVEL_FILE=0;IFEXISTS=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE");
         // dsc.setSchemaName("public");
-        dsc.setDriverName("com.mysql.jdbc.Driver");
+        dsc.setDriverName("com.p6spy.engine.spy.P6SpyDriver");
         dsc.setUsername("root");
-        dsc.setPassword("");
+        dsc.setPassword("test");
         mpg.setDataSource(dsc);
 
         // 包配置
@@ -122,5 +136,19 @@ public class MpGeneratorTest {
 //        });
 //        cfg.setFileOutConfigList(focList);
         mpg.setCfg(cfg);
+    }
+
+
+    @Test
+    public void testGetTableNames() throws SQLException {
+        Connection conn = DriverManager.
+                getConnection("jdbc:p6spy:h2:file:d:/mybatisplus;TRACE_LEVEL_FILE=0;IFEXISTS=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE", "root", "test");
+        Statement stmt = conn.createStatement();
+        ResultSet resultSet = stmt.executeQuery("SELECT * FROM INFORMATION_SCHEMA.TABLES ");
+        while(resultSet.next()){
+            System.out.println(resultSet.getObject("TABLE_NAME"));
+        }
+        // add application code here
+        conn.close();
     }
 }
