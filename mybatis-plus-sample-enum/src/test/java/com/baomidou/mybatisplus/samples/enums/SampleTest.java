@@ -1,23 +1,20 @@
 package com.baomidou.mybatisplus.samples.enums;
 
-import java.util.List;
-import java.util.Optional;
-
-import javax.annotation.Resource;
-
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.samples.enums.entity.User;
+import com.baomidou.mybatisplus.samples.enums.enums.*;
+import com.baomidou.mybatisplus.samples.enums.mapper.UserMapper;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.samples.enums.entity.User;
-import com.baomidou.mybatisplus.samples.enums.enums.AgeEnum;
-import com.baomidou.mybatisplus.samples.enums.enums.GenderEnum;
-import com.baomidou.mybatisplus.samples.enums.enums.GradeEnum;
-import com.baomidou.mybatisplus.samples.enums.enums.UserState;
-import com.baomidou.mybatisplus.samples.enums.mapper.UserMapper;
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * <p>
@@ -41,6 +38,7 @@ public class SampleTest {
         user.setAge(AgeEnum.ONE);
         user.setGrade(GradeEnum.HIGH);
         user.setGender(GenderEnum.MALE);
+        user.setStrEnum(StrEnum.ONE);
         user.setEmail("abc@mp.com");
         Assert.assertTrue(mapper.insert(user) > 0);
         // 成功直接拿会写的 ID
@@ -49,11 +47,11 @@ public class SampleTest {
         List<User> list = mapper.selectList(null);
         for (User u : list) {
             System.out.println(u);
-            Assert.assertNotNull("age should not be null", u.getAge());
+            assertThat(u.getAge()).isNotNull();
             if (u.getId().equals(user.getId())) {
-                Assert.assertNotNull("gender should not be null", u.getGender());
-                Assert.assertNotNull("grade should not be null", u.getGrade());
-
+                assertThat(u.getGender()).isNotNull();
+                assertThat(u.getGrade()).isNotNull();
+                assertThat(u.getStrEnum()).isNotNull();
             }
         }
     }
