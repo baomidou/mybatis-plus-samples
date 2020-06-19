@@ -1,15 +1,16 @@
 package com.baomidou.mybatisplus.samples.optlocker;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.samples.optlocker.entity.User;
-import com.baomidou.mybatisplus.samples.optlocker.mapper.UserMapper;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.Assert;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.samples.optlocker.entity.User;
+import com.baomidou.mybatisplus.samples.optlocker.mapper.UserMapper;
 
 /**
  * <p>
@@ -50,7 +51,7 @@ class OptLockerTest {
         int oldVersion = user.getVersion();
         int i = userMapper.updateById(user);
         assertThat(i).isEqualTo(1);
-        assertThat(oldVersion).isEqualTo(oldVersion++);
+        assertThat(oldVersion + 1).isEqualTo(user.getVersion());
     }
 
     @Order(2)

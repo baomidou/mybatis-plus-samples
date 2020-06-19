@@ -1,5 +1,19 @@
 package com.baomidou.mybatisplus.samples.crud;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -7,18 +21,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.samples.crud.entity.User;
 import com.baomidou.mybatisplus.samples.crud.mapper.UserMapper;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import com.baomidou.mybatisplus.samples.crud.service.UserService;
 
 /**
  * <p>
@@ -125,11 +128,6 @@ public class SampleTest {
                     assertThat(x.getName()).isNotNull();
                     assertThat(x.getAge()).isNull();
                 });
-
-        mapper.selectList(Wrappers.lambdaQuery(new User().setId(10086L)));
-        ArrayList<Long> list = new ArrayList<>();
-        list.add(10086L);
-        mapper.selectList(Wrappers.<User>lambdaQuery().in(User::getId, list));
     }
 
     @Test
@@ -214,4 +212,14 @@ public class SampleTest {
 
     }
 
+    @Autowired
+    UserService userService;
+
+    @Test
+    public void serviceTest() {
+//        System.out.println(userService.lambdaQuery().eq(User::getId, 1).list());
+        LambdaQueryWrapper<User> lq = new LambdaQueryWrapper<>();
+        lq.select(User::getAge).groupBy(User::getAge);
+        userService.list(lq).forEach(System.out::println);
+    }
 }

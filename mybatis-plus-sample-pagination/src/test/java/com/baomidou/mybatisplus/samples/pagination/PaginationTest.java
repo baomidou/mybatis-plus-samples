@@ -16,6 +16,7 @@ import org.springframework.util.CollectionUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -146,5 +147,14 @@ public class PaginationTest {
         RowBounds rowBounds = new RowBounds(0, 5);
         List<User> list = mapper.rowBoundList(rowBounds, Maps.newHashMap("name", "%"));
         System.out.println("list.size=" + list.size());
+    }
+
+    @Test
+    public void selectAndGroupBy(){
+        LambdaQueryWrapper<User> lq = new LambdaQueryWrapper<>();
+        lq.select(User::getAge).groupBy(User::getAge);
+        for (User user : mapper.selectList(lq)) {
+            System.out.println(user.getAge());
+        }
     }
 }
