@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- Import Properties -->
@@ -21,11 +22,24 @@
         <property name="globalConfig" ref="globalConfig"/>
         <property name="plugins">
             <array>
-                <bean class="com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor">
-                    <property name="countSqlParser" ref="countSqlParser"/>
-                </bean>
+                <ref bean="mybatisPlusInterceptor"/>
+                <!--                <bean class="com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor">-->
+                <!--                    <property name="countSqlParser" ref="countSqlParser"/>-->
+                <!--                </bean>-->
             </array>
         </property>
+    </bean>
+
+    <bean id="mybatisPlusInterceptor" class="com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor">
+        <property name="innerInterceptors">
+            <list>
+                <ref bean="paginationInnerInterceptor"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="paginationInnerInterceptor"
+          class="com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor">
     </bean>
 
     <bean id="countSqlParser"
