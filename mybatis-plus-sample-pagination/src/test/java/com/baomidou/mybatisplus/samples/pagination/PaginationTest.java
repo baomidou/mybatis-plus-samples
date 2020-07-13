@@ -10,6 +10,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.assertj.core.util.Maps;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.CollectionUtils;
@@ -20,12 +21,14 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.samples.pagination.entity.User;
 import com.baomidou.mybatisplus.samples.pagination.mapper.UserMapper;
 import com.baomidou.mybatisplus.samples.pagination.model.MyPage;
 import com.baomidou.mybatisplus.samples.pagination.model.ParamSome;
 import com.baomidou.mybatisplus.samples.pagination.model.UserChildren;
+import com.baomidou.mybatisplus.samples.pagination.service.IUserService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -150,11 +153,29 @@ public class PaginationTest {
     }
 
     @Test
-    public void selectAndGroupBy(){
+    public void selectAndGroupBy() {
         LambdaQueryWrapper<User> lq = new LambdaQueryWrapper<>();
         lq.select(User::getAge).groupBy(User::getAge);
         for (User user : mapper.selectList(lq)) {
             System.out.println(user.getAge());
         }
+    }
+
+    @Autowired
+    IUserService userService;
+
+    @Test
+    public void lambdaPageTest() {
+        LambdaQueryChainWrapper<User> wrapper2 = userService.lambdaQuery();
+        wrapper2.like(User::getName, "a");
+        userService.page(new Page<>(1, 10), wrapper2.getWrapper()).getRecords().forEach(System.out::print);
+    }
+
+    @Test
+    public void test() {
+        userService.lambdaQuery().like(User::getName, "a").list().forEach(System.out::println);
+
+        Page page = userService.lambdaQuery().like(User::getName, "a").page(new Page<>(1, 10));
+        page.getRecords().forEach(System.out::println);
     }
 }
