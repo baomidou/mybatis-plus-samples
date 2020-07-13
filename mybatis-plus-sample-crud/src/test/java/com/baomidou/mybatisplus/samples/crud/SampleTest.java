@@ -10,7 +10,6 @@ import javax.annotation.Resource;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -21,7 +20,6 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.samples.crud.entity.User;
 import com.baomidou.mybatisplus.samples.crud.mapper.UserMapper;
-import com.baomidou.mybatisplus.samples.crud.service.UserService;
 
 /**
  * <p>
@@ -212,14 +210,4 @@ public class SampleTest {
 
     }
 
-    @Autowired
-    UserService userService;
-
-    @Test
-    public void serviceTest() {
-//        System.out.println(userService.lambdaQuery().eq(User::getId, 1).list());
-        LambdaQueryWrapper<User> lq = new LambdaQueryWrapper<>();
-        lq.select(User::getAge).groupBy(User::getAge);
-        userService.list(lq).forEach(System.out::println);
-    }
 }
