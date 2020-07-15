@@ -72,14 +72,13 @@ public class H2CodeGenerationTest {
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
         final String folder = new File(this.getClass().getClassLoader().getResource("./").getFile()).getAbsolutePath();
-        dsc.setUrl("jdbc:p6spy:h2:file:" + "d:" + "/mybatisplus;TRACE_LEVEL_FILE=0;IFEXISTS=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE");
+        dsc.setUrl("jdbc:p6spy:h2:file:" + folder + "/mybatisplus;TRACE_LEVEL_FILE=0;IFEXISTS=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.p6spy.engine.spy.P6SpyDriver");
         dsc.setUsername("root");
         dsc.setPassword("test");
         dsc.setDbType(DbType.H2);
         mpg.setDataSource(dsc);
-
 
         // 包配置
         PackageConfig pc = new PackageConfig();
