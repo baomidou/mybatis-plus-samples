@@ -1,11 +1,12 @@
 package com.baomidou.mybatisplus.samples.optlocker;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.samples.optlocker.entity.User;
@@ -16,15 +17,15 @@ import com.baomidou.mybatisplus.samples.optlocker.mapper.UserMapper;
  * </p>
  *
  * @author yuxiaobin
- * @date 2018/8/24
+ * @since 2018/8/24
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest
-public class OptLockerTest {
+class OptLockerTest {
 
     @Autowired
     UserMapper userMapper;
 
+    @Order(0)
     @Test
     public void testUpdateByIdSucc() {
         User user = new User();
@@ -39,10 +40,21 @@ public class OptLockerTest {
         userUpdate.setId(id);
         userUpdate.setAge(19);
         userUpdate.setVersion(1);
-        Assert.assertEquals("Should update success", 1, userMapper.updateById(userUpdate));
-        Assert.assertEquals("Should version = version+1", 2, userUpdate.getVersion().intValue());
+        assertThat(userMapper.updateById(userUpdate)).isEqualTo(1);
+        assertThat(userUpdate.getVersion()).isEqualTo(2);
     }
 
+    @Order(1)
+    @Test
+    public void testUpdateByIdSuccFromDb() {
+        User user = userMapper.selectById(1);
+        int oldVersion = user.getVersion();
+        int i = userMapper.updateById(user);
+        assertThat(i).isEqualTo(1);
+        assertThat(oldVersion + 1).isEqualTo(user.getVersion());
+    }
+
+    @Order(2)
     @Test
     public void testUpdateByIdFail() {
         User user = new User();
@@ -60,6 +72,7 @@ public class OptLockerTest {
         Assert.assertEquals("Should update failed due to incorrect version(actually 1, but 0 passed in)", 0, userMapper.updateById(userUpdate));
     }
 
+    @Order(3)
     @Test
     public void testUpdateByIdSuccWithNoVersion() {
         User user = new User();
@@ -85,6 +98,7 @@ public class OptLockerTest {
      * <p>
      * update(et,ew) et:必须带上version的值才会触发乐观锁
      */
+    @Order(4)
     @Test
     public void testUpdateByEntitySucc() {
         QueryWrapper<User> ew = new QueryWrapper<>();

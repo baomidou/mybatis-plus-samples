@@ -30,13 +30,13 @@
         <module>mybatis-plus-sample-deluxe</module>
         <module>mybatis-plus-sample-sequence</module>
         <module>mybatis-plus-sample-optimistic-locker</module>
-        <module>mybatis-plus-sample-dts-rabbit</module>
         <module>mybatis-plus-sample-dynamic-tablename</module>
         <module>mybatis-plus-sample-typehandler</module>
         <module>mybatis-plus-sample-assembly</module>
         <module>mybatis-plus-sample-resultmap</module>
         <module>mybatis-plus-sample-id-generator</module>
         <module>mybatis-plus-sample-no-spring</module>
+        <module>mybatis-plus-sample-pagehelper</module>
     </modules>
 
     <parent>
@@ -50,7 +50,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <mybatisplus.version>3.3.2</mybatisplus.version>
+        <mybatisplus.version>3.4.0</mybatisplus.version>
         <skipTests>true</skipTests>
     </properties>
 

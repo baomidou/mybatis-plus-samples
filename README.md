@@ -20,6 +20,7 @@
 - mybatis-plus-sample-sql-injector: 自定义全局操作示例
 - mybatis-plus-sample-auto-fill-metainfo: 公共字段填充示例
 - mybatis-plus-sample-logic-delete: 逻辑删除示例
+- mybatis-plus-sample-multi-datasource: 多数据源示例
 - mybatis-plus-sample-enum: 枚举注入示例
 - mybatis-plus-sample-dynamic-tablename: 动态表名示例
 - mybatis-plus-sample-tenant: 多租户示例
@@ -28,3 +29,5 @@
 - mybatis-plus-sample-assembly: 分离打包示例
 - mybatis-plus-sample-resultmap: 使用 resultMap 示例
 - mybatis-plus-sample-id-generator: 自定义ID生成示例
+- mybatis-plus-sample-no-spring: 不使用spring下的示例
+- mybatis-plus-sample-pagehelper: 使用pagehelper进行分页
