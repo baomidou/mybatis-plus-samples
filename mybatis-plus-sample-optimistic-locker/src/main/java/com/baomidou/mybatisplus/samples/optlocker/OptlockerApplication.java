@@ -11,5 +11,4 @@ public class OptlockerApplication {
     public static void main(String[] args) {
         SpringApplication.run(OptlockerApplication.class, args);
     }
-
 }

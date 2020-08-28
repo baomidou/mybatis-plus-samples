@@ -1,33 +1,27 @@
 package com.baomidou.mybatisplus.samples.resultmap;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
 import com.baomidou.mybatisplus.samples.resultmap.entity.Child;
 import com.baomidou.mybatisplus.samples.resultmap.entity.Man;
 import com.baomidou.mybatisplus.samples.resultmap.entity.Woman;
 import com.baomidou.mybatisplus.samples.resultmap.mapper.ChildMapper;
 import com.baomidou.mybatisplus.samples.resultmap.mapper.ManMapper;
 import com.baomidou.mybatisplus.samples.resultmap.mapper.WomanMapper;
-
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author miemie
  * @since 2019-11-27
  */
 @Slf4j
-@RunWith(SpringRunner.class)
 @SpringBootTest
-public class ResultmapTest {
+class ResultmapTest {
 
     @Resource
     private ChildMapper childMapper;
@@ -37,7 +31,7 @@ public class ResultmapTest {
     private WomanMapper womanMapper;
 
     @Test
-    public void t_c() {
+    void t_c() {
         final Child child = childMapper.selectLinkById(1L);
         log.info("child: {}", child);
         assertThat(child).isNotNull();
@@ -50,7 +44,7 @@ public class ResultmapTest {
     }
 
     @Test
-    public void t_m() {
+    void t_m() {
         final Man man = manMapper.selectLinkById(1L);
         log.info("man: {}", man);
         assertThat(man).isNotNull();
@@ -64,7 +58,7 @@ public class ResultmapTest {
     }
 
     @Test
-    public void t_w() {
+    void t_w() {
         final Woman woman = womanMapper.selectLinkById(1L);
         log.info("woman: {}", woman);
         assertThat(woman).isNotNull();

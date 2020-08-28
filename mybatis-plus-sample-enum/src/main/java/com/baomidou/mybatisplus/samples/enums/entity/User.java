@@ -1,10 +1,6 @@
 package com.baomidou.mybatisplus.samples.enums.entity;
 
-import com.baomidou.mybatisplus.samples.enums.enums.AgeEnum;
-import com.baomidou.mybatisplus.samples.enums.enums.GenderEnum;
-import com.baomidou.mybatisplus.samples.enums.enums.GradeEnum;
-import com.baomidou.mybatisplus.samples.enums.enums.UserState;
-
+import com.baomidou.mybatisplus.samples.enums.enums.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -44,4 +40,5 @@ public class User extends BaseEntity {
 
     private UserState userState;
 
+    private StrEnum strEnum;
 }

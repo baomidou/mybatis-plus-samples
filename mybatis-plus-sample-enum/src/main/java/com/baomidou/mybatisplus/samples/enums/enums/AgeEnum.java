@@ -1,6 +1,7 @@
 package com.baomidou.mybatisplus.samples.enums.enums;
 
-import com.baomidou.mybatisplus.core.enums.IEnum;
+
+import com.baomidou.mybatisplus.annotation.IEnum;
 
 import lombok.Getter;
 

@@ -1,5 +1,6 @@
 package com.baomidou.mybatisplus.samples.generator;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,6 +11,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
@@ -23,7 +25,7 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 /**
  * <p>
  * H2数据库 代码生成Sample
- *
+ * <p>
  * 默认H2数据库是大小写敏感的，参考
  * http://www.h2database.com/javadoc/org/h2/engine/DbSettings.html?highlight=CASE_INSENSITIVE_IDENTIFIERS&search=case#CASE_INSENSITIVE_IDENTIFIERS
  *
@@ -34,10 +36,18 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
  */
 public class H2CodeGenerationTest {
 
+    @Test
+    public void testStr() {
+        final String folder = new File(this.getClass().getClassLoader().getResource("./").getFile()).getAbsolutePath();
+        System.out.println(folder);
+
+    }
+
+
     /**
      * 默认H2数据库是大小写敏感的，参考
      * http://www.h2database.com/javadoc/org/h2/engine/DbSettings.html?highlight=CASE_INSENSITIVE_IDENTIFIERS&search=case#CASE_INSENSITIVE_IDENTIFIERS
-     *
+     * <p>
      * 忽略大小写，可以在jdbcUrl后加参数：CASE_INSENSITIVE_IDENTIFIERS=TRUE
      * 就可以忽略大小写
      */
@@ -46,7 +56,7 @@ public class H2CodeGenerationTest {
         generate("h2", "user");
     }
 
-    private void generate(String moduleName, String... tableNamesInclude){
+    private void generate(String moduleName, String... tableNamesInclude) {
         AutoGenerator mpg = new AutoGenerator();
 
         // 全局配置
@@ -61,11 +71,13 @@ public class H2CodeGenerationTest {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:p6spy:h2:file:d:/mybatisplus;TRACE_LEVEL_FILE=0;IFEXISTS=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE");
+        final String folder = new File(this.getClass().getClassLoader().getResource("./").getFile()).getAbsolutePath();
+        dsc.setUrl("jdbc:p6spy:h2:file:" + folder + "/mybatisplus;TRACE_LEVEL_FILE=0;IFEXISTS=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.p6spy.engine.spy.P6SpyDriver");
         dsc.setUsername("root");
         dsc.setPassword("test");
+        dsc.setDbType(DbType.H2);
         mpg.setDataSource(dsc);
 
         // 包配置
@@ -78,9 +90,9 @@ public class H2CodeGenerationTest {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-        strategy.setSuperEntityClass("com.baomidou.mybatisplus.samples.generator.common.BaseEntity");
+//        strategy.setSuperEntityClass("com.baomidou.mybatisplus.samples.generator.common.BaseEntity");
         strategy.setEntityLombokModel(true);
-        strategy.setSuperControllerClass("com.baomidou.mybatisplus.samples.generator.common.BaseController");
+//        strategy.setSuperControllerClass("com.baomidou.mybatisplus.samples.generator.common.BaseController");
         strategy.setInclude(tableNamesInclude);
         strategy.setSuperEntityColumns("id");
         strategy.setControllerMappingHyphenStyle(true);
@@ -98,9 +110,10 @@ public class H2CodeGenerationTest {
 
     /**
      * 自定义模板
+     *
      * @param mpg
      */
-    private void configCustomizedCodeTemplate(AutoGenerator mpg){
+    private void configCustomizedCodeTemplate(AutoGenerator mpg) {
         //配置 自定义模板
         TemplateConfig templateConfig = new TemplateConfig()
                 .setEntity("templates/MyEntityTemplate.java")//指定Entity生成使用自定义模板
@@ -113,7 +126,7 @@ public class H2CodeGenerationTest {
      *
      * @param mpg
      */
-    private void configInjection(AutoGenerator mpg){
+    private void configInjection(AutoGenerator mpg) {
         // 自定义配置
         InjectionConfig cfg = new InjectionConfig() {
             @Override
@@ -145,10 +158,14 @@ public class H2CodeGenerationTest {
                 getConnection("jdbc:p6spy:h2:file:d:/mybatisplus;TRACE_LEVEL_FILE=0;IFEXISTS=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE", "root", "test");
         Statement stmt = conn.createStatement();
         ResultSet resultSet = stmt.executeQuery("SELECT * FROM INFORMATION_SCHEMA.TABLES ");
-        while(resultSet.next()){
+        while (resultSet.next()) {
             System.out.println(resultSet.getObject("TABLE_NAME"));
         }
         // add application code here
+        resultSet = stmt.executeQuery("show table status WHERE 1=1  AND NAME IN ('user')");
+        while (resultSet.next()) {
+            System.out.println(resultSet.getString(1));
+        }
         conn.close();
     }
 }
