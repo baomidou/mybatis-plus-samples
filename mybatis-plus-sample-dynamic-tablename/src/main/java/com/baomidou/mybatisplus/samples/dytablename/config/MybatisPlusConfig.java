@@ -24,7 +24,6 @@ public class MybatisPlusConfig {
         DynamicTableNameInnerInterceptor dynamicTableNameInnerInterceptor = new DynamicTableNameInnerInterceptor();
         HashMap<String, TableNameHandler> map = new HashMap<String, TableNameHandler>(2) {{
             put("user", (sql, tableName) -> {
-                // metaObject 可以获取传入参数，这里实现你自己的动态规则
                 String year = "_2018";
                 int random = new Random().nextInt(10);
                 if (random % 2 == 1) {
