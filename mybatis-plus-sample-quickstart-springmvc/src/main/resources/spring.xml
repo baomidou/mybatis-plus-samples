@@ -18,20 +18,22 @@
     <!-- SqlSessionFactory Config -->
     <bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
+        <property name="configuration" ref="configuration"/>
         <property name="mapperLocations" value="classpath:mappers/*.xml"/>
         <property name="globalConfig" ref="globalConfig"/>
         <property name="plugins">
             <array>
                 <ref bean="mybatisPlusInterceptor"/>
-                <!--                <bean class="com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor">-->
-                <!--                    <property name="countSqlParser" ref="countSqlParser"/>-->
-                <!--                </bean>-->
             </array>
         </property>
     </bean>
 
+    <bean id="configuration" class="com.baomidou.mybatisplus.core.MybatisConfiguration">
+        <property name="useDeprecatedExecutor" value="false"/>
+    </bean>
+
     <bean id="mybatisPlusInterceptor" class="com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor">
-        <property name="innerInterceptors">
+        <property name="interceptors">
             <list>
                 <ref bean="paginationInnerInterceptor"/>
             </list>
@@ -40,6 +42,7 @@
 
     <bean id="paginationInnerInterceptor"
           class="com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor">
+        <constructor-arg name="dbType" value="H2"/>
     </bean>
 
     <bean id="countSqlParser"
