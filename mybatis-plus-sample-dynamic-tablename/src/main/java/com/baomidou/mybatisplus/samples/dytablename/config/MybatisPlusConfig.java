@@ -1,13 +1,12 @@
 package com.baomidou.mybatisplus.samples.dytablename.config;
 
-import com.baomidou.mybatisplus.extension.parsers.DynamicTableNameParser;
-import com.baomidou.mybatisplus.extension.parsers.ITableNameHandler;
-import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.handler.TableNameHandler;
+import com.baomidou.mybatisplus.extension.plugins.inner.DynamicTableNameInnerInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -20,11 +19,11 @@ import java.util.Random;
 public class MybatisPlusConfig {
 
     @Bean
-    public PaginationInterceptor paginationInterceptor() {
-        PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
-        DynamicTableNameParser dynamicTableNameParser = new DynamicTableNameParser();
-        dynamicTableNameParser.setTableNameHandlerMap(new HashMap<String, ITableNameHandler>(2) {{
-            put("user", (metaObject, sql, tableName) -> {
+    public MybatisPlusInterceptor mybatisPlusInterceptor() {
+        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+        DynamicTableNameInnerInterceptor dynamicTableNameInnerInterceptor = new DynamicTableNameInnerInterceptor();
+        HashMap<String, TableNameHandler> map = new HashMap<String, TableNameHandler>(2) {{
+            put("user", (sql, tableName) -> {
                 // metaObject 可以获取传入参数，这里实现你自己的动态规则
                 String year = "_2018";
                 int random = new Random().nextInt(10);
@@ -33,8 +32,9 @@ public class MybatisPlusConfig {
                 }
                 return tableName + year;
             });
-        }});
-        paginationInterceptor.setSqlParserList(Collections.singletonList(dynamicTableNameParser));
-        return paginationInterceptor;
+        }};
+        dynamicTableNameInnerInterceptor.setTableNameHandlerMap(map);
+        interceptor.addInnerInterceptor(dynamicTableNameInnerInterceptor);
+        return interceptor;
     }
 }
