@@ -1,12 +1,12 @@
 package com.baomidou.mybatisplus.samples.deluxe.config;
 
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import com.baomidou.mybatisplus.samples.deluxe.MyLogicSqlInjector;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
-import com.baomidou.mybatisplus.samples.deluxe.MyLogicSqlInjector;
 
 /**
  * @author miemie
@@ -16,18 +16,12 @@ import com.baomidou.mybatisplus.samples.deluxe.MyLogicSqlInjector;
 @MapperScan("com.baomidou.mybatisplus.samples.deluxe.mapper")
 public class MybatisPlusConfig {
 
-    /**
-     * 1.分页插件
-     * 2.多租户
-     */
     @Bean
-    public PaginationInterceptor paginationInterceptor() {
-        return new PaginationInterceptor();
-    }
-
-    @Bean
-    public OptimisticLockerInterceptor optimisticLockerInterceptor(){
-        return new OptimisticLockerInterceptor();
+    public MybatisPlusInterceptor mybatisPlusInterceptor() {
+        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+        interceptor.addInnerInterceptor(new PaginationInnerInterceptor());
+        interceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());
+        return interceptor;
     }
 
     /**
