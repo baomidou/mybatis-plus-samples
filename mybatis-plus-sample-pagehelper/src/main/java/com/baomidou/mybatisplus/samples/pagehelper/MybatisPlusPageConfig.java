@@ -17,14 +17,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MybatisPlusPageConfig {
 
-//    /**
-//     * mp的分页插件
-//     */
-//    @Bean
-//    public PaginationInterceptor paginationInterceptor() {
-//        return new PaginationInterceptor();
-//    }
-
     /**
      * pagehelper的分页插件
      */
