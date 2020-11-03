@@ -1,5 +1,18 @@
 package com.baomidou.mybatisplus.samples.pagination;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.apache.ibatis.session.RowBounds;
+import org.assertj.core.util.Maps;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.CollectionUtils;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -14,18 +27,8 @@ import com.baomidou.mybatisplus.samples.pagination.model.MyPage;
 import com.baomidou.mybatisplus.samples.pagination.model.ParamSome;
 import com.baomidou.mybatisplus.samples.pagination.model.UserChildren;
 import com.baomidou.mybatisplus.samples.pagination.service.IUserService;
+
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.session.RowBounds;
-import org.assertj.core.util.Maps;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.util.CollectionUtils;
-
-import javax.annotation.Resource;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author miemie
@@ -33,13 +36,13 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @Slf4j
 @SpringBootTest
-public class PaginationTest {
+class PaginationTest {
 
     @Resource
     private UserMapper mapper;
 
     @Test
-    public void lambdaPagination() {
+    void lambdaPagination() {
         Page<User> page = new Page<>(1, 3);
         Page<User> result = mapper.selectPage(page, Wrappers.<User>lambdaQuery().ge(User::getAge, 1).orderByAsc(User::getAge));
         assertThat(result.getTotal()).isGreaterThan(3);
@@ -47,7 +50,7 @@ public class PaginationTest {
     }
 
     @Test
-    public void tests1() {
+    void tests1() {
         log.error("----------------------------------baseMapper 自带分页-------------------------------------------------------");
         Page<User> page = new Page<>(1, 5);
         page.addOrder(OrderItem.asc("age"));
@@ -79,7 +82,7 @@ public class PaginationTest {
     }
 
     @Test
-    public void tests2() {
+    void tests2() {
         /* 下面的 left join 不会对 count 进行优化,因为 where 条件里有 join 的表的条件 */
         MyPage<UserChildren> myPage = new MyPage<>(1, 5);
         myPage.setSelectInt(18).setSelectStr("Jack");
@@ -102,26 +105,26 @@ public class PaginationTest {
 
 
     @Test
-    public void testMyPageMap() {
+    void testMyPageMap() {
         MyPage<User> myPage = new MyPage<User>(1, 5).setSelectInt(20).setSelectStr("Jack");
         mapper.mySelectPageMap(myPage, Maps.newHashMap("name", "%a"));
         myPage.getRecords().forEach(System.out::println);
     }
 
     @Test
-    public void testMap() {
+    void testMap() {
         mapper.mySelectMap(Maps.newHashMap("name", "%a")).forEach(System.out::println);
     }
 
     @Test
-    public void myPage() {
+    void myPage() {
         MyPage<User> page = new MyPage<>(1, 5);
         page.setName("a");
         mapper.myPageSelect(page).forEach(System.out::println);
     }
 
     @Test
-    public void iPageTest() {
+    void iPageTest() {
         IPage<User> page = new Page<User>(1, 5) {
             private String name = "%";
 
@@ -140,14 +143,14 @@ public class PaginationTest {
     }
 
     @Test
-    public void rowBoundsTest() {
+    void rowBoundsTest() {
         RowBounds rowBounds = new RowBounds(0, 5);
         List<User> list = mapper.rowBoundList(rowBounds, Maps.newHashMap("name", "%"));
         System.out.println("list.size=" + list.size());
     }
 
     @Test
-    public void selectAndGroupBy() {
+    void selectAndGroupBy() {
         LambdaQueryWrapper<User> lq = new LambdaQueryWrapper<>();
         lq.select(User::getAge).groupBy(User::getAge);
         for (User user : mapper.selectList(lq)) {
@@ -159,14 +162,14 @@ public class PaginationTest {
     IUserService userService;
 
     @Test
-    public void lambdaPageTest() {
+    void lambdaPageTest() {
         LambdaQueryChainWrapper<User> wrapper2 = userService.lambdaQuery();
         wrapper2.like(User::getName, "a");
         userService.page(new Page<>(1, 10), wrapper2.getWrapper()).getRecords().forEach(System.out::print);
     }
 
     @Test
-    public void test() {
+    void test() {
         userService.lambdaQuery().like(User::getName, "a").list().forEach(System.out::println);
 
         Page page = userService.lambdaQuery().like(User::getName, "a").page(new Page<>(1, 10));

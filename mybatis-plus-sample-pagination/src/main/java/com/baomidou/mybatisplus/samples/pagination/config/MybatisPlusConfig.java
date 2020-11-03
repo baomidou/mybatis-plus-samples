@@ -1,6 +1,5 @@
 package com.baomidou.mybatisplus.samples.pagination.config;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,7 +13,6 @@ import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerIntercept
  * @since 2018-08-10
  */
 @Configuration
-@MapperScan("com.baomidou.mybatisplus.samples.pagination.mapper")
 public class MybatisPlusConfig {
 
     /**

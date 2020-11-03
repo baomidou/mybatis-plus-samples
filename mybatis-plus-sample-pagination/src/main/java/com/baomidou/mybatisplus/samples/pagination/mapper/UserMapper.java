@@ -3,6 +3,7 @@ package com.baomidou.mybatisplus.samples.pagination.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
@@ -19,6 +20,7 @@ import com.baomidou.mybatisplus.samples.pagination.model.UserChildren;
  * @author miemie
  * @since 2018-08-10
  */
+@Mapper
 public interface UserMapper extends BaseMapper<User> {
 
     /**
