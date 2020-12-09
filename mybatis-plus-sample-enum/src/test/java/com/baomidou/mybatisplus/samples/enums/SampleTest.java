@@ -41,7 +41,7 @@ public class SampleTest {
         user.setStrEnum(StrEnum.ONE);
         user.setEmail("abc@mp.com");
         Assert.assertTrue(mapper.insert(user) > 0);
-        // 成功直接拿会写的 ID
+        // 成功直接拿回写的 ID
         System.err.println("\n插入成功 ID 为：" + user.getId());
 
         List<User> list = mapper.selectList(null);
