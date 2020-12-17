@@ -142,9 +142,9 @@ public class H2CodeGenerationTest {
 //        List<FileOutConfig> focList = new ArrayList<>();
 //        focList.add(new FileOutConfig("/templates/MyEntityTemplate.java.ftl") {
 //            @Override
-//            public String outputFile(TableInfo tableInfo) {
+//            public File outputFile(TableInfo tableInfo) {
 //                // 指定模板生，自定义生成文件到哪个地方
-//                return "D:/abc";
+//                return new File("D:/abc");
 //            }
 //        });
 //        cfg.setFileOutConfigList(focList);
