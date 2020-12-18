@@ -12,7 +12,6 @@ import com.baomidou.mybatisplus.generator.fill.Column;
 import com.baomidou.mybatisplus.generator.fill.Property;
 import lombok.Data;
 import org.apache.ibatis.jdbc.ScriptRunner;
-import org.h2.Driver;
 import org.junit.Test;
 
 import com.baomidou.mybatisplus.generator.AutoGenerator;
@@ -75,7 +74,7 @@ public class GeneratorTest {
     private DataSourceConfig h2DataSourceConfig() throws SQLException {
         DataSourceConfig dataSourceConfig = new DataSourceConfig
                 .Builder("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;CASE_INSENSITIVE_IDENTIFIERS=TRUE", "sa", "")
-                .driver(Driver.class).build();
+                .driver(org.h2.Driver.class).build();
         runScript(dataSourceConfig);
         return dataSourceConfig;
     }
@@ -95,7 +94,7 @@ public class GeneratorTest {
     private DataSourceConfig mysqlDataSourceConfig() throws SQLException {
         DataSourceConfig dataSourceConfig = new DataSourceConfig
                 .Builder("jdbc:mysql://127.0.0.1:3306/mybatis-plus?characterEncoding=UTF8", "root", "123456")
-                .driver(Driver.class).build();
+                .driver(com.mysql.cj.jdbc.Driver.class).build();
         runScript(dataSourceConfig);
         return dataSourceConfig;
     }
