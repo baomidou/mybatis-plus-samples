@@ -58,9 +58,18 @@ public class WrapperTest {
         print(plainUsers3);
 
         System.out.println("----- 自定义(sql注入) ------");
+        // 方式一
         List<User> plainUsers4 = userMapper.selectList(new QueryWrapper<User>()
                 .apply("role_id = 2"));
+/*        List<User> lambdaUsers4 = userMapper.selectList(new QueryWrapper<User>().lambda()
+                .apply("role_id = 2"));*/
+        // 方式二
+        List<User> plainUsers5 = userMapper.selectList(new QueryWrapper<User>()
+                .apply("role_id = {0}",2));
+/*        List<User> lambdaUsers5 = userMapper.selectList(new QueryWrapper<User>().lambda()
+                .apply("role_id = {0}",2));*/
         print(plainUsers4);
+        Assert.assertEquals(plainUsers4.size(), plainUsers5.size());
 
         UpdateWrapper<User> uw = new UpdateWrapper<>();
         uw.set("email", null);
@@ -129,5 +138,25 @@ public class WrapperTest {
                         i.and(j -> j.eq("name", "a").eq("age", 2))
                                 .or(j -> j.eq("name", "b").eq("age", 2)));
         userMapper.selectList(w);
+    }
+
+    /**
+     * SELECT id,name FROM user
+     * WHERE (age BETWEEN ? AND ?) ORDER BY role_id ASC,id ASC
+     */
+    @Test
+    public void testSelect() {
+        QueryWrapper<User> qw = new QueryWrapper<>();
+        qw.select("id","name").between("age",20,25)
+                .orderByAsc("role_id","id");
+        List<User> plainUsers = userMapper.selectList(qw);
+
+        LambdaQueryWrapper<User> lwq = new LambdaQueryWrapper<>();
+        lwq.select(User::getId,User::getName).between(User::getAge,20,25)
+                .orderByAsc(User::getRoleId,User::getId);
+        List<User> lambdaUsers = userMapper.selectList(lwq);
+
+        print(plainUsers);
+        Assert.assertEquals(plainUsers.size(), lambdaUsers.size());
     }
 }
