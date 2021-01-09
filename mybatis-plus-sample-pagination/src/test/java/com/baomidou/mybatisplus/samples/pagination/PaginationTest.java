@@ -142,6 +142,20 @@ class PaginationTest {
         System.out.println("page.total=" + page.getTotal());
     }
 
+    /**
+     * 只查询当前页的记录，不查询总记录数
+     */
+    @Test
+    void currentPageListTest() {
+        //使用三参数的构造器创建Page对象
+        //第三个参数isSearchCount：传true则查询总记录数;传false则不查询总记录数（既不进行count查询）
+        Page<User> page = new Page<>(1,3,false);
+        Page<User> result = mapper.selectPage(page, Wrappers.<User>lambdaQuery().ge(User::getAge, 20));
+        assertThat(result.getRecords().size()).isEqualTo(3);
+        //因为没有进行count查询，total值为0
+        assertThat(result.getTotal()).isEqualTo(0);
+    }
+
     @Test
     void rowBoundsTest() {
         RowBounds rowBounds = new RowBounds(0, 5);
