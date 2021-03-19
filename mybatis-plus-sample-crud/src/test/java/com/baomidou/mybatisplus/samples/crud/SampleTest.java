@@ -130,6 +130,12 @@ public class SampleTest {
     public void orderBy() {
         List<User> users = mapper.selectList(Wrappers.<User>query().orderByAsc("age"));
         assertThat(users).isNotEmpty();
+        //多字段排序
+        List<User> users2 = mapper.selectList(Wrappers.<User>query().orderByAsc("age","name"));
+        assertThat(users2).isNotEmpty();
+        //先按age升序排列，age相同再按name降序排列
+        List<User> users3 = mapper.selectList(Wrappers.<User>query().orderByAsc("age").orderByDesc("name"));
+        assertThat(users3).isNotEmpty();
     }
 
     @Test
@@ -153,6 +159,12 @@ public class SampleTest {
     public void orderByLambda() {
         List<User> users = mapper.selectList(Wrappers.<User>lambdaQuery().orderByAsc(User::getAge));
         assertThat(users).isNotEmpty();
+        //多字段排序
+        List<User> users2 = mapper.selectList(Wrappers.<User>lambdaQuery().orderByAsc(User::getAge,User::getName));
+        assertThat(users2).isNotEmpty();
+        //先按age升序排列，age相同再按name降序排列
+        List<User> users3 = mapper.selectList(Wrappers.<User>lambdaQuery().orderByAsc(User::getAge).orderByDesc(User::getName));
+        assertThat(users3).isNotEmpty();
     }
 
     @Test
