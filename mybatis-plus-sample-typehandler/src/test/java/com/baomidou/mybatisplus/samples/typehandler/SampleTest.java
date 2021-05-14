@@ -2,6 +2,7 @@ package com.baomidou.mybatisplus.samples.typehandler;
 
 import javax.annotation.Resource;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,15 +27,18 @@ public class SampleTest {
     private UserMapper userMapper;
 
     /**
-     * 自定义类型处理器演示参考 mybatis-plus-sample-deluxe 模块
+     * 自定义类型处理器演示
      */
     @Test
     public void test() {
-        // 自己去观察打印 SQL 目前随机访问 user_2018  user_2019 表
         User Jone = userMapper.selectById(1);
-        System.err.println(Jone.getName());
+        Assert.assertEquals("Jone", Jone.getName());
+        Assert.assertEquals(2, Jone.getWallets().size());
+        Assert.assertEquals("微信钱包", Jone.getWallets().get(1).getName());
 
-        User Jack = userMapper.selectById(1);
-        System.err.println(Jack.getName());
+        User Jack = userMapper.selectById(2);
+        Assert.assertEquals("Jack", Jack.getName());
+        Assert.assertEquals(1, Jack.getWallets().size());
+        Assert.assertEquals("银联钱包", Jack.getWallets().get(0).getName());
     }
 }
