@@ -1,7 +1,7 @@
 package com.baomidou.samples;
 
-import javax.annotation.Resource;
-
+import com.baomidou.samples.entity.User;
+import com.baomidou.samples.mapper.UserMapper;
 import com.baomidou.samples.service.UserService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -9,9 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.baomidou.samples.entity.User;
-import com.baomidou.samples.mapper.UserMapper;
-
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,12 +33,13 @@ public class IdGeneratorTest {
         user.setAge(18);
         userMapper.insert(user);
         Assert.assertEquals(Long.valueOf(1L), user.getId());
+
+        testBatch();
     }
 
     /**
      * 批量插入
      */
-    @Test
     public void testBatch() {
         List<User> users = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {

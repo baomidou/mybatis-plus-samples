@@ -9,7 +9,7 @@ spring:
 mybatis-plus:
   global-config:
     db-config:
-      id-type: id_worker
+      id-type: ASSIGN_ID
       capital-mode: true
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

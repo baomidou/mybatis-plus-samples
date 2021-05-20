@@ -23,7 +23,13 @@
         <property name="globalConfig" ref="globalConfig"/>
         <property name="plugins">
             <array>
-                <bean class="com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor"></bean>
+                <bean class="com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor">
+                    <property name="interceptors">
+                        <list>
+                            <bean class="com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor"/>
+                        </list>
+                    </property>
+                </bean>
             </array>
         </property>
     </bean>
@@ -33,10 +39,13 @@
     </bean>
 
     <bean id="dbConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig.DbConfig">
-        <property name="keyGenerator" ref="keyGenerator"/>
+        <property name="keyGenerators">
+            <list>
+                <bean class="com.baomidou.mybatisplus.extension.incrementer.H2KeyGenerator"/>
+            </list>
+        </property>
     </bean>
 
-    <bean id="keyGenerator" class="com.baomidou.mybatisplus.extension.incrementer.H2KeyGenerator"/>
 
     <!-- MyBatis Mapper Scan Config  -->
     <!--
