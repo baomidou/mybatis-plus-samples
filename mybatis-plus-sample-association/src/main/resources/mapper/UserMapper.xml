@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baomidou.mybatisplus.samples.association.mapper.UserMapper">
+
+    <sql id="Base_Column_List">
+       t.id, t.name, t.age, t.email,
+       t.company_id as "company.id",
+       c.name as "company.name"
+    </sql>
+
+    <select id="selectUserPage" resultType="com.baomidou.mybatisplus.samples.association.entity.User">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM user t
+        LEFT JOIN company c on t.company_id=c.id
+        <where>
+            ${ew.sqlSegment}
+        </where>
+    </select>
+
+</mapper>

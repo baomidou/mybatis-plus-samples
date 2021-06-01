@@ -37,6 +37,7 @@
         <module>mybatis-plus-sample-id-generator</module>
         <module>mybatis-plus-sample-no-spring</module>
         <module>mybatis-plus-sample-pagehelper</module>
+        <module>mybatis-plus-sample-association</module>
     </modules>
 
     <parent>
