@@ -51,7 +51,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <mybatisplus.version>3.4.3</mybatisplus.version>
+        <mybatisplus.version>3.4.3.1</mybatisplus.version>
         <skipTests>true</skipTests>
     </properties>
 
