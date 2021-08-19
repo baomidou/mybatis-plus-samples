@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mybatis_plus?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    username: root
+
+# Mybatis Mate 配置
+mybatis-mate:
+  cert:
+    grant: ☺请添加微信wx153666购买授权，不白嫖从我做起！
+    license: SM/hy2HGmqRZIw7NE5i1vKIiHOQLGXGymokyRCkR+TYuNZuVTdYiESr41OZiYyDkH095+Y5Ifc7tCyVeGi3qrsnyninzgcmvZsUKDl9kQYXzvbt/R7UMj6yqchPsZYf0UQ0mvRyoja1ljXiqbz49qrqXy0q1umWBEzrbH7QjE55M/bnABovM5ljCoENfY2b0EvSaJCUeqeAAxM3K6VrBo0YI4rz9Uo28AXhRgAyaI0QgMy+APM5bCdp9GEXHXYEyApMDvRCqWLfh5WZVdDWD5PZouQL3TKD3kqEf4k+Z1GkrVtHDS9mugpbSP533dHd9O+NF1KpOhkN0lVojrJ21Bg==
+
+# Logger Config
+logging:
+  level:
+    com.baomidou.mybatisplus.samples.mysql: debug

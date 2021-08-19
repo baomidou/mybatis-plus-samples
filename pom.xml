@@ -26,6 +26,7 @@
         <module>mybatis-plus-sample-performance-analysis</module>
         <module>mybatis-plus-sample-execution-analysis</module>
         <module>mybatis-plus-sample-logic-delete</module>
+        <module>mybatis-plus-sample-mysql</module>
         <module>mybatis-plus-sample-deluxe</module>
         <module>mybatis-plus-sample-sequence</module>
         <module>mybatis-plus-sample-optimistic-locker</module>
@@ -80,6 +81,11 @@
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
                 <version>1.2.3</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>8.0.26</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
