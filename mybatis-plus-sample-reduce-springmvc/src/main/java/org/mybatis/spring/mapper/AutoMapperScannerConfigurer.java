@@ -37,8 +37,6 @@ import org.springframework.util.StringUtils;
 import java.lang.annotation.Annotation;
 import java.util.Map;
 
-import static org.springframework.util.Assert.notNull;
-
 /**
  * BeanDefinitionRegistryPostProcessor that searches recursively starting from a base package for
  * interfaces and registers them as {@code MapperFactoryBean}. Note that only interfaces with at
@@ -291,7 +289,9 @@ public class AutoMapperScannerConfigurer implements BeanDefinitionRegistryPostPr
      */
     @Override
     public void afterPropertiesSet() throws Exception {
-        notNull(this.basePackage, "Property 'basePackage' is required");
+        if (null == this.basePackage) {
+            throw new RuntimeException("Property 'basePackage' is required");
+        }
     }
 
     /**

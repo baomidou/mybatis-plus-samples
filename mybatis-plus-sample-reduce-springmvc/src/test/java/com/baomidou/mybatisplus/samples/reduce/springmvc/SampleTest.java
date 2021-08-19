@@ -1,22 +1,19 @@
 package com.baomidou.mybatisplus.samples.reduce.springmvc;
 
-import java.util.List;
-
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.samples.reduce.springmvc.entity.City;
-import com.baomidou.mybatisplus.samples.reduce.springmvc.entity.District;
-import com.baomidou.mybatisplus.samples.reduce.springmvc.utils.SpringContext;
-import org.junit.Assert;
+import com.baomidou.mybatisplus.samples.reduce.springmvc.entity.User;
+import com.baomidou.mybatisplus.samples.reduce.springmvc.mapper.UserMapper;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.samples.reduce.springmvc.entity.User;
-import com.baomidou.mybatisplus.samples.reduce.springmvc.mapper.UserMapper;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:spring.xml"})
@@ -32,7 +29,7 @@ public class SampleTest {
     public void testSelect() {
         System.out.println(("----- selectAll method test ------"));
         List<User> userList = userMapper.selectList(null);
-        Assert.assertEquals(5, userList.size());
+        Assertions.assertEquals(5, userList.size());
         userList.forEach(System.out::println);
     }
 
@@ -48,7 +45,7 @@ public class SampleTest {
         u = new User();
         u.setName("Tomcat2");
         userMapper.insert(u);
-        Assert.assertEquals("id should increase 1", id1 + 1, u.getId().longValue());
+        Assertions.assertEquals(id1 + 1, u.getId().longValue());
     }
 
     @Test
@@ -60,11 +57,11 @@ public class SampleTest {
     public void testPagination() {
         Page<User> page = new Page<>(1, 3);
         userMapper.selectPage(page, null);
-        Assert.assertTrue("total should not be 0", page.getTotal() != 0);
+        Assertions.assertTrue(page.getTotal() != 0, "total should not be 0");
         for (User u : page.getRecords()) {
             System.out.println(u);
         }
-        Assert.assertEquals("pagination should be 3 per page", 3, page.getRecords().size());
+        Assertions.assertEquals(3, page.getRecords().size());
     }
 
     @Test
@@ -75,23 +72,23 @@ public class SampleTest {
 
         City city = (City) cityMapper.selectById(1);
 
-        Assert.assertEquals(city.getId().longValue(),1L);
+        Assertions.assertEquals(city.getId().longValue(),1L);
 
 
         String districtMapperClassName = "districtMapper";
         boolean isContained = context.containsBean(districtMapperClassName);
-        Assert.assertFalse(isContained);
+        Assertions.assertFalse(isContained);
 
         //BaseMapper districtMapper =(BaseMapper) context.getBean(districtMapperClassName);
         //District district = (District) districtMapper.selectById(1);
-        //Assert.assertEquals(district.getId().longValue(),1L);
+        //Assertions.assertEquals(district.getId().longValue(),1L);
 
         String userMapperClassName = "userMapper";
         BaseMapper userMapper =(BaseMapper) context.getBean(userMapperClassName);
 
         userMapper.selectById(1);
         User user = (User) userMapper.selectById(1);
-        Assert.assertEquals(user.getId().longValue(),1L);
+        Assertions.assertEquals(user.getId().longValue(),1L);
 
     }
 

@@ -6,12 +6,12 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.samples.crud.entity.User;
+import com.baomidou.mybatisplus.samples.crud.entity.User2;
+import com.baomidou.mybatisplus.samples.crud.mapper.User2Mapper;
 import com.baomidou.mybatisplus.samples.crud.mapper.UserMapper;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -27,12 +27,12 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author hubin
  * @since 2018-08-11
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class SampleTest {
-
     @Resource
     private UserMapper mapper;
+    @Resource
+    private User2Mapper user2Mapper;
 
     @Test
     public void aInsert() {
@@ -131,7 +131,7 @@ public class SampleTest {
         List<User> users = mapper.selectList(Wrappers.<User>query().orderByAsc("age"));
         assertThat(users).isNotEmpty();
         //多字段排序
-        List<User> users2 = mapper.selectList(Wrappers.<User>query().orderByAsc("age","name"));
+        List<User> users2 = mapper.selectList(Wrappers.<User>query().orderByAsc("age", "name"));
         assertThat(users2).isNotEmpty();
         //先按age升序排列，age相同再按name降序排列
         List<User> users3 = mapper.selectList(Wrappers.<User>query().orderByAsc("age").orderByDesc("name"));
@@ -160,7 +160,7 @@ public class SampleTest {
         List<User> users = mapper.selectList(Wrappers.<User>lambdaQuery().orderByAsc(User::getAge));
         assertThat(users).isNotEmpty();
         //多字段排序
-        List<User> users2 = mapper.selectList(Wrappers.<User>lambdaQuery().orderByAsc(User::getAge,User::getName));
+        List<User> users2 = mapper.selectList(Wrappers.<User>lambdaQuery().orderByAsc(User::getAge, User::getName));
         assertThat(users2).isNotEmpty();
         //先按age升序排列，age相同再按name降序排列
         List<User> users3 = mapper.selectList(Wrappers.<User>lambdaQuery().orderByAsc(User::getAge).orderByDesc(User::getName));
@@ -174,7 +174,7 @@ public class SampleTest {
         User user = mapper.selectOne(wrapper);
         System.out.println("maxId=" + user.getId());
         List<User> users = mapper.selectList(Wrappers.<User>lambdaQuery().orderByDesc(User::getId));
-        Assert.assertEquals(user.getId().longValue(), users.get(0).getId().longValue());
+        Assertions.assertEquals(user.getId().longValue(), users.get(0).getId().longValue());
     }
 
     @Test
@@ -206,9 +206,9 @@ public class SampleTest {
         List<User> list = mapper.selectList(wrapper);
         list.forEach(System.out::println);
         list.forEach(x -> {
-            Assert.assertNull(x.getId());
-            Assert.assertNotNull(x.getAge());
-            Assert.assertNotNull(x.getCount());
+            Assertions.assertNull(x.getId());
+            Assertions.assertNotNull(x.getAge());
+            Assertions.assertNotNull(x.getCount());
         });
         mapper.insert(
                 new User().setId(10088L)
@@ -216,8 +216,16 @@ public class SampleTest {
                         .setEmail("miemie@baomidou.com")
                         .setAge(3));
         User miemie = mapper.selectById(10088L);
-        Assert.assertNotNull(miemie);
+        Assertions.assertNotNull(miemie);
 
     }
 
+    @Test
+    public void testSqlCondition() {
+        Assertions.assertEquals(user2Mapper.selectList(Wrappers.<User2>query()
+                .setEntity(new User2().setName("n"))).size(), 2);
+        Assertions.assertEquals(user2Mapper.selectList(Wrappers.<User2>query().like("name", "J")).size(), 2);
+        Assertions.assertEquals(user2Mapper.selectList(Wrappers.<User2>query().gt("age", 18)
+                .setEntity(new User2().setName("J"))).size(), 1);
+    }
 }

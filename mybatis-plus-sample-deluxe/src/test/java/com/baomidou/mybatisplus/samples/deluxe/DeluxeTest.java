@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.samples.deluxe.entity.User;
 import com.baomidou.mybatisplus.samples.deluxe.mapper.UserMapper;
 import com.baomidou.mybatisplus.samples.deluxe.model.UserPage;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.CollectionUtils;
@@ -30,7 +30,7 @@ class DeluxeTest {
         System.out.println("------ 自定义 xml 分页 ------");
         UserPage selectPage = new UserPage(1, 5).setSelectInt(20);
         UserPage userPage = mapper.selectUserPage(selectPage);
-        Assert.assertSame(userPage, selectPage);
+        Assertions.assertSame(userPage, selectPage);
         System.out.println("总条数 ------> " + userPage.getTotal());
         System.out.println("当前页数 ------> " + userPage.getCurrent());
         System.out.println("当前每页显示数 ------> " + userPage.getSize());
@@ -39,7 +39,7 @@ class DeluxeTest {
         System.out.println("------ baseMapper 自带分页 ------");
         Page<User> page = new Page<>(1, 5);
         IPage<User> userIPage = mapper.selectPage(page, new QueryWrapper<User>().eq("age", 20));
-        Assert.assertSame(userIPage, page);
+        Assertions.assertSame(userIPage, page);
         System.out.println("总条数 ------> " + userIPage.getTotal());
         System.out.println("当前页数 ------> " + userIPage.getCurrent());
         System.out.println("当前每页显示数 ------> " + userIPage.getSize());
@@ -59,7 +59,8 @@ class DeluxeTest {
         u.setAge(18);
         mapper.updateById(u);
         u = mapper.selectById(u.getId());
-        Assert.assertEquals("version should be updated", 2, u.getVersion().intValue());
+        // version should be updated
+        Assertions.assertEquals(2, u.getVersion().intValue());
     }
 
     @Test
@@ -81,8 +82,8 @@ class DeluxeTest {
         mapper.myInsertAll(u);
 
         User user = mapper.selectById(id);
-        Assert.assertNotNull(user);
-        Assert.assertNotNull(user.getCreateTime());
+        Assertions.assertNotNull(user);
+        Assertions.assertNotNull(user.getCreateTime());
     }
 
     @Test
@@ -94,8 +95,8 @@ class DeluxeTest {
         mapper.mysqlInsertAllBatch(batchList);
 
         User user = mapper.selectById(1009991);
-        Assert.assertNotNull(user);
-        Assert.assertNotNull(user.getCreateTime());
+        Assertions.assertNotNull(user);
+        Assertions.assertNotNull(user.getCreateTime());
     }
 
     @Test
@@ -108,6 +109,6 @@ class DeluxeTest {
         QueryWrapper<User> ew = new QueryWrapper<>();
         ew.like("u.name", "Tom");
         List<User> list = mapper.customerSqlSegment(ew);
-        Assert.assertEquals(1, list.size());
+        Assertions.assertEquals(1, list.size());
     }
 }

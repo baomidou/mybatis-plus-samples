@@ -15,7 +15,6 @@
         <module>mybatis-plus-sample-quickstart</module>
         <module>mybatis-plus-sample-quickstart-springmvc</module>
         <module>mybatis-plus-sample-reduce-springmvc</module>
-        <module>mybatis-plus-sample-generator</module>
         <module>mybatis-plus-sample-crud</module>
         <module>mybatis-plus-sample-active-record</module>
         <module>mybatis-plus-sample-tenant</module>
@@ -43,7 +42,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.10.RELEASE</version>
+        <version>2.5.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -51,7 +50,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <mybatisplus.version>3.4.3.1</mybatisplus.version>
+        <mybatisplus.version>3.4.3.2</mybatisplus.version>
         <skipTests>true</skipTests>
     </properties>
 
@@ -68,19 +67,14 @@
                 <version>${mybatisplus.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-generator</artifactId>
-                <version>${mybatisplus.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>p6spy</groupId>
                 <artifactId>p6spy</artifactId>
-                <version>3.8.5</version>
+                <version>3.9.1</version>
             </dependency>
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
-                <version>1.2.49</version>
+                <version>1.2.76</version>
             </dependency>
             <dependency>
                 <groupId>ch.qos.logback</groupId>

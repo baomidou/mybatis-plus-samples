@@ -1,14 +1,15 @@
 package com.baomidou.samples.execution;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.samples.execution.entity.Student;
 import com.baomidou.samples.execution.mapper.StudentMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.MyBatisSystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.util.Assert;
 
 /**
  * 执行分析测试
@@ -39,6 +40,6 @@ class ExecutionTest {
         } catch (MyBatisSystemException e) {
 
         }
-        Assert.notEmpty(studentMapper.selectList(new QueryWrapper<>()), "数据都被删掉了.(┬＿┬)");
+        Assertions.assertTrue(CollectionUtils.isEmpty(studentMapper.selectList(new QueryWrapper<>())), "数据都被删掉了.(┬＿┬)");
     }
 }

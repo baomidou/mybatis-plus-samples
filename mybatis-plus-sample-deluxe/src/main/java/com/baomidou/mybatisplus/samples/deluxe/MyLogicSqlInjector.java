@@ -5,6 +5,7 @@ import java.util.List;
 import com.baomidou.mybatisplus.core.injector.AbstractMethod;
 import com.baomidou.mybatisplus.core.injector.DefaultSqlInjector;
 import com.baomidou.mybatisplus.core.injector.methods.SelectById;
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.samples.deluxe.methods.DeleteAll;
 import com.baomidou.mybatisplus.samples.deluxe.methods.MyInsertAll;
 import com.baomidou.mybatisplus.samples.deluxe.methods.MysqlInsertAllBatch;
@@ -23,8 +24,8 @@ public class MyLogicSqlInjector extends DefaultSqlInjector {
      * @return
      */
     @Override
-    public List<AbstractMethod> getMethodList(Class<?> mapperClass) {
-        List<AbstractMethod> methodList = super.getMethodList(mapperClass);
+    public List<AbstractMethod> getMethodList(Class<?> mapperClass, TableInfo tableInfo) {
+        List<AbstractMethod> methodList = super.getMethodList(mapperClass, tableInfo);
         methodList.add(new DeleteAll());
         methodList.add(new MyInsertAll());
         methodList.add(new MysqlInsertAllBatch());

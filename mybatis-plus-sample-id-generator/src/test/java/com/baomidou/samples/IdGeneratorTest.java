@@ -3,11 +3,9 @@ package com.baomidou.samples;
 import com.baomidou.samples.entity.User;
 import com.baomidou.samples.mapper.UserMapper;
 import com.baomidou.samples.service.UserService;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -17,7 +15,6 @@ import java.util.List;
  * @author nieqiuqiu 2019/11/30
  */
 @SpringBootTest
-@RunWith(SpringRunner.class)
 public class IdGeneratorTest {
 
     @Resource
@@ -32,7 +29,7 @@ public class IdGeneratorTest {
         user.setName("靓仔");
         user.setAge(18);
         userMapper.insert(user);
-        Assert.assertEquals(Long.valueOf(1L), user.getId());
+        Assertions.assertEquals(Long.valueOf(1L), user.getId());
 
         testBatch();
     }
@@ -49,6 +46,6 @@ public class IdGeneratorTest {
             users.add(user);
         }
         boolean result = userService.saveBatch(users);
-        Assert.assertEquals(true, result);
+        Assertions.assertEquals(true, result);
     }
 }

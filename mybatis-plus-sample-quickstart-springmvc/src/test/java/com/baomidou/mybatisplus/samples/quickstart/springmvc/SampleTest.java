@@ -1,17 +1,16 @@
 package com.baomidou.mybatisplus.samples.quickstart.springmvc;
 
-import java.util.List;
-
-import org.junit.Assert;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.samples.quickstart.springmvc.entity.User;
+import com.baomidou.mybatisplus.samples.quickstart.springmvc.mapper.UserMapper;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.samples.quickstart.springmvc.entity.User;
-import com.baomidou.mybatisplus.samples.quickstart.springmvc.mapper.UserMapper;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:spring.xml"})
@@ -24,7 +23,7 @@ public class SampleTest {
     public void testSelect() {
         System.out.println(("----- selectAll method test ------"));
         List<User> userList = userMapper.selectList(null);
-        Assert.assertEquals(5, userList.size());
+        Assertions.assertEquals(5, userList.size());
         userList.forEach(System.out::println);
     }
 
@@ -40,7 +39,7 @@ public class SampleTest {
         u = new User();
         u.setName("Tomcat2");
         userMapper.insert(u);
-        Assert.assertEquals("id should increase 1", id1 + 1, u.getId().longValue());
+        Assertions.assertEquals(id1 + 1, u.getId().longValue());
     }
 
     @Test
@@ -52,11 +51,11 @@ public class SampleTest {
     public void testPagination() {
         Page<User> page = new Page<>(1, 3);
         userMapper.selectPage(page, null);
-        Assert.assertTrue("total should not be 0", page.getTotal() != 0);
+        Assertions.assertTrue(page.getTotal() != 0, "total should not be 0");
         for (User u : page.getRecords()) {
             System.out.println(u);
         }
-        Assert.assertEquals("pagination should be 3 per page", 3, page.getRecords().size());
+        Assertions.assertEquals(3, page.getRecords().size());
     }
 
 }

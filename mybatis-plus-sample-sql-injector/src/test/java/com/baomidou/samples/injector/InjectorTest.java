@@ -1,20 +1,15 @@
 package com.baomidou.samples.injector;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.annotation.Resource;
-
-import org.assertj.core.util.Lists;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
 import com.baomidou.samples.injector.entity.Student;
 import com.baomidou.samples.injector.mapper.StudentMapper;
-
 import lombok.extern.slf4j.Slf4j;
+import org.assertj.core.util.Lists;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 自定义注入测试
@@ -22,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
  * @author nieqiurong 2018/8/11 20:34.
  */
 @Slf4j
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class InjectorTest {
 

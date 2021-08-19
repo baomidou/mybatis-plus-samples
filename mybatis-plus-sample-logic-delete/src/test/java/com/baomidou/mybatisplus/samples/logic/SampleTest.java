@@ -1,19 +1,5 @@
 package com.baomidou.mybatisplus.samples.logic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.assertj.core.util.Maps;
-import org.junit.Test;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.samples.logic.entity.Common;
@@ -22,12 +8,20 @@ import com.baomidou.mybatisplus.samples.logic.entity.Null2;
 import com.baomidou.mybatisplus.samples.logic.mapper.CommonMapper;
 import com.baomidou.mybatisplus.samples.logic.mapper.Null1Mapper;
 import com.baomidou.mybatisplus.samples.logic.mapper.Null2Mapper;
-
 import lombok.extern.slf4j.Slf4j;
+import org.assertj.core.util.Maps;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Slf4j
 @TestMethodOrder(MethodOrderer.Alphanumeric.class)
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class SampleTest {
 

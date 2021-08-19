@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baomidou.mybatisplus.samples.association.mapper.CompanyMapper">
+
+    <resultMap id="companyUser" type="com.baomidou.mybatisplus.samples.association.entity.Company">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <collection property="userList" ofType="com.baomidou.mybatisplus.samples.association.entity.User">
+            <result property="id" column="id"/>
+            <result property="name" column="name"/>
+            <result property="age" column="age"/>
+            <result property="email" column="email"/>
+        </collection>
+    </resultMap>
+
+    <select id="testResultMapCollection" resultMap="companyUser">
+        SELECT c.id, c.name, u.id AS uid, u.name AS uname, u.age, u.email
+        FROM company c JOIN user u ON c.id = u.company_id WHERE c.id=1
+    </select>
+</mapper>
