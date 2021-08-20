@@ -38,8 +38,8 @@ class ExecutionTest {
         try {
             studentMapper.delete(new QueryWrapper<>());
         } catch (MyBatisSystemException e) {
-
+            System.err.println("执行了全表删除拦截，删除无效！异常：" + e.getMessage());
         }
-        Assertions.assertTrue(CollectionUtils.isEmpty(studentMapper.selectList(new QueryWrapper<>())), "数据都被删掉了.(┬＿┬)");
+        Assertions.assertTrue(CollectionUtils.isNotEmpty(studentMapper.selectList(new QueryWrapper<>())), "数据都被删掉了.(┬＿┬)");
     }
 }
