@@ -1,10 +1,13 @@
 package com.baomidou.mybatisplus.samples.dytablename;
 
+import com.baomidou.mybatisplus.samples.dytablename.config.RequestDataHelper;
 import com.baomidou.mybatisplus.samples.dytablename.entity.User;
 import com.baomidou.mybatisplus.samples.dytablename.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.HashMap;
 
 /**
  * <p>
@@ -22,6 +25,11 @@ class SampleTest {
 
     @Test
     void test() {
+        RequestDataHelper.setRequestData(new HashMap<String, Object>() {{
+            put("id", 123);
+            put("hello", "china");
+            put("name", "习大大");
+        }});
         // 自己去观察打印 SQL 目前随机访问 user_2018  user_2019 表
         for (int i = 0; i < 6; i++) {
             User user = userMapper.selectById(1);
