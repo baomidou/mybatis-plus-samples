@@ -27,8 +27,8 @@ class SampleTest {
     void test() {
         RequestDataHelper.setRequestData(new HashMap<String, Object>() {{
             put("id", 123);
-            put("hello", "china");
-            put("name", "习大大");
+            put("hello", "tomcat");
+            put("name", "汤姆凯特");
         }});
         // 自己去观察打印 SQL 目前随机访问 user_2018  user_2019 表
         for (int i = 0; i < 6; i++) {
