@@ -16,7 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @since 2018-08-11
  */
 @SpringBootTest
-public class SampleTest {
+public class ActiveRecordTest {
 
     @Test
     public void aInsert() {

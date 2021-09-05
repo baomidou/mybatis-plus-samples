@@ -1,13 +1,8 @@
 # MyBatis-Plus Samples
 
-[![Build Status](https://travis-ci.org/baomidou/mybatis-plus-samples.svg?branch=master)](https://travis-ci.org/baomidou/mybatis-plus-samples)
-[![codecov](https://codecov.io/gh/baomidou/mybatis-plus-samples/branch/master/graph/badge.svg)](https://codecov.io/gh/baomidou/mybatis-plus-samples)
-
-
-[![贡献代码](https://github.com/baomidou/mybatis-plus-samples)](https://github.com/baomidou/mybatis-plus-samples)
+[贡献代码](https://github.com/baomidou/mybatis-plus-samples)
 
 [企业版 Mybatis-Mate 高级特性](https://gitee.com/baomidou/mybatis-mate-examples)
-
 
 本工程为 MyBatis-Plus 的官方示例，项目结构如下：
 
@@ -35,6 +30,12 @@
 - mybatis-plus-sample-assembly: 分离打包示例
 - mybatis-plus-sample-resultmap: 使用 resultMap 示例
 - mybatis-plus-sample-id-generator: 自定义ID生成示例
+- mybatis-plus-sample-id-string: 字符串ID生成示例
 - mybatis-plus-sample-no-spring: 不使用spring下的示例
 - mybatis-plus-sample-pagehelper: 使用pagehelper进行分页
 - mybatis-plus-sample-association: 联表查询示例
+
+
+![微信 wx153666](https://images.gitee.com/uploads/images/2021/0903/235825_2d017339_12260.jpeg)
+
+- 可加作者，进入微信群

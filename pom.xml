@@ -35,6 +35,7 @@
         <module>mybatis-plus-sample-assembly</module>
         <module>mybatis-plus-sample-resultmap</module>
         <module>mybatis-plus-sample-id-generator</module>
+        <module>mybatis-plus-sample-id-string</module>
         <module>mybatis-plus-sample-no-spring</module>
         <module>mybatis-plus-sample-pagehelper</module>
         <module>mybatis-plus-sample-association</module>
@@ -51,7 +52,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <mybatisplus.version>3.4.3.2</mybatisplus.version>
+        <mybatisplus.version>3.4.3.3</mybatisplus.version>
         <skipTests>true</skipTests>
     </properties>
 

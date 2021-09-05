@@ -10,8 +10,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @SpringBootTest
-public class SampleTest {
-
+public class QuickStartTest {
     @Resource
     private UserMapper userMapper;
 

@@ -18,8 +18,7 @@ import java.util.List;
  * @since 2018-08-11
  */
 @SpringBootTest
-public class SampleTest {
-
+public class TenantTest {
     @Resource
     private UserMapper mapper;
 

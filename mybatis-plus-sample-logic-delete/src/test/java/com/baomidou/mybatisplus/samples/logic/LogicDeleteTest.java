@@ -23,8 +23,7 @@ import java.util.List;
 @Slf4j
 @TestMethodOrder(MethodOrderer.Alphanumeric.class)
 @SpringBootTest
-public class SampleTest {
-
+public class LogicDeleteTest {
     @Resource
     private CommonMapper commonMapper;
     @Resource

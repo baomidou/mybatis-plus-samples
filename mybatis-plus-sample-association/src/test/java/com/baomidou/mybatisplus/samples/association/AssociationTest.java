@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 @SpringBootTest
-public class SampleTest {
+public class AssociationTest {
     @Autowired
     private CompanyMapper companyMapper;
     @Autowired

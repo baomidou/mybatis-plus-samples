@@ -23,8 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 2018-08-11
  */
 @SpringBootTest
-public class SampleTest {
-
+public class EnumTest {
     @Resource
     private UserMapper mapper;
 

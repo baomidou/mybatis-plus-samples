@@ -14,8 +14,7 @@ import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:spring.xml"})
-public class SampleTest {
-
+public class SpringMvcTest {
     @Autowired
     private UserMapper userMapper;
 

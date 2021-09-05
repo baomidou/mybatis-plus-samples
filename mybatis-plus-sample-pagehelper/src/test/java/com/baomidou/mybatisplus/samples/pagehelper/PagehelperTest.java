@@ -19,8 +19,7 @@ import com.github.pagehelper.PageInfo;
  * @since 2020-05-29
  */
 @SpringBootTest
-class DefaultTest {
-
+class PagehelperTest {
     @Autowired
     private UserMapper mapper;
 

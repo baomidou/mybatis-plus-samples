@@ -9,19 +9,19 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.annotation.Resource;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * <p>
- * </p>
+ * 乐观锁
  *
  * @author yuxiaobin
  * @since 2018/8/24
  */
 @SpringBootTest
 class OptLockerTest {
-
-    @Autowired
+    @Resource
     UserMapper userMapper;
 
     @Order(0)
