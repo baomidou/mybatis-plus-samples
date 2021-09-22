@@ -1,11 +1,10 @@
 package com.baomidou.mybatisplus.samples.tenant.mapper;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.samples.tenant.entity.User;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -22,9 +21,9 @@ public interface UserMapper extends BaseMapper<User> {
      * 参考打印的SQL
      * @return
      */
-    public Integer myCount();
+    Integer myCount();
 
-    public List<User> getUserAndAddr(@Param("username") String username);
+    List<User> getUserAndAddr(@Param("username") String username);
 
-    public List<User> getAddrAndUser(@Param("name") String name);
+    List<User> getAddrAndUser(@Param("name") String name);
 }

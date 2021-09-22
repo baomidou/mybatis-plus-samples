@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.baomidou.mybatisplus.samples.tenant.mapper.UserMapper">
 
-
     <select id="myCount" resultType="java.lang.Integer">
         select count(1) from user
     </select>
@@ -17,6 +16,7 @@
             </if>
         </where>
     </select>
+
     <select id="getAddrAndUser" resultType="com.baomidou.mybatisplus.samples.tenant.entity.User">
         select a.name as addr_name, u.id, u.name
         from user_addr a
@@ -27,6 +27,4 @@
             </if>
         </where>
     </select>
-
-
 </mapper>

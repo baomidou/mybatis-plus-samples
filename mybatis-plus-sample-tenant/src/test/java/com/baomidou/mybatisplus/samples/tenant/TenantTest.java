@@ -60,7 +60,6 @@ public class TenantTest {
 
     @Test
     public void testTenantFilter(){
-//        mapper.getUserAndAddr().forEach(System.out::println);
         mapper.getAddrAndUser(null).forEach(System.out::println);
         mapper.getAddrAndUser("add").forEach(System.out::println);
         mapper.getUserAndAddr(null).forEach(System.out::println);
