@@ -5,6 +5,6 @@ import com.baomidou.mybatisplus.samples.reduce.springmvc.entity.User;
 
 public interface UserMapper extends BaseMapper<User> {
 
-    public Integer selectMaxAge();
+    Integer selectMaxAge();
 
 }

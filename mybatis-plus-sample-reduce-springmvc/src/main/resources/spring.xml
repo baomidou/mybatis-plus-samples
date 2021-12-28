@@ -46,16 +46,10 @@
         </property>
     </bean>
 
-
     <!-- MyBatis Mapper Scan Config  -->
     <!--
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.baomidou.mybatisplus.samples.reduce.springmvc.mapper"/>
     </bean>
      -->
-
-
-
-
-
 </beans>

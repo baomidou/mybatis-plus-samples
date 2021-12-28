@@ -1,13 +1,13 @@
 package com.baomidou.mybatisplus.samples.mysql.config;
 
-import mybatis.mate.ddl.IDdl;
+import mybatis.mate.ddl.SimpleDdl;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class MysqlDdl implements IDdl {
+public class MysqlDdl extends SimpleDdl {
 
     /**
      * 执行 SQL 脚本方式
