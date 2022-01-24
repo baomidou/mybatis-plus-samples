@@ -23,6 +23,7 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
+    // 测试地址 http://localhost:8080/test
     @RequestMapping(value = "test")
     public String test(){
         User user = new User();
