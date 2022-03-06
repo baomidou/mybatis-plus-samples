@@ -26,6 +26,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class EnumTest {
     @Resource
     private UserMapper mapper;
+    
+    @Test
+    public void selectXML() {
+        User user = mapper.selectLinkById(1L);
+        System.out.println(user);
+        Assertions.assertNotNull(user);
+    }
 
     @Test
     public void insert() {

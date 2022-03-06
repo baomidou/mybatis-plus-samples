@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baomidou.mybatisplus.samples.enums.mapper.UserMapper">
+
+    <resultMap id="c_r" type="com.baomidou.mybatisplus.samples.enums.entity.User">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <result property="email" column="email"/>
+        <result property="gender" column="gender"/>
+        <result property="grade" column="grade"/>
+        <result property="strEnum" column="str_enum"/>
+        <result property="userState" column="user_state"/>
+        <result property="id" column="id"/>
+    </resultMap>
+
+    <select id="selectLinkById" resultMap="c_r">
+        select *
+        from user
+        where id = #{id}
+    </select>
+</mapper>
