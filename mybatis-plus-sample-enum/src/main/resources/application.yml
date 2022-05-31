@@ -9,7 +9,7 @@ spring:
     password: test
 # MP 配置
 mybatis-plus:
-  type-enums-package: com.baomidou.mybatisplus.samples.enums.enums
+#  type-enums-package: com.baomidou.mybatisplus.samples.enums.enums
   configuration:
     # 3.0.8之前版本问题默认将枚举注册为EnumOrdinalTypeHandler,这是错误的方式,默认是 org.apache.ibatis.type.EnumTypeHandler
     # 如果项目之中实体统一使用IEnum或注解的方式,可配置成 com.baomidou.mybatisplus.extension.handlers.EnumTypeHandler,也可省略上面的type-enums-package配置
