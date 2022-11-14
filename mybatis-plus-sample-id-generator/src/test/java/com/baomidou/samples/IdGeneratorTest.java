@@ -1,9 +1,10 @@
 package com.baomidou.samples;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 import com.baomidou.samples.entity.User;
 import com.baomidou.samples.mapper.UserMapper;
 import com.baomidou.samples.service.UserService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -15,7 +16,7 @@ import java.util.List;
  * @author nieqiuqiu 2019/11/30
  */
 @SpringBootTest
-public class IdGeneratorTest {
+class IdGeneratorTest {
 
     @Resource
     private UserMapper userMapper;
@@ -24,20 +25,20 @@ public class IdGeneratorTest {
     private UserService userService;
 
     @Test
-    public void test() {
+    void test() {
         User user = new User();
         user.setName("靓仔");
         user.setAge(18);
         userMapper.insert(user);
-        Assertions.assertEquals(Long.valueOf(1L), user.getId());
-
-        testBatch();
+        assertThat(user)
+            .hasFieldOrPropertyWithValue("id", 1L);
     }
 
     /**
      * 批量插入
      */
-    public void testBatch() {
+    @Test
+    void testBatch() {
         List<User> users = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
             User user = new User();
@@ -46,6 +47,6 @@ public class IdGeneratorTest {
             users.add(user);
         }
         boolean result = userService.saveBatch(users);
-        Assertions.assertEquals(true, result);
+        assertThat(result).isTrue();
     }
 }
