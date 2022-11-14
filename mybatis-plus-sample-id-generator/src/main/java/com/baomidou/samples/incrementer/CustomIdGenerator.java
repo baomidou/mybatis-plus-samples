@@ -28,9 +28,11 @@ public class CustomIdGenerator implements IdentifierGenerator {
         String bizKey = entity.getClass().getName();
         log.info("bizKey:{}", bizKey);
         MetaObject metaObject = SystemMetaObject.forObject(entity);
-        String name = (String) metaObject.getValue("name");
-        final long id = al.getAndAdd(1);
-        log.info("为{}生成主键值->:{}", name, id);
+        final long id = al.getAndIncrement();
+        if (log.isInfoEnabled()) {
+           String name = (String) metaObject.getValue("name");
+           log.info("为{}生成主键值->:{}", name, id);
+        }
         return id;
     }
 }
