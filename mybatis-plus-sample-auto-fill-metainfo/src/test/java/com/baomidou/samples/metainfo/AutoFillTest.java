@@ -1,5 +1,7 @@
 package com.baomidou.samples.metainfo;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.baomidou.samples.metainfo.entity.User;
 import com.baomidou.samples.metainfo.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -15,20 +17,30 @@ import javax.annotation.Resource;
  */
 @Slf4j
 @SpringBootTest
-public class AutoFillTest {
+class AutoFillTest {
 
     @Resource
     private UserMapper userMapper;
 
     @Test
-    public void test() {
+    void testFieldAutoFill() {
         User user = new User(null, "Tom", 1, "tom@qq.com", null);
         userMapper.insert(user);
-        log.info("query user:{}", userMapper.selectById(user.getId()));
-        User beforeUser = userMapper.selectById(1L);
-        log.info("before user:{}", beforeUser);
-        beforeUser.setAge(12);
-        userMapper.updateById(beforeUser);
-        log.info("query user:{}", userMapper.selectById(1L));
+        User afterInsertedUser = userMapper.selectById(user.getId());
+        log.info("new user:{}", afterInsertedUser);
+        assertThat(afterInsertedUser)
+            .extracting(User::getOperator)
+            .isEqualTo("Jetty");
+
+        afterInsertedUser.setAge(12);
+        // 需要重置为null，以支持字段自动填充
+        afterInsertedUser.setOperator(null);
+        userMapper.updateById(afterInsertedUser);
+
+        User afterUpdatedUser = userMapper.selectById(user.getId());
+        log.info("update after user:{}", afterUpdatedUser);
+        assertThat(afterUpdatedUser)
+            .extracting(User::getOperator)
+            .isEqualTo("Tom");
     }
 }
