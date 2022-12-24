@@ -3,7 +3,7 @@ package com.baomidou.mybatisplus.samples.quickstart.entity;
 import lombok.Data;
 
 @Data
-public class User {
+public class SysUser {
     private Long id;
     private String name;
     private Integer age;

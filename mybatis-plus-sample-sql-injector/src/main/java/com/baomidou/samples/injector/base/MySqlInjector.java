@@ -23,8 +23,8 @@ public class MySqlInjector extends DefaultSqlInjector {
     public List<AbstractMethod> getMethodList(Class<?> mapperClass, TableInfo tableInfo) {
         List<AbstractMethod> methodList = super.getMethodList(mapperClass, tableInfo);
         //增加自定义方法
-        methodList.add(new DeleteAll());
-        methodList.add(new FindOne());
+        methodList.add(new DeleteAll("deleteAll"));
+        methodList.add(new FindOne("findOne"));
         /**
          * 以下 3 个为内置选装件
          * 头 2 个支持字段筛选函数

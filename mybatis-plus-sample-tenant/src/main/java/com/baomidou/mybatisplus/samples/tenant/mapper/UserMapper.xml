@@ -3,12 +3,12 @@
 <mapper namespace="com.baomidou.mybatisplus.samples.tenant.mapper.UserMapper">
 
     <select id="myCount" resultType="java.lang.Integer">
-        select count(1) from user
+        select count(1) from sys_user
     </select>
 
     <select id="getUserAndAddr" resultType="com.baomidou.mybatisplus.samples.tenant.entity.User">
         select u.id, u.name, a.name as addr_name
-        from user u
+        from sys_user u
         left join user_addr a on a.user_id=u.id
         <where>
             <if test="username!=null">
@@ -20,7 +20,7 @@
     <select id="getAddrAndUser" resultType="com.baomidou.mybatisplus.samples.tenant.entity.User">
         select a.name as addr_name, u.id, u.name
         from user_addr a
-        left join user u on u.id=a.user_id
+        left join sys_user u on u.id=a.user_id
         <where>
             <if test="name!=null">
                 a.name like concat(concat('%',#{name}),'%')

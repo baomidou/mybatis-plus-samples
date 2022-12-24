@@ -11,7 +11,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-@TableName("user")
+@TableName("sys_user")
 public class User {
     @TableId(type = IdType.ASSIGN_ID)
     private Long id;

@@ -11,7 +11,7 @@
     <select id="selectUserPage" resultType="com.baomidou.mybatisplus.samples.association.entity.User">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM user t
+        FROM sys_user t
         LEFT JOIN company c on t.company_id=c.id
         <where>
             ${ew.sqlSegment}

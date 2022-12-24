@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 @KeySequence("SEQ_USER")
-@TableName("user")
+@TableName("sys_user")
 public class User {
 
     @TableId(value = "id", type = IdType.INPUT)

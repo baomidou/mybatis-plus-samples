@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
  * @author nieqiurong 2018-08-10 22:55:21.
  */
 @Data
-@TableName(value = "user")
+@TableName(value = "sys_user")
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {

@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Data
 @Accessors(chain = true)
-@TableName(autoResultMap = true)
+@TableName(value = "sys_user", autoResultMap = true)
 public class User {
     private Long id;
     private String name;

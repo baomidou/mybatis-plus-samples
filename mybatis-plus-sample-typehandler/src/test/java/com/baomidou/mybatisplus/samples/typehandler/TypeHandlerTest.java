@@ -9,9 +9,9 @@ import com.baomidou.mybatisplus.samples.typehandler.entity.Wallet;
 import com.baomidou.mybatisplus.samples.typehandler.mapper.UserMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.annotation.Resource;
 import java.util.Arrays;
 
 /**
@@ -25,7 +25,7 @@ import java.util.Arrays;
 @SpringBootTest
 public class TypeHandlerTest {
 
-    @Resource
+    @Autowired
     private UserMapper userMapper;
 
     /**

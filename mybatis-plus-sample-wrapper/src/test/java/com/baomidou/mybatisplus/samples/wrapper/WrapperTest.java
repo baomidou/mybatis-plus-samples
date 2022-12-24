@@ -8,10 +8,10 @@ import com.baomidou.mybatisplus.samples.wrapper.mapper.RoleMapper;
 import com.baomidou.mybatisplus.samples.wrapper.mapper.UserMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -21,9 +21,9 @@ import java.util.List;
 @SpringBootTest
 public class WrapperTest {
 
-    @Resource
+    @Autowired
     private UserMapper userMapper;
-    @Resource
+    @Autowired
     private RoleMapper roleMapper;
 
     @Test

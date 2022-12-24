@@ -13,7 +13,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -21,7 +20,7 @@ import java.util.List;
 public class ReduceTest {
     @Autowired
     ApplicationContext context;
-    @Resource
+    @Autowired
     private UserMapper userMapper;
 
     @Test

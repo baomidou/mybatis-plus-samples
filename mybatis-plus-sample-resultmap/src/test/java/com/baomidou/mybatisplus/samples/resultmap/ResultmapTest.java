@@ -8,9 +8,9 @@ import com.baomidou.mybatisplus.samples.resultmap.mapper.ManMapper;
 import com.baomidou.mybatisplus.samples.resultmap.mapper.WomanMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,11 +22,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Slf4j
 @SpringBootTest
 class ResultmapTest {
-    @Resource
+    @Autowired
     private ChildMapper childMapper;
-    @Resource
+    @Autowired
     private ManMapper manMapper;
-    @Resource
+    @Autowired
     private WomanMapper womanMapper;
 
     @Test

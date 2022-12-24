@@ -16,13 +16,13 @@
 
     <select id="mySelectPage" resultType="com.baomidou.mybatisplus.samples.pagination.entity.User">
         select *
-        from user
+        from sys_user
         where (age = #{pg.selectInt} and name = #{pg.selectStr})
            or (age = #{ps.yihao} and name = #{ps.erhao})
     </select>
 
     <select id="mySelectPageMap" resultType="com.baomidou.mybatisplus.samples.pagination.entity.User">
-        select * from user
+        select * from sys_user
         <where>
             <if test="map.name!=null and map.name!=''">
                 name like #{map.name}
@@ -31,7 +31,7 @@
     </select>
 
     <select id="mySelectMap" resultType="com.baomidou.mybatisplus.samples.pagination.entity.User">
-        select * from user
+        select * from sys_user
         <where>
             <if test="name!=null and name!=''">
                 name like #{name}
@@ -40,7 +40,7 @@
     </select>
 
     <select id="myPageSelect" resultType="com.baomidou.mybatisplus.samples.pagination.entity.User">
-        select * from user
+        select * from sys_user
         <where>
             <if test="name!=null and name!=''">
                 name like '%'||#{name}||'%'
@@ -49,7 +49,7 @@
     </select>
 
     <select id="iPageSelect" resultType="com.baomidou.mybatisplus.samples.pagination.entity.User">
-        select * from user
+        select * from sys_user
         <where>
             <if test="name!=null and name!=''">
                 name like #{name}
@@ -58,7 +58,7 @@
     </select>
 
     <select id="rowBoundList" resultType="com.baomidou.mybatisplus.samples.pagination.entity.User">
-        select * from user
+        select * from sys_user
         <where>
             <if test="name!=null and name!=''">
                 name like #{name}

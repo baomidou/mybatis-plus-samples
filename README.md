@@ -11,6 +11,7 @@
 - mybatis-plus-sample-reduce-springmvc: 简化掉默认mapper类示例（Spring MVC版本）
 - mybatis-plus-sample-generator: 代码生成器示例
 - mybatis-plus-sample-crud: 完整 CRUD 示例
+- mybatis-plus-sample-ddl-mysql: SQL 脚本自动维护 示例
 - mybatis-plus-sample-wrapper: 条件构造器示例
 - mybatis-plus-sample-pagination: 分页功能示例
 - mybatis-plus-sample-active-record: ActiveRecord示例

@@ -8,10 +8,10 @@ import com.baomidou.mybatisplus.samples.deluxe.mapper.UserMapper;
 import com.baomidou.mybatisplus.samples.deluxe.model.UserPage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +22,7 @@ import java.util.List;
 @SpringBootTest
 class DeluxeTest {
 
-    @Resource
+    @Autowired
     private UserMapper mapper;
 
     @Test

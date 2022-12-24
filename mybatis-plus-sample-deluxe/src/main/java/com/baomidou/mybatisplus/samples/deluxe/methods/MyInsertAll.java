@@ -16,6 +16,10 @@ import com.baomidou.mybatisplus.core.metadata.TableInfo;
  */
 public class MyInsertAll extends AbstractMethod {
 
+    public MyInsertAll(String methodName) {
+        super(methodName);
+    }
+
     @Override
     public MappedStatement injectMappedStatement(Class<?> mapperClass, Class<?> modelClass, TableInfo tableInfo) {
         String sql = "insert into %s %s values %s";
@@ -34,6 +38,6 @@ public class MyInsertAll extends AbstractMethod {
         valueSql.delete(valueSql.length()-1, valueSql.length());
         valueSql.append(")");
         SqlSource sqlSource = languageDriver.createSqlSource(configuration, String.format(sql, tableInfo.getTableName(), fieldSql.toString(), valueSql.toString()), modelClass);
-        return this.addInsertMappedStatement(mapperClass, modelClass, "myInsertAll", sqlSource, new NoKeyGenerator(), null, null);
+        return this.addInsertMappedStatement(mapperClass, modelClass, methodName, sqlSource, new NoKeyGenerator(), null, null);
     }
 }

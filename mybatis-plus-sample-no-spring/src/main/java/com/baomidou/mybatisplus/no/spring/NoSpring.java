@@ -57,9 +57,9 @@ public class NoSpring {
             Connection connection = dataSource.getConnection();
             Statement statement = connection.createStatement();
             statement.execute("create table person (" +
-                    "id BIGINT(20) NOT NULL," +
+                    "id BIGINT NOT NULL," +
                     "name VARCHAR(30) NULL," +
-                    "age INT(11) NULL," +
+                    "age INT NULL," +
                     "PRIMARY KEY (id)" +
                     ")");
         } catch (SQLException e) {

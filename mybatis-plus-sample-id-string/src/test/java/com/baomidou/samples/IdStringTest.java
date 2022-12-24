@@ -5,17 +5,17 @@ import com.baomidou.samples.mapper.UserMapper;
 import com.baomidou.samples.service.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootTest
 public class IdStringTest {
-    @Resource
+    @Autowired
     private UserMapper userMapper;
-    @Resource
+    @Autowired
     private UserService userService;
 
     @Test

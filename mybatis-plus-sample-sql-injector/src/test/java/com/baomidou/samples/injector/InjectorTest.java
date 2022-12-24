@@ -5,9 +5,9 @@ import com.baomidou.samples.injector.mapper.StudentMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @SpringBootTest
 public class InjectorTest {
 
-    @Resource
+    @Autowired
     private StudentMapper studentMapper;
 
     @Test

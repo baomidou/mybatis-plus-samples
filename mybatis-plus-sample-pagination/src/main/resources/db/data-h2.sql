@@ -1,6 +1,6 @@
 DELETE
 FROM children;
-DELETE FROM user;
+DELETE FROM sys_user;
 
 INSERT INTO children (id, name, user_id)
 VALUES (1, 'Jone', 1),
@@ -9,7 +9,7 @@ VALUES (1, 'Jone', 1),
        (4, 'Jack', 15),
        (5, 'Billie', 15);
 
-INSERT INTO user (id, name, age, email)
+INSERT INTO sys_user (id, name, age, email)
 VALUES (1, 'Jone', 18, 'test1@baomidou.com'),
        (2, 'Jack', 20, 'test2@baomidou.com'),
        (3, 'Jack', 20, 'test2@baomidou.com'),

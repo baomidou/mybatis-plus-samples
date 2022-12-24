@@ -3,6 +3,6 @@
 <mapper namespace="com.baomidou.mybatisplus.samples.reduce.springmvc.mapper.UserMapper">
 
     <select id="selectMaxAge" resultType="java.lang.Integer">
-        select max(age) from user
+        select max(age) from sys_user
     </select>
 </mapper>

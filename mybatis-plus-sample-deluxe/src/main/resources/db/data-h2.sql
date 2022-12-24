@@ -1,7 +1,6 @@
-DELETE
-FROM user;
+DELETE FROM sys_user;
 
-INSERT INTO user (id, name, age, email, version, deleted)
+INSERT INTO sys_user (id, name, age, email, version, deleted)
 VALUES (1, 'Jone', 18, 'test1@baomidou.com',    1, 0),
        (2, 'Jack', 20, 'test2@baomidou.com',    1, 0),
        (3, 'Jack', 20, 'test2@baomidou.com',    1, 0),

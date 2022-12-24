@@ -13,9 +13,9 @@ import org.assertj.core.util.Maps;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,11 +24,11 @@ import java.util.List;
 @TestMethodOrder(MethodOrderer.Alphanumeric.class)
 @SpringBootTest
 public class LogicDeleteTest {
-    @Resource
+    @Autowired
     private CommonMapper commonMapper;
-    @Resource
+    @Autowired
     private Null1Mapper null1Mapper;
-    @Resource
+    @Autowired
     private Null2Mapper null2Mapper;
 
     @Test

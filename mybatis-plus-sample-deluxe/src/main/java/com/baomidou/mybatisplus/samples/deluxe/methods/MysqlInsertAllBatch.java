@@ -16,6 +16,10 @@ import com.baomidou.mybatisplus.core.metadata.TableInfo;
  */
 public class MysqlInsertAllBatch extends AbstractMethod {
 
+    public MysqlInsertAllBatch(String methodName) {
+        super(methodName);
+    }
+
     @Override
     public MappedStatement injectMappedStatement(Class<?> mapperClass, Class<?> modelClass, TableInfo tableInfo) {
         final String sql = "<script>insert into %s %s values %s</script>";
@@ -23,7 +27,7 @@ public class MysqlInsertAllBatch extends AbstractMethod {
         final String valueSql = prepareValuesSqlForMysqlBatch(tableInfo);
         final String sqlResult = String.format(sql, tableInfo.getTableName(), fieldSql, valueSql);
         SqlSource sqlSource = languageDriver.createSqlSource(configuration, sqlResult, modelClass);
-        return this.addInsertMappedStatement(mapperClass, modelClass, "mysqlInsertAllBatch", sqlSource, new NoKeyGenerator(), null, null);
+        return this.addInsertMappedStatement(mapperClass, modelClass, methodName, sqlSource, new NoKeyGenerator(), null, null);
     }
 
     private String prepareFieldSql(TableInfo tableInfo) {

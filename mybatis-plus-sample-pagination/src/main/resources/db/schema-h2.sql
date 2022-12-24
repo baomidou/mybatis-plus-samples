@@ -1,12 +1,12 @@
 -- noinspection SqlNoDataSourceInspectionForFile
 
-DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS sys_user;
 
-CREATE TABLE user
+CREATE TABLE sys_user
 (
-  id      BIGINT (20) NOT NULL COMMENT '主键ID',
+  id      BIGINT NOT NULL COMMENT '主键ID',
   name    VARCHAR(30) NULL DEFAULT NULL COMMENT '姓名',
-  age     INT (11) NULL DEFAULT NULL COMMENT '年龄',
+  age     INT NULL DEFAULT NULL COMMENT '年龄',
   email   VARCHAR(50) NULL DEFAULT NULL COMMENT '邮箱',
   PRIMARY KEY (id)
 );
@@ -15,8 +15,8 @@ DROP TABLE IF EXISTS children;
 
 CREATE TABLE children
 (
-    id      BIGINT (20) NOT NULL COMMENT '主键ID',
+    id      BIGINT NOT NULL COMMENT '主键ID',
     name    VARCHAR(30) NULL DEFAULT NULL COMMENT '姓名',
-    user_id BIGINT (20) NULL DEFAULT NULL COMMENT '上级ID',
+    user_id BIGINT NULL DEFAULT NULL COMMENT '上级ID',
     PRIMARY KEY (id)
 );

@@ -35,7 +35,7 @@ public class MybatisPlusConfig {
             // 这是 default 方法,默认返回 false 表示所有表都需要拼多租户条件
             @Override
             public boolean ignoreTable(String tableName) {
-                return !"user".equalsIgnoreCase(tableName);
+                return !"sys_user".equalsIgnoreCase(tableName);
             }
         }));
         // 如果用了分页插件注意先 add TenantLineInnerInterceptor 再 add PaginationInnerInterceptor

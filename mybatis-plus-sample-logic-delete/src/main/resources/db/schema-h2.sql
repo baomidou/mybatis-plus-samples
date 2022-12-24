@@ -4,23 +4,23 @@ DROP TABLE IF EXISTS null2;
 
 CREATE TABLE common
 (
-    id      BIGINT(20) NOT NULL,
+    id      BIGINT NOT NULL,
     name    VARCHAR(20) NOT NULL,
-    deleted INT(11) NOT NULL DEFAULT 0,
+    deleted INT NOT NULL DEFAULT 0,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE null1
 (
-    id      BIGINT(20) NOT NULL,
+    id      BIGINT NOT NULL,
     name    VARCHAR(20) NOT NULL,
-    deleted INT(11),
+    deleted INT,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE null2
 (
-    id       BIGINT(20) NOT NULL,
+    id       BIGINT NOT NULL,
     name     VARCHAR(20) NOT NULL,
     del_time TIMESTAMP,
     PRIMARY KEY (id)

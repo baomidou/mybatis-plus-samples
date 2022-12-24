@@ -1,18 +1,5 @@
 package com.baomidou.mybatisplus.samples.pagination;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.apache.ibatis.session.RowBounds;
-import org.assertj.core.util.Maps;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.util.CollectionUtils;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -27,8 +14,17 @@ import com.baomidou.mybatisplus.samples.pagination.model.MyPage;
 import com.baomidou.mybatisplus.samples.pagination.model.ParamSome;
 import com.baomidou.mybatisplus.samples.pagination.model.UserChildren;
 import com.baomidou.mybatisplus.samples.pagination.service.IUserService;
-
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.session.RowBounds;
+import org.assertj.core.util.Maps;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.CollectionUtils;
+
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author miemie
@@ -38,7 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 @SpringBootTest
 class PaginationTest {
 
-    @Resource
+    @Autowired
     private UserMapper mapper;
 
     @Test

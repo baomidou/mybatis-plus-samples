@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.samples.tenant.entity.User;
 import com.baomidou.mybatisplus.samples.tenant.mapper.UserMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -19,7 +19,7 @@ import java.util.List;
  */
 @SpringBootTest
 public class TenantTest {
-    @Resource
+    @Autowired
     private UserMapper mapper;
 
     @Test

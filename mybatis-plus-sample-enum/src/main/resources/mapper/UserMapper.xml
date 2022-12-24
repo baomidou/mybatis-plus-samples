@@ -15,8 +15,6 @@
     </resultMap>
 
     <select id="selectLinkById" resultMap="c_r">
-        select *
-        from user
-        where id = #{id}
+        select * from sys_user where id = #{id}
     </select>
 </mapper>

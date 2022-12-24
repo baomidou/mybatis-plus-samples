@@ -1,7 +1,6 @@
-DELETE
-FROM user;
+DELETE FROM sys_user;
 
-INSERT INTO user (id, name)
+INSERT INTO sys_user (id, name)
 VALUES (1, 'Jone'),
        (2, 'Jack'),
        (3, 'Tom'),

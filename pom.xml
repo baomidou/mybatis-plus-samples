@@ -16,6 +16,7 @@
         <module>mybatis-plus-sample-quickstart-springmvc</module>
         <module>mybatis-plus-sample-reduce-springmvc</module>
         <module>mybatis-plus-sample-crud</module>
+        <module>mybatis-plus-sample-ddl-mysql</module>
         <module>mybatis-plus-sample-active-record</module>
         <module>mybatis-plus-sample-tenant</module>
         <module>mybatis-plus-sample-enum</module>
@@ -44,15 +45,15 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.2</version>
+        <version>3.0.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-        <mybatisplus.version>3.5.2</mybatisplus.version>
+        <java.version>17</java.version>
+        <mybatisplus.version>3.5.3</mybatisplus.version>
         <skipTests>true</skipTests>
     </properties>
 
@@ -77,11 +78,6 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>1.2.76</version>
-            </dependency>
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-classic</artifactId>
-                <version>1.2.3</version>
             </dependency>
             <dependency>
                 <groupId>mysql</groupId>
@@ -132,45 +128,8 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>com.baomidou.mybatisplus.samples.generator.MpGeneratorTest</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <version>2.7</version>
-                <configuration>
-                    <formats>
-                        <format>html</format>
-                        <format>xml</format>
-                    </formats>
-                    <instrumentation>
-                        <ignoreMethodAnnotations>
-                            <ignoreMethodAnnotation>lombok.Generated</ignoreMethodAnnotation>
-                        </ignoreMethodAnnotations>
-                    </instrumentation>
-                    <check/>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>clean</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.12.1</version>
             </plugin>
         </plugins>
     </build>

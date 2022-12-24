@@ -1,5 +1,6 @@
 package com.baomidou.mybatisplus.samples.enums.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.samples.enums.enums.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,6 +17,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Accessors(chain = true)
+@TableName("sys_user")
 public class User extends BaseEntity {
 
     private String name;

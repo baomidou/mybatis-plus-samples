@@ -15,6 +15,6 @@
 
     <select id="testResultMapCollection" resultMap="companyUser">
         SELECT c.id, c.name, u.id AS uid, u.name AS uname, u.age, u.email
-        FROM company c JOIN user u ON c.id = u.company_id WHERE c.id=1
+        FROM company c JOIN sys_user u ON c.id = u.company_id WHERE c.id=1
     </select>
 </mapper>

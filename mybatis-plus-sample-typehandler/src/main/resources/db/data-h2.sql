@@ -1,6 +1,6 @@
-DELETE FROM user;
+DELETE FROM sys_user;
 
-INSERT INTO user (id, name, age, email, wallets, other_info) VALUES
+INSERT INTO sys_user (id, name, age, email, wallets, other_info) VALUES
 (1, 'Jone', 18, 'test1@baomidou.com', '[{
     "name": "支付宝钱包",
     "currencyList": [{
