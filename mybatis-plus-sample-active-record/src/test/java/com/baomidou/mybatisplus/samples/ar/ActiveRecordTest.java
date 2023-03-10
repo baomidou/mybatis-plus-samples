@@ -27,6 +27,7 @@ public class ActiveRecordTest {
         Assertions.assertTrue(user.insert());
         // 成功可以直接获取 ID
         System.err.println("\n插入成功 ID 为：" + user.getId());
+        Assertions.assertEquals(6, user.getId());
     }
 
 
