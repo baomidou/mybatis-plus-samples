@@ -15,6 +15,9 @@ public class MysqlDdl extends SimpleDdl {
     @Override
     public List<String> getSqlFiles() {
         return Arrays.asList(
+                // 测试存储过程
+                "db/test_procedure.sql#$$",
+
                 // 内置包方式
                 "db/tag-schema.sql",
                 "db/tag-data.sql"

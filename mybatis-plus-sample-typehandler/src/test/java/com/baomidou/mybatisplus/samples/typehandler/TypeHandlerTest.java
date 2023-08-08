@@ -50,6 +50,12 @@ public class TypeHandlerTest {
         Assertions.assertEquals(userMapper.update(new User().setAge(99), wrapper), 1);
         System.err.println(userMapper.selectById(2));
 
+        // 演示 json 格式 Wrapper TypeHandler 查询
+        User h2User = userMapper.selectOne(Wrappers.<User>lambdaQuery()
+                .apply("name={0,typeHandler=" + UserNameJsonTypeHandler.class.getCanonicalName() + "}",
+                        "{\"id\":101,\"name\":\"Jack\"}"));
+        Assertions.assertNotNull(h2User);
+
         // 分页测试
         Page<User> userPage = userMapper.selectPage(new Page<>(1, 20), null);
         Assertions.assertEquals(userPage.getTotal(), 2);
