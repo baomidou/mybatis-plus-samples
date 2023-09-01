@@ -35,6 +35,7 @@
 - mybatis-plus-sample-no-spring: 不使用spring下的示例
 - mybatis-plus-sample-pagehelper: 使用pagehelper进行分页
 - mybatis-plus-sample-association: 联表查询示例
+- mybatis-plus-sample-jonb: 数据库 postgres 字段 jsonb 示例
 
 
 ![微信 wx153666](https://images.gitee.com/uploads/images/2021/0903/235825_2d017339_12260.jpeg)
