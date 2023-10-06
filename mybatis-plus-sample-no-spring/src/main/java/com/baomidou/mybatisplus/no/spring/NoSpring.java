@@ -7,13 +7,13 @@ import java.sql.Statement;
 
 import javax.sql.DataSource;
 
+import org.apache.ibatis.datasource.pooled.PooledDataSource;
 import org.apache.ibatis.logging.stdout.StdOutImpl;
 import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
-import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.core.MybatisSqlSessionFactoryBuilder;
@@ -48,8 +48,8 @@ public class NoSpring {
     }
 
     public static DataSource dataSource() {
-        SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
-        dataSource.setDriverClass(org.h2.Driver.class);
+        PooledDataSource dataSource = new PooledDataSource();
+        dataSource.setDriver(org.h2.Driver.class.getName());
         dataSource.setUrl("jdbc:h2:mem:test");
         dataSource.setUsername("root");
         dataSource.setPassword("test");
