@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * 自动填充测试
  *
@@ -30,4 +33,25 @@ public class AutoFillTest {
         userMapper.updateById(beforeUser);
         log.info("query user:{}", userMapper.selectById(1L));
     }
+
+    @Test
+    void testCustomMethod() {
+        List<User> userList = Arrays.asList(new User(null, "testMyMethod1", 12, "aa@qq.com", null),
+                new User(null, "testMyMethod1", 12, "aa@qq.com", null));
+        userMapper.testMyMethod1(userList);
+        userList = Arrays.asList(new User(null, "testMyMethod2", 12, "aa@qq.com", null),
+                new User(null, "testMyMethod2", 12, "aa@qq.com", null));
+        userMapper.testMyMethod2(userList);
+        userList = Arrays.asList(new User(null, "testMyMethod3", 12, "aa@qq.com", null),
+                new User(null, "testMyMethod3", 12, "aa@qq.com", null));
+        userMapper.testMyMethod3(userList);
+        userList = Arrays.asList(new User(null, "testMyMethod4", 12, "aa@qq.com", null),
+                new User(null, "testMyMethod4", 12, "aa@qq.com", null));
+        userMapper.testMyMethod4(userList);
+        //----- 后面这里是3.5.4正式版后才开始支持的.....
+        userList = Arrays.asList(new User(null, "testMyMethod5", 12, "aa@qq.com", null),
+                new User(null, "testMyMethod5", 12, "aa@qq.com", null));
+        userMapper.testMyMethod5(userList);
+    }
+
 }

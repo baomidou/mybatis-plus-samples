@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baomidou.samples.metainfo.mapper.UserMapper">
+
+    <insert id="testMyMethod1" parameterType="com.baomidou.samples.metainfo.entity.User">
+        INSERT INTO sys_user ( ID, NAME, AGE, EMAIL, OPERATOR ) values
+        <foreach collection="coll" item="user" separator=",">
+            (#{user.id},#{user.name},#{user.age},#{user.email},#{user.operator})
+        </foreach>
+    </insert>
+
+
+    <insert id="testMyMethod2" parameterType="com.baomidou.samples.metainfo.entity.User">
+        INSERT INTO sys_user ( ID, NAME, AGE, EMAIL, OPERATOR ) values
+        <foreach collection="list" item="user" separator=",">
+            (#{user.id},#{user.name},#{user.age},#{user.email},#{user.operator})
+        </foreach>
+    </insert>
+
+
+    <insert id="testMyMethod3" parameterType="com.baomidou.samples.metainfo.entity.User">
+        INSERT INTO sys_user ( ID, NAME, AGE, EMAIL, OPERATOR ) values
+        <foreach collection="collection" item="user" separator=",">
+            (#{user.id},#{user.name},#{user.age},#{user.email},#{user.operator})
+        </foreach>
+    </insert>
+
+
+    <insert id="testMyMethod4" parameterType="com.baomidou.samples.metainfo.entity.User">
+        INSERT INTO sys_user ( ID, NAME, AGE, EMAIL, OPERATOR ) values
+        <foreach collection="list" item="user" separator=",">
+            (#{user.id},#{user.name},#{user.age},#{user.email},#{user.operator})
+        </foreach>
+    </insert>
+
+    <insert id="testMyMethod5" parameterType="com.baomidou.samples.metainfo.entity.User">
+        INSERT INTO sys_user ( ID, NAME, AGE, EMAIL, OPERATOR ) values
+        <foreach collection="userList" item="user" separator=",">
+            (#{user.id},#{user.name},#{user.age},#{user.email},#{user.operator})
+        </foreach>
+    </insert>
+
+</mapper>
