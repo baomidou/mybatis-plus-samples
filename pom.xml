@@ -55,7 +55,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>17</java.version>
         <mybatisplus.version>3.5.4-SNAPSHOT</mybatisplus.version>
-        <skipTests>true</skipTests>
+        <skipTests>false</skipTests>
+        <argLine>-Dfile.encoding=UTF-8</argLine>
     </properties>
 
     <dependencyManagement>
