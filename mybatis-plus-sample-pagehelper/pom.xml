@@ -16,7 +16,7 @@
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
             <!-- pagehelper 包含该依赖存在版本冲突，因此不建议和 mp 一起混用 -->
             <exclusions>
                 <exclusion>
