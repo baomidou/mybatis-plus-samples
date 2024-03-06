@@ -26,16 +26,22 @@ public class User {
     private Integer age;
     private String email;
 
+//    /**
+//     * 注意！！ 必须开启映射注解
+//     *
+//     * @TableName(autoResultMap = true)
+//     * <p>
+//     * 以下两种类型处理器，二选一 也可以同时存在
+//     * <p>
+//     * 注意！！选择对应的 JSON 处理器也必须存在对应依赖包
+//     */
+//    @TableField(typeHandler = WalletListTypeHandler.class)
+//    private List<Wallet> wallets;
+
     /**
-     * 注意！！ 必须开启映射注解
-     *
-     * @TableName(autoResultMap = true)
-     * <p>
-     * 以下两种类型处理器，二选一 也可以同时存在
-     * <p>
-     * 注意！！选择对应的 JSON 处理器也必须存在对应依赖包
+     * 3.5.6开始可以直接用啦,以下版本请按↑↑↑的方式.
      */
-    @TableField(typeHandler = WalletListTypeHandler.class)
+    @TableField(typeHandler = FastjsonTypeHandler.class)
     private List<Wallet> wallets;
 
     @TableField(typeHandler = FastjsonTypeHandler.class)
