@@ -44,4 +44,11 @@ public class RequestDataHelper {
     public static Map<String, Object> getRequestData() {
         return REQUEST_DATA.get();
     }
+
+    /**
+     * 删除请求参数
+     */
+    public static void removeRequestData(){
+        REQUEST_DATA.remove();
+    }
 }
