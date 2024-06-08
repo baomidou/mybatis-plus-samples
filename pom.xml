@@ -110,7 +110,7 @@
                     <dependency>
                         <groupId>org.springframework.boot</groupId>
                         <artifactId>spring-boot-dependencies</artifactId>
-                        <version>3.1.7</version>
+                        <version>3.2.6</version>
                         <type>pom</type>
                         <scope>import</scope>
                     </dependency>
@@ -126,7 +126,7 @@
                     <plugin>
                         <groupId>org.springframework.boot</groupId>
                         <artifactId>spring-boot-maven-plugin</artifactId>
-                        <version>3.1.7</version>
+                        <version>3.2.6</version>
                     </plugin>
                 </plugins>
             </build>
@@ -190,6 +190,17 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
                 <version>3.12.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
+                </configuration>
             </plugin>
         </plugins>
     </build>
