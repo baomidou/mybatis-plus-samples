@@ -17,13 +17,6 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>${mybatisplus.artifactId}</artifactId>
-            <!-- pagehelper 包含该依赖存在版本冲突，因此不建议和 mp 一起混用 -->
-            <exclusions>
-                <exclusion>
-                    <groupId>com.github.jsqlparser</groupId>
-                    <artifactId>jsqlparser</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
@@ -33,7 +26,14 @@
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
-            <version>5.1.11</version>
+            <version>6.1.0</version>
+            <!-- pagehelper 包含该依赖存在版本冲突，因此不建议和 mp 一起混用 -->
+            <exclusions>
+                <exclusion>
+                    <groupId>com.github.jsqlparser</groupId>
+                    <artifactId>jsqlparser</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
