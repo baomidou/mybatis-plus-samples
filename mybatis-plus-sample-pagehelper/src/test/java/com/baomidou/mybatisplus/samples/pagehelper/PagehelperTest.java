@@ -65,8 +65,8 @@ class PagehelperTest {
     void testBlockAttackInner() {
         MyBatisSystemException myBatisSystemException = Assertions.assertThrows(MyBatisSystemException.class, () -> mapper.delete(Wrappers.update()));
         Throwable cause = myBatisSystemException.getCause();
-        Assertions.assertEquals(cause.getCause().getClass(), MybatisPlusException.class);
-        Assertions.assertEquals(cause.getCause().getMessage(), "Prohibition of full table deletion");
+        Assertions.assertEquals(cause.getClass(), MybatisPlusException.class);
+        Assertions.assertEquals(cause.getMessage(), "Prohibition of full table deletion");
     }
 
 }
