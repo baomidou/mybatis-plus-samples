@@ -4,7 +4,8 @@
 DROP TABLE IF EXISTS "public"."test_data";
 CREATE TABLE "public"."test_data" (
                                       "id" int8 NOT NULL,
-                                      "content" jsonb
+                                      "content" jsonb,
+                                      "content_list" jsonb
 )
 ;
 
