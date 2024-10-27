@@ -18,7 +18,6 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <scope>42.6.0</scope>
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
