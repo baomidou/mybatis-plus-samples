@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.baomidou.mybatisplus.samples.reduce.springmvc.mapper.UserMapper">
-
-    <select id="selectMaxAge" resultType="java.lang.Integer">
-        select max(age) from sys_user
-    </select>
-</mapper>

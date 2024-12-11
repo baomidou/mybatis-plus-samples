@@ -8,7 +8,6 @@
 
 - mybatis-plus-sample-quickstart: 快速开始示例
 - mybatis-plus-sample-quickstart-springmvc: 快速开始示例（Spring MVC版本）
-- mybatis-plus-sample-reduce-springmvc: 简化掉默认mapper类示例（Spring MVC版本）
 - mybatis-plus-sample-generator: 代码生成器示例
 - mybatis-plus-sample-crud: 完整 CRUD 示例
 - mybatis-plus-sample-ddl-mysql: SQL 脚本自动维护 示例
