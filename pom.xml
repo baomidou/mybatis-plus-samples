@@ -14,7 +14,6 @@
     <modules>
         <module>mybatis-plus-sample-quickstart</module>
         <module>mybatis-plus-sample-quickstart-springmvc</module>
-        <module>mybatis-plus-sample-reduce-springmvc</module>
         <module>mybatis-plus-sample-crud</module>
         <module>mybatis-plus-sample-ddl-mysql</module>
         <module>mybatis-plus-sample-active-record</module>
