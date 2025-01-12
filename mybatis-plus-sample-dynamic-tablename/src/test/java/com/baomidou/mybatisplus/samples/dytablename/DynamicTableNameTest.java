@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.samples.dytablename.config.RequestDataHelper;
 import com.baomidou.mybatisplus.samples.dytablename.entity.User;
 import com.baomidou.mybatisplus.samples.dytablename.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -19,6 +21,9 @@ import java.util.HashMap;
  */
 @SpringBootTest
 class DynamicTableNameTest {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(DynamicTableNameTest.class);
+
     @Autowired
     private UserMapper userMapper;
 
@@ -33,7 +38,7 @@ class DynamicTableNameTest {
             // 自己去观察打印 SQL 目前随机访问 user_2018  user_2019 表
             for (int i = 0; i < 6; i++) {
                 User user = userMapper.selectById(1);
-                System.err.println(user.getName());
+                LOGGER.info("userName:{}", user.getName());
             }
         } finally {
             RequestDataHelper.removeRequestData();
