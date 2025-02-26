@@ -14,5 +14,3 @@ mybatis-plus:
     db-config:
       id-type: ASSIGN_ID
       capital-mode: true
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

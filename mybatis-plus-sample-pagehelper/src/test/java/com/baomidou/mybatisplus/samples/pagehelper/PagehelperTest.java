@@ -1,9 +1,12 @@
 package com.baomidou.mybatisplus.samples.pagehelper;
 
+import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mybatis.spring.MyBatisSystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -57,4 +60,13 @@ class PagehelperTest {
         assertThat(list).isNotEmpty();
         assertThat(list.size()).isEqualTo(2);
     }
+
+    @Test
+    void testBlockAttackInner() {
+        MyBatisSystemException myBatisSystemException = Assertions.assertThrows(MyBatisSystemException.class, () -> mapper.delete(Wrappers.update()));
+        Throwable cause = myBatisSystemException.getCause();
+        Assertions.assertEquals(cause.getClass(), MybatisPlusException.class);
+        Assertions.assertEquals(cause.getMessage(), "Prohibition of full table deletion");
+    }
+
 }

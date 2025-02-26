@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,5 +19,8 @@ public class TestData implements Serializable {
 
     @TableField(typeHandler = JsonbTypeHandler.class)
     private TestContent content;
+
+    @TableField(typeHandler = JsonbTypeHandler.class)
+    private List<TestContent> contentList;
 
 }

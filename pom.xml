@@ -14,7 +14,6 @@
     <modules>
         <module>mybatis-plus-sample-quickstart</module>
         <module>mybatis-plus-sample-quickstart-springmvc</module>
-        <module>mybatis-plus-sample-reduce-springmvc</module>
         <module>mybatis-plus-sample-crud</module>
         <module>mybatis-plus-sample-ddl-mysql</module>
         <module>mybatis-plus-sample-active-record</module>
@@ -25,6 +24,7 @@
         <module>mybatis-plus-sample-auto-fill-metainfo</module>
         <module>mybatis-plus-sample-sql-injector</module>
         <module>mybatis-plus-sample-performance-analysis</module>
+        <module>mybatis-plus-startup-analysis</module>
         <module>mybatis-plus-sample-execution-analysis</module>
         <module>mybatis-plus-sample-logic-delete</module>
         <module>mybatis-plus-sample-mysql</module>
@@ -43,29 +43,16 @@
         <module>mybatis-plus-sample-jsonb</module>
     </modules>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.1</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>17</java.version>
-        <mybatisplus.version>3.5.8</mybatisplus.version>
+        <mybatisplus.version>3.5.10.1</mybatisplus.version>
         <skipTests>false</skipTests>
         <argLine>-Dfile.encoding=UTF-8</argLine>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatisplus.version}</version>
-            </dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus</artifactId>
@@ -98,7 +85,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.34</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -108,10 +94,94 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>spring-boot3</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <mybatisplus.artifactId>mybatis-plus-spring-boot3-starter</mybatisplus.artifactId>
+                <java.version>17</java.version>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>com.baomidou</groupId>
+                    <artifactId>mybatis-plus-jsqlparser</artifactId>
+                    <version>${mybatisplus.version}</version>
+                </dependency>
+            </dependencies>
+            <dependencyManagement>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-dependencies</artifactId>
+                        <version>3.3.4</version>
+                        <type>pom</type>
+                        <scope>import</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.baomidou</groupId>
+                        <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+                        <version>${mybatisplus.version}</version>
+                    </dependency>
+                </dependencies>
+            </dependencyManagement>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <version>3.3.4</version>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>spring-boot2</id>
+            <properties>
+                <mybatisplus.artifactId>mybatis-plus-boot-starter</mybatisplus.artifactId>
+                <java.version>8</java.version>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>com.baomidou</groupId>
+                    <artifactId>mybatis-plus-jsqlparser-4.9</artifactId>
+                    <version>${mybatisplus.version}</version>
+                </dependency>
+            </dependencies>
+            <dependencyManagement>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-dependencies</artifactId>
+                        <version>2.7.18</version>
+                        <type>pom</type>
+                        <scope>import</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.baomidou</groupId>
+                        <artifactId>mybatis-plus-boot-starter</artifactId>
+                        <version>${mybatisplus.version}</version>
+                    </dependency>
+                </dependencies>
+            </dependencyManagement>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <version>2.7.18</version>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
     <repositories>
         <repository>
             <id>aliyun</id>
-            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+            <url>https://maven.aliyun.com/nexus/content/groups/public</url>
         </repository>
         <repository>
             <id>oss-public</id>
@@ -133,6 +203,18 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
                 <version>3.12.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
+                </configuration>
             </plugin>
         </plugins>
     </build>

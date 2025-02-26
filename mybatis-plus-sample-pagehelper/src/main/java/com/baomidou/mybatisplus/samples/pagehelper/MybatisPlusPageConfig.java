@@ -2,6 +2,7 @@ package com.baomidou.mybatisplus.samples.pagehelper;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.github.pagehelper.PageInterceptor;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +23,12 @@ public class MybatisPlusPageConfig {
     @Bean
     public PageInterceptor pageInterceptor() {
         return new PageInterceptor();
+    }
+
+
+    @Bean
+    public BlockAttackInnerInterceptor blockAttackInnerInterceptor(){
+        return new BlockAttackInnerInterceptor();
     }
 
     /**
