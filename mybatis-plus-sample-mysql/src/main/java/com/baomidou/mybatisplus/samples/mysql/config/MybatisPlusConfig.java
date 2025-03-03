@@ -35,8 +35,6 @@ public class MybatisPlusConfig {
         MybatisSqlSessionFactoryBean sqlSessionFactory = new MybatisSqlSessionFactoryBean();
         /* 数据源 */
         sqlSessionFactory.setDataSource(dataSource);
-        /* 枚举扫描 */
-        sqlSessionFactory.setTypeEnumsPackage("com.baomidou.mybatisplus.samples.mysql.enums");
         /* xml扫描 */
         sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver()
             .getResources("classpath:/mapper/*.xml"));
