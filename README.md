@@ -36,7 +36,7 @@
 - mybatis-plus-sample-association: 联表查询示例
 - mybatis-plus-sample-jsonb: 数据库 postgres 字段 jsonb 示例
 - mybatis-plus-startup-analysis : 启动性能测试示例
-
+- mybatis-plus-sample-kotlin : Kotlin工程示例
 
 ![微信 wx153666](https://images.gitee.com/uploads/images/2021/0903/235825_2d017339_12260.jpeg)
 

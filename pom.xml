@@ -41,6 +41,7 @@
         <module>mybatis-plus-sample-pagehelper</module>
         <module>mybatis-plus-sample-association</module>
         <module>mybatis-plus-sample-jsonb</module>
+        <module>mybatis-plus-sample-kotlin</module>
     </modules>
 
     <properties>
@@ -103,6 +104,8 @@
             <properties>
                 <mybatisplus.artifactId>mybatis-plus-spring-boot3-starter</mybatisplus.artifactId>
                 <java.version>17</java.version>
+                <maven.compiler.source>17</maven.compiler.source>
+                <maven.compiler.target>17</maven.compiler.target>
             </properties>
             <dependencies>
                 <dependency>
@@ -142,6 +145,8 @@
             <properties>
                 <mybatisplus.artifactId>mybatis-plus-boot-starter</mybatisplus.artifactId>
                 <java.version>8</java.version>
+                <maven.compiler.source>1.8</maven.compiler.source>
+                <maven.compiler.target>1.8</maven.compiler.target>
             </properties>
             <dependencies>
                 <dependency>
