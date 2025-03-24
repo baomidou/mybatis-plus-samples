@@ -4,12 +4,6 @@ spring:
     url: jdbc:mysql://localhost:3306/mybatis_plus?useSSL=false&useUnicode=true&characterEncoding=UTF-8
     username: root
 
-# Mybatis Mate 配置
-mybatis-mate:
-  cert:
-    grant: thisIsTestLicense
-    license: as/bsBaSVrsA9FfjC/N77ruEt2/QZDrW+MHETNuEuZBra5mlaXZU+DE1ZvF8UjzlLCpH3TFVH3WPV+Ya7Ugiz1Rx4wSh/FK6Ug9lhos7rnsNaRB/+mR30aXqtlLt4dAmLAOCT56r9mikW+t1DDJY8TVhERWMjEipbqGO9oe1fqYCegCEX8tVCpToKr5J1g1V86mNsNnEGXujnLlEw9jBTrGxAyQroD7Ns1Dhwz1K4Y188mvmRQp9t7OYrpgsC7N9CXq1s1c2GtvfItHArkqHE4oDrhaPjpbMjFWLI5/XqZDtW3D+AVcH7pTcYZn6vzFfDZEmfDFV5fQlT3Rc+GENEg==
-
 # Logger Config
 logging:
   level:

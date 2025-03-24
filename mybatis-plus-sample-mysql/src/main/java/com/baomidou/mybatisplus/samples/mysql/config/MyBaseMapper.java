@@ -15,4 +15,6 @@ public interface MyBaseMapper<T> extends BaseMapper<T> {
     int insertBatchSomeColumn(@Param("list") List<T> entityList);
 
     int alwaysUpdateSomeColumnById(@Param(Constants.ENTITY) T entity);
+
+    int mysqlInsertAllBatch(@Param("list") List<T> entityList);
 }
