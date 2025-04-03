@@ -1,8 +1,12 @@
 package com.baomidou.mybatisplus.samples.mysql;
 
+
+import com.baomidou.mybatisplus.samples.mysql.config.DdlConfig;
+import com.baomidou.mybatisplus.samples.mysql.config.MysqlDdl;
 import com.baomidou.mybatisplus.extension.ddl.DdlScript;
 import com.baomidou.mybatisplus.samples.mysql.config.DdlConfig;
 import com.baomidou.mybatisplus.samples.mysql.config.MysqlDdl;
+
 import com.baomidou.mybatisplus.samples.mysql.entity.TestData;
 import com.baomidou.mybatisplus.samples.mysql.enums.TestEnum;
 import com.baomidou.mybatisplus.samples.mysql.mapper.TestDataMapper;
