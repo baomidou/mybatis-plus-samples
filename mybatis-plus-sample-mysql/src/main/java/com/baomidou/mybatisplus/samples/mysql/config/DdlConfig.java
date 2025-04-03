@@ -1,6 +1,6 @@
 package com.baomidou.mybatisplus.samples.mysql.config;
 
-import mybatis.mate.ddl.DdlScript;
+import com.baomidou.mybatisplus.extension.ddl.DdlScript;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

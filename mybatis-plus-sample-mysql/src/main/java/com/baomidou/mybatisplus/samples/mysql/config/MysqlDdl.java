@@ -1,6 +1,6 @@
 package com.baomidou.mybatisplus.samples.mysql.config;
 
-import mybatis.mate.ddl.SimpleDdl;
+import com.baomidou.mybatisplus.extension.ddl.SimpleDdl;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
