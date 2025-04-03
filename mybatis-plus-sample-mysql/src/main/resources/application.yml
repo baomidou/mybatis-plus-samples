@@ -1,8 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/mybatis_plus?useSSL=false&useUnicode=true&characterEncoding=UTF-8
-    username: root
+    url: jdbc:mysql://106.54.53.186:3306/mybatis_plus?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    username: mybatis_plus
+    password: fRMdHikwHbGzwdz2
 
 # Mybatis Mate 配置
 mybatis-mate:
