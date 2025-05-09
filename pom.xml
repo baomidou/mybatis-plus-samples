@@ -106,6 +106,7 @@
                 <java.version>17</java.version>
                 <maven.compiler.source>17</maven.compiler.source>
                 <maven.compiler.target>17</maven.compiler.target>
+                <mybatis-spring.version>3.0.4</mybatis-spring.version>
             </properties>
             <dependencies>
                 <dependency>
@@ -147,6 +148,7 @@
                 <java.version>8</java.version>
                 <maven.compiler.source>1.8</maven.compiler.source>
                 <maven.compiler.target>1.8</maven.compiler.target>
+                <mybatis-spring.version>2.1.2</mybatis-spring.version>
             </properties>
             <dependencies>
                 <dependency>
