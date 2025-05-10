@@ -8,3 +8,7 @@ spring:
 logging:
   level:
     com.baomidou.mybatisplus.samples.mysql: debug
+mybatis-plus:
+  global-config:
+    db-config:
+      column-format: "`%s`"
