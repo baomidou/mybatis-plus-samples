@@ -28,11 +28,12 @@ public class MyLogicSqlInjector extends DefaultSqlInjector {
      * @return
      */
     @Override
-    public List<AbstractMethod> getMethodList() {
-        List<AbstractMethod> methodList = super.getMethodList();
-        methodList.add(new DeleteAll());
-        methodList.add(new MyInsertAll());
-        methodList.add(new MysqlInsertAllBatch());
+    public List<AbstractMethod> getMethodList(Class<?> mapperClass, TableInfo tableInfo) {
+        List<AbstractMethod> methodList = super.getMethodList(mapperClass, tableInfo);
+        methodList.add(new DeleteAll("deleteAll"));
+        methodList.add(new MyInsertAll("myInsertAll"));
+        methodList.add(new MysqlInsertAllBatch("mysqlInsertAllBatch"));
+        methodList.add(new SelectById());
         return methodList;
     }
 }
