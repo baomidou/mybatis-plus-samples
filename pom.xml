@@ -47,7 +47,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <mybatisplus.version>3.5.12</mybatisplus.version>
+        <mybatisplus.version>3.5.13-SNAPSHOT</mybatisplus.version>
         <skipTests>false</skipTests>
         <argLine>-Dfile.encoding=UTF-8</argLine>
     </properties>
@@ -183,6 +183,48 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+        <id>spring-boot4</id>
+        <properties>
+            <mybatisplus.artifactId>mybatis-plus-spring-boot4-starter</mybatisplus.artifactId>
+            <java.version>17</java.version>
+            <maven.compiler.source>17</maven.compiler.source>
+            <maven.compiler.target>17</maven.compiler.target>
+            <mybatis-spring.version>3.0.4</mybatis-spring.version>
+        </properties>
+        <dependencies>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-jsqlparser</artifactId>
+                <version>${mybatisplus.version}</version>
+            </dependency>
+        </dependencies>
+        <dependencyManagement>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-dependencies</artifactId>
+                    <version>4.0.0-M1</version>
+                    <type>pom</type>
+                    <scope>import</scope>
+                </dependency>
+                <dependency>
+                    <groupId>com.baomidou</groupId>
+                    <artifactId>mybatis-plus-spring-boot4-starter</artifactId>
+                    <version>${mybatisplus.version}</version>
+                </dependency>
+            </dependencies>
+        </dependencyManagement>
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>4.0.0-M1</version>
+                </plugin>
+            </plugins>
+        </build>
+    </profile>
     </profiles>
 
     <repositories>
