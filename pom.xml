@@ -47,7 +47,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <mybatisplus.version>3.5.14</mybatisplus.version>
+        <mybatisplus.version>3.5.15-SNAPSHOT</mybatisplus.version>
         <skipTests>false</skipTests>
         <argLine>-Dfile.encoding=UTF-8</argLine>
     </properties>
@@ -204,7 +204,7 @@
                 <dependency>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-dependencies</artifactId>
-                    <version>4.0.0-M2</version>
+                    <version>4.0.0-M3</version>
                     <type>pom</type>
                     <scope>import</scope>
                 </dependency>
@@ -220,7 +220,7 @@
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
-                    <version>4.0.0-M2</version>
+                    <version>4.0.0-M3</version>
                 </plugin>
             </plugins>
         </build>
