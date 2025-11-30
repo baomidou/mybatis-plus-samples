@@ -47,7 +47,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <mybatisplus.version>3.5.15-SNAPSHOT</mybatisplus.version>
+        <mybatisplus.version>3.5.15</mybatisplus.version>
         <skipTests>false</skipTests>
         <argLine>-Dfile.encoding=UTF-8</argLine>
     </properties>
