@@ -56,7 +56,7 @@ class MysqlTest {
         // 自增 id 增长为 1
         TestData testData = new TestData().setTestInt(1);
         testData.setTestEnum(TestEnum.ONE).setTestStr("abc");
-        Assertions.assertEquals(testDataMapper.insert(testData), 1);
+        Assertions.assertEquals(1, testDataMapper.insert(testData));
         testData = testDataMapper.selectById(testData.getId());
         Assertions.assertNotNull(testData);
         Assertions.assertEquals(1, testData.getId());
@@ -64,7 +64,7 @@ class MysqlTest {
         // 自增 id 增长为 2
         TestData testData2 = new TestData().setTestInt(1);
         testData2.setTestEnum(TestEnum.TWO).setTestStr("def");
-        Assertions.assertEquals(testDataMapper.insert(testData2), 1);
+        Assertions.assertEquals(1, testDataMapper.insert(testData2));
         testData2 = testDataMapper.selectById(testData2.getId());
         Assertions.assertNotNull(testData2);
         Assertions.assertEquals(2, testData2.getId());

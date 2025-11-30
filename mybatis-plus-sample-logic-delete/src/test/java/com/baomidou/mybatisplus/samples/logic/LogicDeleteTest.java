@@ -10,9 +10,7 @@ import com.baomidou.mybatisplus.samples.logic.mapper.Null1Mapper;
 import com.baomidou.mybatisplus.samples.logic.mapper.Null2Mapper;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.util.Maps;
-import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -21,7 +19,6 @@ import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
-@TestMethodOrder(MethodOrderer.Alphanumeric.class)
 @SpringBootTest
 public class LogicDeleteTest {
     @Autowired

@@ -15,3 +15,7 @@ spring:
 logging:
   level:
     com.baomidou.mybatisplus.samples.assembly: debug
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    database-id: 'mp'
