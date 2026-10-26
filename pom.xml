@@ -42,12 +42,13 @@
         <module>mybatis-plus-sample-association</module>
         <module>mybatis-plus-sample-jsonb</module>
         <module>mybatis-plus-sample-kotlin</module>
+        <module>mybatis-plus-sample-sharding</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <mybatisplus.version>3.5.16</mybatisplus.version>
+        <mybatisplus.version>3.5.18</mybatisplus.version>
         <skipTests>false</skipTests>
         <argLine>-Dfile.encoding=UTF-8</argLine>
     </properties>

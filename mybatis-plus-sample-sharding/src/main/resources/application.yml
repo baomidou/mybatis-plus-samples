@@ -1,0 +1,35 @@
+mybatis-plus:
+  sharding:
+    primary: orders
+    datasource:
+      orders:
+        - key: writer
+          cluster: master
+          driver-class-name: org.h2.Driver
+          url: jdbc:h2:mem:sharding_writer;MODE=MYSQL;DB_CLOSE_DELAY=-1;INIT=RUNSCRIPT FROM 'classpath:writer.sql'
+          username: sa
+          password:
+        - key: reader-a
+          cluster: slave
+          driver-class-name: org.h2.Driver
+          url: jdbc:h2:mem:sharding_reader_a;MODE=MYSQL;DB_CLOSE_DELAY=-1;INIT=RUNSCRIPT FROM 'classpath:reader-a.sql'
+          username: sa
+          password:
+        - key: reader-b
+          cluster: slave
+          driver-class-name: org.h2.Driver
+          url: jdbc:h2:mem:sharding_reader_b;MODE=MYSQL;DB_CLOSE_DELAY=-1;INIT=RUNSCRIPT FROM 'classpath:reader-b.sql'
+          username: sa
+          password:
+      inventory:
+        - key: writer
+          cluster: master
+          driver-class-name: org.h2.Driver
+          url: jdbc:h2:mem:sharding_inventory;MODE=MYSQL;DB_CLOSE_DELAY=-1;INIT=RUNSCRIPT FROM 'classpath:inventory.sql'
+          username: sa
+          password:
+  mapper-locations: classpath:/mapper/*.xml
+
+spring:
+  main:
+    web-application-type: none
