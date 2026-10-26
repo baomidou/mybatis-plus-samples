@@ -2,7 +2,7 @@
 
 [贡献代码](https://github.com/baomidou/mybatis-plus-samples)
 
-[企业版 Mybatis-Mate 高级特性](https://gitee.com/baomidou/mybatis-mate-examples)
+[官方网站](https://baomidou.com)
 
 本工程为 MyBatis-Plus 的官方示例，项目结构如下：
 
@@ -21,7 +21,7 @@
 - mybatis-plus-sample-sql-injector: 自定义全局操作示例
 - mybatis-plus-sample-auto-fill-metainfo: 公共字段填充示例
 - mybatis-plus-sample-logic-delete: 逻辑删除示例
-- mybatis-plus-sample-multi-datasource: 多数据源示例
+- mybatis-plus-sample-sharding : 多数据源及主从分离示例
 - mybatis-plus-sample-enum: 枚举注入示例
 - mybatis-plus-sample-dynamic-tablename: 动态表名示例
 - mybatis-plus-sample-tenant: 多租户示例
