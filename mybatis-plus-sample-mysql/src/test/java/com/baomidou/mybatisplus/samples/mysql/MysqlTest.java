@@ -1,6 +1,12 @@
 package com.baomidou.mybatisplus.samples.mysql;
 
+
+import com.baomidou.mybatisplus.samples.mysql.config.DdlConfig;
+import com.baomidou.mybatisplus.samples.mysql.config.MysqlDdl;
 import com.baomidou.mybatisplus.extension.ddl.DdlScript;
+import com.baomidou.mybatisplus.samples.mysql.config.DdlConfig;
+import com.baomidou.mybatisplus.samples.mysql.config.MysqlDdl;
+
 import com.baomidou.mybatisplus.samples.mysql.entity.TestData;
 import com.baomidou.mybatisplus.samples.mysql.enums.TestEnum;
 import com.baomidou.mybatisplus.samples.mysql.mapper.TestDataMapper;
@@ -31,12 +37,19 @@ class MysqlTest {
 
     @Autowired
     private DdlScript ddlScript;
+    @Autowired
+    private MysqlDdl mysqlDdl;
 
     @BeforeEach
     void truncateTable() throws Exception {
+        // ddlScript.run(mysqlDdl.getSqlFiles());
         ddlScript.run(new StringReader("TRUNCATE TABLE test_data;"));
     }
 
+    @Test
+    void initTable() {
+        ddlScript.run(mysqlDdl.getSqlFiles());
+    }
     @Test
     @Order(1)
     void insertBatch() {
@@ -48,6 +61,20 @@ class MysqlTest {
         }
         assertEquals(size, testDataMapper.insertBatchSomeColumn(testDataList));
         testDataList.forEach(data-> LOGGER.info("testData:{}", data));
+    }
+
+    @Test
+    @Order(3)
+    void selectAll() {
+
+        int size = 9;
+        List<TestData> testDataList = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            String str = i + "条";
+            testDataList.add(new TestData().setTestInt(i).setTestEnum(TestEnum.TWO).setTestStr(str));
+        }
+        assertEquals(size, testDataMapper.insertBatchSomeColumn(testDataList));
+        testDataList.forEach(System.err::println);
     }
 
     @Test
